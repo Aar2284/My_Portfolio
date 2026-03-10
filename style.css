@@ -1,0 +1,53 @@
+/* --- 1. FONTS & VARIABLES --- */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
+
+:root {
+    /* The Core Color Palette */
+    --sky-blue: #87CEEB;
+    --space-dark: #050510;
+    --earth-green: #2E8B57;
+    --neon-cyan: #00f3ff;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --text-main: #e0e0e0;
+}
+
+/* --- 2. GLOBAL RESET & PHYSICS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none; /* This hides your boring default Windows mouse pointer */
+}
+
+body, html {
+    font-family: 'JetBrains Mono', monospace;
+    background-color: var(--sky-blue); /* We start Scene 1 on Earth */
+    color: var(--text-main);
+    overflow-x: hidden; /* Prevents horizontal scrolling bugs */
+}
+
+/* --- 3. THE ORBITAL CURSOR PAINT --- */
+.orbital-core {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: var(--neon-cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.orbital-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(0, 243, 255, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+}
