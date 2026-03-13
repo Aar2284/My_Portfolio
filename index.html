@@ -3,40 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aaryan Kalia | Data Science & Machine Learning</title>
-    
+    <title>Aaryan Kalia // Data Science & Machine Learning Portfolio</title>
     <link rel="stylesheet" href="style.css">
     
-    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.20/dist/lenis.css">
+    <!-- GSAP Core & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis for Smooth Scrolling -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 </head>
 <body>
-    
-    <div class="orbital-core"></div>
-    <div class="orbital-ring"></div>
+    <!-- Custom Glowing Comet Cursor -->
+    <div class="cursor-comet"></div>
+    <div class="cursor-trail"></div>
 
-    <section class="scene-1">
-        
-        <div class="hero-text">
-            <h1>Aaryan Kalia</h1>
-            <p>> B.Tech CSE // Data Science & Machine Learning</p>
-            <a href="#" class="resume-btn">> DOWNLOAD_FLIGHT_MANIFEST.pdf</a>
-        </div>
-
-        <div class="ground">
+    <!-- Space Journey Timeline Container -->
+    <div id="space-journey">
+        <!-- Phase 3: Scene 1 - Earth Launchpad & Ignition -->
+        <section id="scene-1" class="scene">
+            <div class="sky-background">
+                <div class="sky-black-overlay"></div>
             </div>
+            <div class="clouds-layer">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="cloud cloud-3"></div>
+                <div class="cloud cloud-4"></div>
+            </div>
+            
+            <div class="launchpad-container">
+                <div class="earth-hills"></div>
+                <div class="launchpad"></div>
+                <!-- Launchpad smoke -->
+                <div class="smoke-layer"></div>
+            </div>
+            
+            <!-- Intro text moved to start hidden and fade IN later -->
+            <div class="intro-content">
+                <h1 class="hacker-text">Aaryan Kalia</h1>
+                <h2 class="role-text">// B.Tech CSE // Data Science & Machine Learning</h2>
+            </div>
+
+            <!-- Assembled Rocket Container -->
+            <div class="rocket-assembly" id="main-rocket">
+                <!-- Grouping each image with its respective text node so they stay together when shattering -->
+                
+                <div class="rocket-part-wrapper layer-1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    <img src="assets/rocket-layer-1.svg" class="rocket-layer" alt="Rocket Nose Cone">
+                    <div class="node node-1 hidden"><span class="neon-cyan">&gt;&gt;</span> Nose Cone: Programming<br><span class="tech-subtext">Python, C++, SQL, Java</span></div>
+                </div>
+
+                <div class="rocket-part-wrapper layer-2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    <img src="assets/rocket-layer-2.svg" class="rocket-layer" alt="Rocket Body Top">
+                    <div class="node node-2 hidden"><span class="neon-cyan">&gt;&gt;</span> Left Booster: Data Handling<br><span class="tech-subtext">Pandas, NumPy, Spark</span></div>
+                </div>
+                
+                <div class="rocket-part-wrapper layer-3" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    <img src="assets/rocket-layer-3.svg" class="rocket-layer" alt="Rocket Body Mid">
+                    <div class="node node-3 hidden"><span class="neon-cyan">&gt;&gt;</span> Main Core: Machine Learning<br><span class="tech-subtext">Scikit-Learn, TensorFlow, PyTorch</span></div>
+                </div>
+                
+                <div class="rocket-part-wrapper layer-4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    <img src="assets/rocket-layer-4.svg" class="rocket-layer" alt="Rocket Engines">
+                    <div class="node node-4 hidden"><span class="neon-cyan">&gt;&gt;</span> Right Booster: Visualization<br><span class="tech-subtext">Matplotlib, Seaborn, Power BI</span></div>
+                </div>
+                
+                <div class="rocket-part-wrapper layer-5" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    <img src="assets/rocket-layer-5.svg" class="rocket-layer" alt="Rocket Thrusters">
+                    <div class="node node-5 hidden"><span class="neon-cyan">&gt;&gt;</span> Engine Block: Tools<br><span class="tech-subtext">Git, GitHub, Jupyter, Docker</span></div>
+                </div>
+                
+                <div class="rocket-fire"></div>
+            </div>
+        </section>
+
+        <!-- Phase 4: Scene 2 - The Orbital Shatter (Tech Stack) -->
+        <section id="scene-2" class="scene floating-scene">
+            <!-- (Logic moved to Scene 1 wrappers to keep them pinned visually during the journey) -->
+        </section>
+    </div>
+
+    <!-- Phase 5: Scene 3 - The Constellation Grid (Project Hub) -->
+    <section id="scene-3" class="scene">
+        <div class="starfield"></div>
+        <!-- SVG Canvas for connecting lines -->
+        <svg id="constellation-canvas" class="constellation-svg" viewBox="0 0 1000 800" preserveAspectRatio="none">
+            <!-- Drawn paths connecting the stars -->
+            <path class="constellation-line" d="M 200 200 L 700 300 L 400 500 L 800 650" />
+            
+            <!-- We also add glowing star dots exactly at those coordinates inside the SVG instead of divs for perfect alignment -->
+            <circle class="svg-star" id="proj-1-dot" cx="200" cy="200" r="10" />
+            <circle class="svg-star" id="proj-2-dot" cx="700" cy="300" r="10" />
+            <circle class="svg-star" id="proj-3-dot" cx="400" cy="500" r="10" />
+            <circle class="svg-star" id="proj-4-dot" cx="800" cy="650" r="10" />
+        </svg>
         
-        <div class="rocket-container">
-            <div class="rocket-placeholder">🚀</div>
+        <!-- Text labels positioned absolutely to match the SVG coordinates -->
+        <div class="project-stars">
+            <div class="star-label" style="top: 15%; left: 20%;">Kepler's Eye</div>
+            <div class="star-label" style="top: 25%; left: 70%;">AI Personality Island</div>
+            <div class="star-label" style="top: 55%; left: 40%;">Crypto Genome</div>
+            <div class="star-label" style="top: 75%; left: 80%;">Propensity Engine</div>
         </div>
-        
     </section>
 
-    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    
+    <!-- Phase 6: Scene 4 - The Glasshouse (Horizontal Multimedia Scroll) -->
+    <section id="scene-4" class="scene">
+        <div class="horizontal-scroll-container">
+            <!-- Card 1 -->
+            <div class="glass-card">
+                <h3>Kepler's Eye</h3>
+                <div class="card-grid">
+                    <div class="card-col">
+                        <ul class="workflow-list">
+                            <li><span class="neon-cyan">&gt;</span> Problem Statement & Dataset</li>
+                            <li><span class="neon-cyan">&gt;</span> Data Cleaning & EDA Visuals</li>
+                            <li><span class="neon-cyan">&gt;</span> Feature Engineering & Model Architecture</li>
+                            <li><span class="neon-cyan">&gt;</span> Evaluation Metrics (Accuracy, Precision, Recall, F1, RMSE)</li>
+                            <li><span class="neon-cyan">&gt;</span> Business Impact</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <!-- Multimedia space -->
+                        <div class="media-container"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="glass-card">
+                <h3>AI-Powered Personality Island</h3>
+                <div class="card-grid">
+                    <div class="card-col">
+                        <ul class="workflow-list">
+                            <li><span class="neon-cyan">&gt;</span> Problem Statement & Dataset</li>
+                            <li><span class="neon-cyan">&gt;</span> Data Cleaning & EDA Visuals</li>
+                            <li><span class="neon-cyan">&gt;</span> Feature Engineering & Model Architecture</li>
+                            <li><span class="neon-cyan">&gt;</span> Evaluation Metrics (Accuracy, Precision, Recall, F1, RMSE)</li>
+                            <li><span class="neon-cyan">&gt;</span> Business Impact</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <div class="media-container"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="glass-card">
+                <h3>Crypto Genome</h3>
+                <div class="card-grid">
+                    <div class="card-col">
+                        <ul class="workflow-list">
+                            <li><span class="neon-cyan">&gt;</span> Problem Statement & Dataset</li>
+                            <li><span class="neon-cyan">&gt;</span> Data Cleaning & EDA Visuals</li>
+                            <li><span class="neon-cyan">&gt;</span> Feature Engineering & Model Architecture</li>
+                            <li><span class="neon-cyan">&gt;</span> Evaluation Metrics (Accuracy, Precision, Recall, F1, RMSE)</li>
+                            <li><span class="neon-cyan">&gt;</span> Business Impact</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <div class="media-container"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="glass-card">
+                <h3>E-commerce Propensity Engine</h3>
+                <div class="card-grid">
+                    <div class="card-col">
+                        <ul class="workflow-list">
+                            <li><span class="neon-cyan">&gt;</span> Problem Statement & Dataset</li>
+                            <li><span class="neon-cyan">&gt;</span> Data Cleaning & EDA Visuals</li>
+                            <li><span class="neon-cyan">&gt;</span> Feature Engineering & Model Architecture</li>
+                            <li><span class="neon-cyan">&gt;</span> Evaluation Metrics (Accuracy, Precision, Recall, F1, RMSE)</li>
+                            <li><span class="neon-cyan">&gt;</span> Business Impact</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <div class="media-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 7: Scene 5 - Terminal Velocity & The Match Cut (Loop) -->
+    <section id="scene-5" class="scene">
+        <div class="impact-zone">
+            <div class="terminal-earth-hills"></div>
+            <div class="falling-comet" id="crashing-comet"></div>
+            
+            <div class="transmission-tail">
+                <a href="#" class="contact-link">GitHub</a>
+                <a href="#" class="contact-link">LinkedIn</a>
+                <a href="#" class="contact-link">Email</a>
+                <a href="#" class="contact-link">Resume</a>
+            </div>
+        </div>
+        
+        <!-- White flash overlay for looping -->
+        <div id="flash-overlay"></div>
+    </section>
+
     <script src="main.js"></script>
 </body>
 </html>

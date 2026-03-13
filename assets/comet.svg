@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150">
+  <circle cx="120" cy="30" r="15" fill="#00ffff" />
+  <!-- Flame tail -->
+  <path d="M110,40 Q50,100 10,140 Q40,90 100,20 Z" fill="#0b0c10" stroke="#00ffff" stroke-width="2"/>
+  <path d="M115,35 Q60,90 20,130 Q45,85 105,25 Z" fill="#4a90e2" />
+</svg>
