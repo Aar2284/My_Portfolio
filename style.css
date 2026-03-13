@@ -216,10 +216,10 @@ body, html {
 /* Intro Text */
 .intro-content {
     position: absolute;
-    top: -40vh; /* Offsets based on the 60vh container so it's vertically centered in the viewport */
-    left: 10vw;
+    top: -20vh; /* Placed just above the green earth curve inside the container */
+    left: 40vw; /* Positioned to the right of the rocket */
     z-index: 10;
-    opacity: 0; /* Changed to start hidden, will fade IN via GSAP */
+    opacity: 1; /* Starts visible on the launchpad */
 }
 
 /* Rocket Assembly */
@@ -476,47 +476,37 @@ body, html {
 }
 
 /* ========================================================================= */
-/* Phase 7: Scene 5 - Terminal Velocity & The Match Cut */
+/* ========================================================================= */
+/* Phase 7: Scene 5 - Hyperdrive Warp Jump */
 /* ========================================================================= */
 #scene-5 {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(180deg, var(--color-space-black) 0%, var(--color-sky-blue) 100%);
-    perspective: 1000px; /* Enhanced 3D terminal velocity effect */
+    background-color: var(--color-space-black);
 }
 
-.impact-zone {
+.hyperdrive-zone {
     width: 100%;
     height: 100vh;
     position: relative;
-    transform-style: preserve-3d;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-.terminal-earth-hills {
+.hyper-streak {
     position: absolute;
-    bottom: -20vh;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200vw;
-    height: 60vh;
-    background: radial-gradient(ellipse at top, var(--color-earth-green), #1c4d2e);
-    border-radius: 50% 50% 0 0;
-    z-index: 2;
-}
-
-.falling-comet {
-    position: absolute;
-    top: -20vh;
-    right: -20vw;
-    left: auto;
-    transform: rotate(-135deg); /* pointing bottom-left */
-    width: 150px;
-    height: 150px;
-    background-image: url('assets/comet.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: 5;
-    /* Will be animated down-left via GSAP */
+    top: 50%; left: 50%;
+    width: 3px;
+    height: 10px; /* Starts as a small star */
+    background: white;
+    transform-origin: top center;
+    opacity: 0; /* visible via GSAP */
+    border-radius: 2px;
+    box-shadow: 0 0 10px white, 0 0 20px var(--color-neon-cyan);
+    z-index: 1;
 }
 
 /* White Screen Overlay */

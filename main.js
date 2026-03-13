@@ -120,13 +120,12 @@ tlSpaceJourney
     .to(".rocket-assembly", { rotation: 25, duration: 2, ease: "power1.inOut" }, 1.5)
     .to(".rocket-assembly", { rotation: 0, duration: 2, ease: "power1.inOut" }, 4.5)
     
-    // Fade IN the introductory text as we fly through clouds, moving slightly up with rocket
-    .to(".intro-content", { opacity: 1, y: "-10vh", duration: 2 }, 1.5)
+    // Animate the introductory text upwards and out of frame alongside the earth
+    .to(".intro-content", { y: "-100vh", opacity: 0, duration: 5, ease: "power2.in" }, 0.5)
 
     // --- ORBITAL SHATTER (Sequential & Slow Free Fall) ---
     // Start slowing down the engine as we reach the center orbit
     .to(".rocket-fire", { opacity: 0.3, scaleY: 0.5, duration: 1 }, 5.5)
-    .to(".intro-content", { opacity: 0, duration: 1 }, 5.5)
     
     // PART 1: The Boosters Shatter (Left & Right)
     // Reduce horizontal spread to -10vw / 10vw so the long text labels stay safely inside the viewport
@@ -211,8 +210,25 @@ tlGlasshouse.to(".horizontal-scroll-container", {
 .to(".glass-card", { filter: "blur(20px)", opacity: 0.2, duration: 1 }, ">");
 
 // ------------------------------------------------------------------------------------------------ //
-// Phase 7: Scene 5 - Final Impact & Info Screen
-const tlImpact = gsap.timeline({
+// Phase 7: Scene 5 - Hyperdrive Jump & Info Screen
+
+// Generate Hyperdrive Streaks dynamically
+const hyperZone = document.querySelector('.hyperdrive-zone');
+if (hyperZone) {
+    for (let i = 0; i < 60; i++) {
+        const streak = document.createElement('div');
+        streak.classList.add('hyper-streak');
+        // Random starting parameters
+        const angle = Math.random() * 360;
+        const distance = Math.random() * 100; // start near center
+        streak.style.transform = `rotate(${angle}deg) translateY(${distance}px)`;
+        // Store base angle for animation
+        streak.dataset.angle = angle;
+        hyperZone.appendChild(streak);
+    }
+}
+
+const tlHyperdrive = gsap.timeline({
     scrollTrigger: {
         trigger: "#scene-5",
         start: "top top",
@@ -222,21 +238,20 @@ const tlImpact = gsap.timeline({
     }
 });
 
-tlImpact
-    // Aggressive camera tilt and zoom out
-    .to(".impact-zone", { rotationX: 45, scale: 1.2, duration: 2, ease: "power2.in" }, 0)
-    // Comet falls fast from top-right down to earth
-    .to(".falling-comet", { 
-        top: "70vh", 
-        right: "50vw", 
-        width: "300px", 
-        height: "300px", 
+tlHyperdrive
+    // 1. Stars dramatically stretch and accelerate outward into lines (Hyperdrive start)
+    .to(".hyper-streak", { 
+        height: () => 500 + Math.random() * 500 + "px", // stretch massively
+        y: () => 500 + Math.random() * 500, // explode outwards from center
+        opacity: 1, 
         duration: 2, 
         ease: "power4.in" 
     }, 0)
-    // Impact triggers the white screen to fade in
-    .to("#white-screen", { opacity: 1, duration: 0.5 }, ">-0.2")
+    // 2. The whole zone scales slightly to enhance the incoming speed
+    .to(".hyperdrive-zone", { scale: 1.5, duration: 2, ease: "power2.in" }, 0)
+    // 3. Screen flashes to pure white to mask the transition
+    .to("#white-screen", { opacity: 1, duration: 0.5 }, ">-0.4")
     // Keep it interactive
     .set("#white-screen", { pointerEvents: "auto" })
-    // Fade in text links on the white screen
+    // 4. Fade in text links on the white screen
     .to(".transmission-tail", { opacity: 1, y: 0, duration: 1, ease: "power2.out" });
