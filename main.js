@@ -163,18 +163,19 @@ tlSpaceJourney
     .to(".node-3", { opacity: 1, duration: 1 }, 21.5) 
     .to(".layer-3", { scale: 1.1, duration: 2, ease: "power1.inOut" }, 21.5) 
     
-    // Main core boosts cinematically out of the frame
-    .to(".layer-3", { y: "-150vh", duration: 4, ease: "power3.in" }, 24.5)
+    // Main core stays in center to transition smoothly to the constellation grid
     .to(".node-3", { opacity: 0, duration: 2 }, 24.5);
 
 // ------------------------------------------------------------------------------------------------ //
 // Phase 5: Scene 3 - The Constellation Grid (Line Draw Effect)
 
-// First, accurately measure the path length for perfect draw animation
-const path = document.querySelector('.constellation-line');
-const pathLength = path.getTotalLength();
-path.style.strokeDasharray = pathLength;
-path.style.strokeDashoffset = pathLength; // initially hidden
+// First, accurately measure each path length for perfect draw animation
+const paths = document.querySelectorAll('.constellation-path');
+paths.forEach(path => {
+    const pLength = path.getTotalLength();
+    path.style.strokeDasharray = pLength;
+    path.style.strokeDashoffset = pLength; // initially hidden
+});
 
 const tlConstellation = gsap.timeline({
     scrollTrigger: {
@@ -186,10 +187,26 @@ const tlConstellation = gsap.timeline({
 });
 
 tlConstellation
-    // Draw the line
-    .to(".constellation-line", { strokeDashoffset: 0, ease: "none" })
-    // While line is drawing, slightly stagger fade in the labels
+    // Draw all constellation lines dynamically
+    .to(".constellation-path", { strokeDashoffset: 0, ease: "none", duration: 1 })
+    // While lines draw, slightly stagger fade in the labels
     .to(".star-label", { opacity: 1, stagger: 0.1, duration: 0.5 }, "<0.2");
+
+// Camera Follow / Deep Space Parallax effect for the Rocket Main Core
+// As the user scrolls through Scene 3 (which normally pushes Scene 1/2 up out of view),
+// we push the rocket back down so it stays visible and slowly scales away into the distance.
+gsap.to(".layer-3", {
+    scrollTrigger: {
+        trigger: "#scene-3",
+        start: "top bottom", // As soon as scene 3 starts coming up
+        end: "bottom top",
+        scrub: 1,
+    },
+    y: "+=300vh", // Translate down rapidly to counteract the viewport scroll
+    scale: 0.3,   // Shrink into the deep space background
+    opacity: 0,   // Fade out slowly as it travels deep into the stars
+    ease: "power1.inOut"
+});
 
 // ------------------------------------------------------------------------------------------------ //
 // Phase 6: Scene 4 - The Glasshouse (Horizontal Scroll)
