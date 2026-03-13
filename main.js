@@ -163,49 +163,30 @@ tlSpaceJourney
     .to(".node-3", { opacity: 1, duration: 1 }, 21.5) 
     .to(".layer-3", { scale: 1.1, duration: 2, ease: "power1.inOut" }, 21.5) 
     
-    // Main core stays in center to transition smoothly to the constellation grid
-    .to(".node-3", { opacity: 0, duration: 2 }, 24.5);
+    // 1. Scene 3 fades in behind the rocket with a heavy blur
+    .set("#scene-3", { filter: "blur(20px)" }, 22)
+    .to("#scene-3", { opacity: 1, duration: 3, ease: "power1.inOut" }, 22)
 
-// ------------------------------------------------------------------------------------------------ //
-// Phase 5: Scene 3 - The Constellation Grid (Line Draw Effect)
+    // 2. Rocket cinematically flies passing the camera
+    .to(".layer-3", { y: "-150vh", scale: 2, duration: 4, ease: "power3.in" }, 24)
+    .to(".node-3", { opacity: 0, duration: 1 }, 24)
 
-// First, accurately measure each path length for perfect draw animation
+    // 3. Blur is removed to reveal the stars clearly now that the rocket has passed
+    .to("#scene-3", { filter: "blur(0px)", duration: 2, ease: "power2.out" }, 27)
+
+    // 4. Then the constellation starts forming (merged into this pinned timeline)
+    .to(".constellation-path", { strokeDashoffset: 0, duration: 2.5, ease: "power1.inOut" }, 29)
+    .to(".star-label", { opacity: 1, stagger: 0.2, duration: 1.5 }, 29.5)
+    
+    // Finalize pinned sequence by unlocking pointers for Scene 3 projects
+    .set("#scene-3", { pointerEvents: "auto" });
+
+// First, accurately measure each path length for perfect draw animation BEFORE scroll
 const paths = document.querySelectorAll('.constellation-path');
 paths.forEach(path => {
     const pLength = path.getTotalLength();
     path.style.strokeDasharray = pLength;
     path.style.strokeDashoffset = pLength; // initially hidden
-});
-
-const tlConstellation = gsap.timeline({
-    scrollTrigger: {
-        trigger: "#scene-3",
-        start: "top center",
-        end: "bottom center",
-        scrub: 1.5,
-    }
-});
-
-tlConstellation
-    // Draw all constellation lines dynamically
-    .to(".constellation-path", { strokeDashoffset: 0, ease: "none", duration: 1 })
-    // While lines draw, slightly stagger fade in the labels
-    .to(".star-label", { opacity: 1, stagger: 0.1, duration: 0.5 }, "<0.2");
-
-// Camera Follow / Deep Space Parallax effect for the Rocket Main Core
-// As the user scrolls through Scene 3 (which normally pushes Scene 1/2 up out of view),
-// we push the rocket back down so it stays visible and slowly scales away into the distance.
-gsap.to(".layer-3", {
-    scrollTrigger: {
-        trigger: "#scene-3",
-        start: "top bottom", // As soon as scene 3 starts coming up
-        end: "bottom top",
-        scrub: 1,
-    },
-    y: "+=300vh", // Translate down rapidly to counteract the viewport scroll
-    scale: 0.3,   // Shrink into the deep space background
-    opacity: 0,   // Fade out slowly as it travels deep into the stars
-    ease: "power1.inOut"
 });
 
 // ------------------------------------------------------------------------------------------------ //

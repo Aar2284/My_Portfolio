@@ -311,9 +311,14 @@ body, html {
 /* Phase 5: Scene 3 - The Constellation Grid */
 /* ========================================================================= */
 #scene-3 {
-    position: relative;
-    /* Extra height so it feels like a large space segment to scroll through */
-    min-height: 150vh; 
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5;
+    opacity: 0; /* Animated in via GSAP */
+    pointer-events: none; /* Let clicks pass until GSAP enables it */
+    overflow: hidden;
 }
 
 .starfield {
@@ -361,17 +366,6 @@ body, html {
     box-shadow: 0 0 20px var(--color-neon-cyan);
 }
 
-.proj-node {
-    fill: var(--color-neon-cyan);
-    filter: drop-shadow(0 0 10px var(--color-neon-cyan));
-    animation: pulse-node 2s infinite alternate;
-}
-
-@keyframes pulse-node {
-    0% { r: 6px; fill: var(--color-neon-cyan); }
-    100% { r: 9px; fill: var(--color-white); filter: drop-shadow(0 0 15px var(--color-white)); }
-}
-
 .project-stars {
     position: absolute;
     top: 0; left: 0;
@@ -382,12 +376,13 @@ body, html {
 
 .star-label {
     position: absolute;
-    color: var(--color-text-primary);
-    font-size: 1.2rem;
+    color: var(--color-neon-cyan);
+    font-size: 1.4rem;
     font-weight: bold;
-    transform: translate(-15%, -150%);
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    transform: translate(-50%, -50%); /* Center inside the polygon */
+    text-shadow: 0 0 15px var(--color-space-black), 0 0 5px var(--color-space-black);
     opacity: 0; /* Animated in via GSAP */
+    text-align: center;
 }
 
 /* ========================================================================= */
@@ -509,28 +504,40 @@ body, html {
 
 .falling-comet {
     position: absolute;
-    top: -50px;
-    left: 50%;
-    transform: translateX(-50%) rotate(180deg); /* Pointing down */
+    top: -20vh;
+    right: -20vw;
+    left: auto;
+    transform: rotate(-135deg); /* pointing bottom-left */
     width: 150px;
     height: 150px;
     background-image: url('assets/comet.svg');
     background-size: contain;
     background-repeat: no-repeat;
     z-index: 5;
-    /* Will be animated down via GSAP */
+    /* Will be animated down-left via GSAP */
+}
+
+/* White Screen Overlay */
+#white-screen {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: #f8f9fa; /* Nice bright white */
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none; /* enable when visible via GSAP */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .transmission-tail {
-    position: absolute;
-    top: -300px;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
-    z-index: 4;
+    opacity: 0; /* animated in */
+    transform: translateY(50px);
 }
 
 .contact-link {
@@ -549,10 +556,17 @@ body, html {
     transform: scale(1.1);
 }
 
-#flash-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
+.contact-link.dark {
+    font-family: var(--font-hacker);
+    color: var(--color-space-black);
+    text-shadow: none;
+    font-size: 2.5rem;
+}
+
+.contact-link.dark:hover {
+    color: var(--color-neon-cyan);
+    transform: scale(1.1);
+}
     background-color: white;
     z-index: 9999;
     opacity: 0;

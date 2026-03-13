@@ -82,74 +82,62 @@
         <section id="scene-2" class="scene floating-scene">
             <!-- (Logic moved to Scene 1 wrappers to keep them pinned visually during the journey) -->
         </section>
-    </div>
 
-    <!-- Phase 5: Scene 3 - The Constellation Grid (Project Hub) -->
-    <section id="scene-3" class="scene">
+        <!-- Phase 5: Scene 3 - The Constellation Grid (Project Hub) MOVED INSIDE PINNED CONTAINER -->
+        <section id="scene-3" class="scene">
         <div class="starfield"></div>
         <!-- SVG Canvas for connecting lines -->
         <svg id="constellation-canvas" class="constellation-svg" viewBox="0 0 1000 800" preserveAspectRatio="none">
             
-            <!-- Project 1: Kepler's Eye / Ursa Major (Big Dipper) -->
+            <!-- Project 1: Kepler's Eye (Diamond shape) -->
             <g class="constellation-group" id="constellation-1">
-                <path class="constellation-path" d="M 150 150 L 200 180 L 250 190 L 300 160 L 330 110 L 380 90 L 350 160 Z" />
-                <circle class="svg-star" cx="150" cy="150" r="4" />
-                <circle class="svg-star" cx="200" cy="180" r="4" />
-                <circle class="svg-star" cx="250" cy="190" r="4" />
-                <circle class="svg-star proj-node" cx="300" cy="160" r="8" /> <!-- Project Node -->
-                <circle class="svg-star" cx="330" cy="110" r="4" />
-                <circle class="svg-star" cx="380" cy="90" r="4" />
-                <circle class="svg-star" cx="350" cy="160" r="4" />
+                <path class="constellation-path" d="M 250 50 L 350 150 L 250 300 L 150 150 L 250 50" />
+                <circle class="svg-star" cx="250" cy="50" r="5" />
+                <circle class="svg-star" cx="350" cy="150" r="5" />
+                <circle class="svg-star" cx="250" cy="300" r="5" />
+                <circle class="svg-star" cx="150" cy="150" r="5" />
             </g>
 
-            <!-- Project 2: AI Personality Island / Cassiopeia (W shape) -->
+            <!-- Project 2: AI Personality Island (Pentagon shape) -->
             <g class="constellation-group" id="constellation-2">
-                <path class="constellation-path" d="M 700 200 L 750 280 L 800 230 L 850 300 L 900 250" />
-                <circle class="svg-star" cx="700" cy="200" r="4" />
-                <circle class="svg-star proj-node" cx="750" cy="280" r="8" /> <!-- Project Node -->
-                <circle class="svg-star" cx="800" cy="230" r="4" />
-                <circle class="svg-star" cx="850" cy="300" r="4" />
-                <circle class="svg-star" cx="900" cy="250" r="4" />
+                <path class="constellation-path" d="M 650 100 L 850 100 L 900 250 L 750 350 L 600 250 L 650 100" />
+                <circle class="svg-star" cx="650" cy="100" r="5" />
+                <circle class="svg-star" cx="850" cy="100" r="5" />
+                <circle class="svg-star" cx="900" cy="250" r="5" />
+                <circle class="svg-star" cx="750" cy="350" r="5" />
+                <circle class="svg-star" cx="600" cy="250" r="5" />
             </g>
 
-            <!-- Project 3: Crypto Genome / Orion (Hourglass) -->
+            <!-- Project 3: Crypto Genome (Hexagon shape) -->
             <g class="constellation-group" id="constellation-3">
-                <path class="constellation-path" d="M 250 450 L 350 450 L 320 520 L 280 520 Z" />
-                <path class="constellation-path" d="M 280 520 L 250 600 L 350 600 L 320 520" />
-                <path class="constellation-path" d="M 280 520 L 300 520 L 320 520" /> <!-- Belt -->
-                <circle class="svg-star" cx="250" cy="450" r="4" />
-                <circle class="svg-star" cx="350" cy="450" r="4" />
-                <circle class="svg-star proj-node" cx="280" cy="520" r="8" /> <!-- Project Node -->
-                <circle class="svg-star" cx="300" cy="520" r="4" />
-                <circle class="svg-star" cx="320" cy="520" r="4" />
-                <circle class="svg-star" cx="250" cy="600" r="4" />
-                <circle class="svg-star" cx="350" cy="600" r="4" />
+                <path class="constellation-path" d="M 200 450 L 400 450 L 450 550 L 400 650 L 200 650 L 150 550 L 200 450" />
+                <circle class="svg-star" cx="200" cy="450" r="5" />
+                <circle class="svg-star" cx="400" cy="450" r="5" />
+                <circle class="svg-star" cx="450" cy="550" r="5" />
+                <circle class="svg-star" cx="400" cy="650" r="5" />
+                <circle class="svg-star" cx="200" cy="650" r="5" />
+                <circle class="svg-star" cx="150" cy="550" r="5" />
             </g>
 
-            <!-- Project 4: Propensity Engine / Cygnus (Swan/Cross) -->
+            <!-- Project 4: Propensity Engine (Trapezoid shape) -->
             <g class="constellation-group" id="constellation-4">
-                <path class="constellation-path" d="M 750 500 L 750 650" />
-                <path class="constellation-path" d="M 650 575 L 850 575" />
-                <circle class="svg-star" cx="750" cy="500" r="4" />
-                <circle class="svg-star" cx="750" cy="550" r="4" />
-                <circle class="svg-star proj-node" cx="750" cy="575" r="8" /> <!-- Project Node -->
-                <circle class="svg-star" cx="750" cy="600" r="4" />
-                <circle class="svg-star" cx="750" cy="650" r="4" />
-                <circle class="svg-star" cx="650" cy="575" r="4" />
-                <circle class="svg-star" cx="700" cy="575" r="4" />
-                <circle class="svg-star" cx="800" cy="575" r="4" />
-                <circle class="svg-star" cx="850" cy="575" r="4" />
+                <path class="constellation-path" d="M 650 500 L 900 500 L 850 700 L 700 700 L 650 500" />
+                <circle class="svg-star" cx="650" cy="500" r="5" />
+                <circle class="svg-star" cx="900" cy="500" r="5" />
+                <circle class="svg-star" cx="850" cy="700" r="5" />
+                <circle class="svg-star" cx="700" cy="700" r="5" />
             </g>
         </svg>
         
         <!-- Text labels positioned absolutely to match the main project nodes in the SVG -->
         <div class="project-stars">
-            <div class="star-label" style="top: 20%; left: 32%;">Kepler's Eye</div>
-            <div class="star-label" style="top: 38%; left: 77%;">AI Personality Island</div>
-            <div class="star-label" style="top: 67%; left: 30%;">Crypto Genome</div>
-            <div class="star-label" style="top: 75%; left: 78%;">Propensity Engine</div>
+            <div class="star-label" style="top: 22%; left: 25%;">Kepler's Eye</div>
+            <div class="star-label" style="top: 26%; left: 75%;">AI Personality<br>Island</div>
+            <div class="star-label" style="top: 68.75%; left: 30%;">Crypto Genome</div>
+            <div class="star-label" style="top: 75%; left: 77.5%;">Propensity Engine</div>
         </div>
-    </section>
+        </section>
+    </div> <!-- End of space-journey Timeline Container -->
 
     <!-- Phase 6: Scene 4 - The Glasshouse (Horizontal Multimedia Scroll) -->
     <section id="scene-4" class="scene">
@@ -230,22 +218,24 @@
         </div>
     </section>
 
-    <!-- Phase 7: Scene 5 - Terminal Velocity & The Match Cut (Loop) -->
+    <!-- Phase 7: Scene 5 - Final Impact & Info Screen -->
     <section id="scene-5" class="scene">
         <div class="impact-zone">
             <div class="terminal-earth-hills"></div>
+            <!-- Comet element will be animated from top-right to bottom-center -->
             <div class="falling-comet" id="crashing-comet"></div>
-            
-            <div class="transmission-tail">
-                <a href="#" class="contact-link">GitHub</a>
-                <a href="#" class="contact-link">LinkedIn</a>
-                <a href="#" class="contact-link">Email</a>
-                <a href="#" class="contact-link">Resume</a>
-            </div>
         </div>
         
-        <!-- White flash overlay for looping -->
-        <div id="flash-overlay"></div>
+        <!-- Final White Info Screen -->
+        <div id="white-screen">
+            <div class="transmission-tail">
+                <h2 style="color: black; margin-bottom: 20px; font-size: 3rem;">Mission Complete</h2>
+                <a href="#" class="contact-link dark">GitHub</a>
+                <a href="#" class="contact-link dark">LinkedIn</a>
+                <a href="#" class="contact-link dark">Email</a>
+                <a href="#" class="contact-link dark">Resume</a>
+            </div>
+        </div>
     </section>
 
     <script src="main.js"></script>
