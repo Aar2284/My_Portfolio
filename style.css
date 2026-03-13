@@ -189,6 +189,8 @@ body, html {
 .launchpad {
     position: absolute;
     bottom: 20vh;
+    left: 20%;
+    transform: translateX(-50%);
     width: 200px;
     height: 40px;
     background-color: var(--color-launchpad-gray);
@@ -566,9 +568,4 @@ body, html {
 .contact-link.dark:hover {
     color: var(--color-neon-cyan);
     transform: scale(1.1);
-}
-    background-color: white;
-    z-index: 9999;
-    opacity: 0;
-    pointer-events: none;
 }

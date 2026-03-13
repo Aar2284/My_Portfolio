@@ -204,45 +204,39 @@ const tlGlasshouse = gsap.timeline({
 tlGlasshouse.to(".horizontal-scroll-container", {
     // Scroll horizontally the exact width of the container minus one viewport width
     x: () => -(document.querySelector('.horizontal-scroll-container').scrollWidth - window.innerWidth),
-    ease: "none"
-});
+    ease: "none",
+    duration: 4
+})
+// "after the all the cards are done then make them blur"
+.to(".glass-card", { filter: "blur(20px)", opacity: 0.2, duration: 1 }, ">");
 
 // ------------------------------------------------------------------------------------------------ //
-// Phase 7: Scene 5 - Terminal Velocity & Loop
+// Phase 7: Scene 5 - Final Impact & Info Screen
 const tlImpact = gsap.timeline({
     scrollTrigger: {
         trigger: "#scene-5",
         start: "top top",
-        end: "+=100%",
+        end: "+=2000",
         scrub: 1,
         pin: true,
-        onLeave: () => triggerLoop() // Trigger on scroll completion
     }
 });
 
 tlImpact
     // Aggressive camera tilt and zoom out
     .to(".impact-zone", { rotationX: 45, scale: 1.2, duration: 2, ease: "power2.in" }, 0)
-    // Comet falls fast
-    .to(".falling-comet", { top: "70vh", duration: 2, ease: "power4.in" }, 0)
-    // Tail follows closely behind
-    .to(".transmission-tail", { top: "25vh", duration: 2, ease: "power4.in" }, "<0.2");
-
-function triggerLoop() {
-    // 1. Flash white
-    gsap.to("#flash-overlay", {
-        opacity: 1,
-        duration: 0.2,
-        onComplete: () => {
-            // 2. Instantly reset scroll to top
-            lenis.scrollTo(0, { immediate: true });
-            
-            // 3. Fade flash out slowly to reveal Scene 1
-            gsap.to("#flash-overlay", {
-                opacity: 0,
-                duration: 1.5,
-                delay: 0.1
-            });
-        }
-    });
-}
+    // Comet falls fast from top-right down to earth
+    .to(".falling-comet", { 
+        top: "70vh", 
+        right: "50vw", 
+        width: "300px", 
+        height: "300px", 
+        duration: 2, 
+        ease: "power4.in" 
+    }, 0)
+    // Impact triggers the white screen to fade in
+    .to("#white-screen", { opacity: 1, duration: 0.5 }, ">-0.2")
+    // Keep it interactive
+    .set("#white-screen", { pointerEvents: "auto" })
+    // Fade in text links on the white screen
+    .to(".transmission-tail", { opacity: 1, y: 0, duration: 1, ease: "power2.out" });
