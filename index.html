@@ -3,239 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aaryan Kalia // Data Science & Machine Learning Portfolio</title>
+    <title>Aaryan Kalia // Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Syncopate:wght@700&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     
-    <!-- GSAP Core & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <!-- Lenis for Smooth Scrolling -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 </head>
 <body>
-    <!-- Custom Glowing Comet Cursor -->
-    <div class="cursor-comet"></div>
-    <div class="cursor-trail"></div>
+    <!-- Canvas Particle System (Fixed Background) -->
+    <canvas id="bg-canvas"></canvas>
 
-    <!-- Space Journey Timeline Container -->
-    <div id="space-journey">
-        <!-- Phase 3: Scene 1 - Earth Launchpad & Ignition -->
-        <section id="scene-1" class="scene">
-            <div class="sky-background">
-                <div class="sky-black-overlay"></div>
-            </div>
-            <div class="clouds-layer">
-                <div class="cloud cloud-1"></div>
-                <div class="cloud cloud-2"></div>
-                <div class="cloud cloud-3"></div>
-                <div class="cloud cloud-4"></div>
-            </div>
+    <nav class="top-nav">
+        <div class="nav-links">
+            <a href="#hero">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="lang-toggle">EN</div>
+    </nav>
+
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
             
-            <div class="launchpad-container">
-                <img src="assets/earth.png" class="earth-hills" alt="Earth" />
-                <!-- Launchpad smoke -->
-                <div class="smoke-layer"></div>
-                
-                <!-- Intro text moved to sit naturally on the Earth container -->
-                <div class="intro-content">
-                    <h1 class="hacker-text">Aaryan Kalia</h1>
-                    <h2 class="role-text">// B.Tech CSE // Data Science & Machine Learning</h2>
+            <!-- Phase 1: Hero Section (GSAP Hero Parallax) -->
+            <section id="hero" class="scene">
+                <div class="hero-layers">
+                    <!-- Layered Image Assets -->
+                    <div class="layer layer-planet-left">
+                        <img src="assets/planet-hero-left.png" alt="" class="asset-img">
+                    </div>
+                    <div class="layer layer-planet-right">
+                        <img src="assets/planet-hero-right.png" alt="" class="asset-img">
+                    </div>
+                    <div class="layer layer-rocket-wrap">
+                        <div class="spaceship">
+                            <div class="rocket-assembly">
+                                <img src="assets/rocket-layer-5.svg" class="r-part p5">
+                                <img src="assets/rocket-layer-4.svg" class="r-part p4">
+                                <img src="assets/rocket-layer-3.svg" class="r-part p3">
+                                <img src="assets/rocket-layer-2.svg" class="r-part p2">
+                                <img src="assets/rocket-layer-1.svg" class="r-part p1">
+                                <div class="rocket-flame"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Assembled Rocket Container -->
-            <div class="rocket-assembly" id="main-rocket">
-                <!-- Grouping each image with its respective text node so they stay together when shattering -->
-                
-                <div class="rocket-part-wrapper layer-1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                    <img src="assets/rocket-layer-1.svg" class="rocket-layer" alt="Rocket Nose Cone">
-                    <div class="node node-1 hidden"><span class="neon-cyan">&gt;&gt;</span> Nose Cone: Programming<br><span class="tech-subtext">Python, C++, SQL, Java</span></div>
+                <div class="hero-text-content">
+                    <h1 class="main-title">AARYAN KALIA</h1>
+                    <p class="sub-title">Augmenting the future with AI-Powered Intelligence and Data Visualization.</p>
+                    <a href="#" class="btn-hero">MY RESUME ></a>
                 </div>
+            </section>
 
-                <div class="rocket-part-wrapper layer-2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                    <img src="assets/rocket-layer-2.svg" class="rocket-layer" alt="Rocket Body Top">
-                    <div class="node node-2 hidden"><span class="neon-cyan">&gt;&gt;</span> Left Booster: Data Handling<br><span class="tech-subtext">Pandas, NumPy, Spark</span></div>
+            <!-- Phase 2: Skills Planet Sequence -->
+            <section id="skills" class="scene">
+                <div class="skills-track">
+                    <div class="skill-slide" id="skill-coding">
+                        <div class="planet-skill"><img src="assets/skill-planet-1.png" class="asset-img"></div>
+                        <div class="skill-info">
+                            <h2>My Coding Languages</h2>
+                            <p>Python, C++, Java, PL/SQL</p>
+                        </div>
+                    </div>
+                    <div class="skill-slide" id="skill-eda">
+                        <div class="planet-skill"><img src="assets/skill-planet-2.png" class="asset-img"></div>
+                        <div class="skill-info">
+                            <h2>EDA</h2>
+                            <p>Pandas, NumPy, Scikit-Learn</p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="rocket-part-wrapper layer-3" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                    <img src="assets/rocket-layer-3.svg" class="rocket-layer" alt="Rocket Body Mid">
-                    <div class="node node-3 hidden"><span class="neon-cyan">&gt;&gt;</span> Main Core: Machine Learning<br><span class="tech-subtext">Scikit-Learn, TensorFlow, PyTorch</span></div>
+            </section>
+
+            <!-- Phase 3: Split-Screen Project Showcase (Diagonal Mask Wipe) -->
+            <section id="projects" class="scene">
+                <div class="diagonal-wipe-container">
+                    <!-- Project 1 -->
+                    <div class="project-split-card" id="p1">
+                        <div class="split-left content-side">
+                            <div class="card-ui">
+                                <div class="project-tag">MACHINE LEARNING</div>
+                                <h2>World Bank Socio Economic Analysis</h2>
+                                <p>Comprehensive analysis of global socio-economic trends using World Bank datasets, featuring predictive modeling for GDP growth.</p>
+                                <div class="tech-pills">
+                                    <span>Python</span>
+                                    <span>Pandas</span>
+                                    <span>Scikit-Learn</span>
+                                    <span>Plotly</span>
+                                </div>
+                                <a href="#" class="btn-project">VIEW PROJECT ></a>
+                            </div>
+                        </div>
+                        <div class="split-right visual-side">
+                            <img src="assets/polar-bear-standing.png" class="project-asset">
+                            <div class="holographic-ui">
+                                <div class="holo-panel"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-split-card" id="p2">
+                        <div class="split-left content-side">
+                            <div class="card-ui">
+                                <div class="project-tag">DEVELOPMENT</div>
+                                <h2>AI Personality Island</h2>
+                                <p>An interactive visual experience driven by LLMs that maps user personality traits to a procedurally generated ecosystem.</p>
+                                <div class="tech-pills">
+                                    <span>LLMs</span>
+                                    <span>Flask</span>
+                                    <span>Tailwind</span>
+                                    <span>Three.js</span>
+                                </div>
+                                <a href="#" class="btn-project">VIEW PROJECT ></a>
+                            </div>
+                        </div>
+                        <div class="split-right visual-side">
+                            <img src="assets/polar-bear-diving.png" class="project-asset">
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="rocket-part-wrapper layer-4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                    <img src="assets/rocket-layer-4.svg" class="rocket-layer" alt="Rocket Engines">
-                    <div class="node node-4 hidden"><span class="neon-cyan">&gt;&gt;</span> Right Booster: Visualization<br><span class="tech-subtext">Matplotlib, Seaborn, Power BI</span></div>
+            </section>
+
+            <!-- Phase 4: Landscape & Cabin -->
+            <section id="landscape" class="scene">
+                <img src="assets/aurora-landscape.png" class="full-scene-asset">
+                <div class="landscape-text">
+                    <h2>Easy as A,B,C</h2>
+                    <p>Building intuitive interfaces for complex data.</p>
                 </div>
-                
-                <div class="rocket-part-wrapper layer-5" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                    <img src="assets/rocket-layer-5.svg" class="rocket-layer" alt="Rocket Thrusters">
-                    <div class="node node-5 hidden"><span class="neon-cyan">&gt;&gt;</span> Engine Block: Tools<br><span class="tech-subtext">Git, GitHub, Jupyter, Docker</span></div>
+            </section>
+
+            <section id="winter" class="scene">
+                <img src="assets/winter-cabin-scene.png" class="full-scene-asset">
+                <div class="winter-text">
+                    <h2>Safe as Houses</h2>
+                    <p>Security and reliability at the core of every deployment.</p>
                 </div>
-                
-                <div class="rocket-fire"></div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Phase 4: Scene 2 - The Orbital Shatter (Tech Stack) -->
-        <section id="scene-2" class="scene floating-scene">
-            <!-- (Logic moved to Scene 1 wrappers to keep them pinned visually during the journey) -->
-        </section>
+            <footer class="footer-rewind">
+                <button id="back-to-top">REPLAY MISSION</button>
+            </footer>
 
-        <!-- Phase 5: Scene 3 - The Constellation Grid (Project Hub) MOVED INSIDE PINNED CONTAINER -->
-        <section id="scene-3" class="scene">
-        <div class="starfield"></div>
-        <!-- SVG Canvas for connecting lines -->
-        <svg id="constellation-canvas" class="constellation-svg" viewBox="0 0 1000 800" preserveAspectRatio="none">
-            
-            <!-- Project 1: Kepler's Eye (Diamond shape) -->
-            <g class="constellation-group" id="constellation-1">
-                <path class="constellation-path" d="M 250 50 L 350 150 L 250 300 L 150 150 L 250 50" />
-                <circle class="svg-star" cx="250" cy="50" r="5" />
-                <circle class="svg-star" cx="350" cy="150" r="5" />
-                <circle class="svg-star" cx="250" cy="300" r="5" />
-                <circle class="svg-star" cx="150" cy="150" r="5" />
-            </g>
-
-            <!-- Project 2: AI Personality Island (Pentagon shape) -->
-            <g class="constellation-group" id="constellation-2">
-                <path class="constellation-path" d="M 650 100 L 850 100 L 900 250 L 750 350 L 600 250 L 650 100" />
-                <circle class="svg-star" cx="650" cy="100" r="5" />
-                <circle class="svg-star" cx="850" cy="100" r="5" />
-                <circle class="svg-star" cx="900" cy="250" r="5" />
-                <circle class="svg-star" cx="750" cy="350" r="5" />
-                <circle class="svg-star" cx="600" cy="250" r="5" />
-            </g>
-
-            <!-- Project 3: Crypto Genome (Hexagon shape) -->
-            <g class="constellation-group" id="constellation-3">
-                <path class="constellation-path" d="M 200 450 L 400 450 L 450 550 L 400 650 L 200 650 L 150 550 L 200 450" />
-                <circle class="svg-star" cx="200" cy="450" r="5" />
-                <circle class="svg-star" cx="400" cy="450" r="5" />
-                <circle class="svg-star" cx="450" cy="550" r="5" />
-                <circle class="svg-star" cx="400" cy="650" r="5" />
-                <circle class="svg-star" cx="200" cy="650" r="5" />
-                <circle class="svg-star" cx="150" cy="550" r="5" />
-            </g>
-
-            <!-- Project 4: Propensity Engine (Trapezoid shape) -->
-            <g class="constellation-group" id="constellation-4">
-                <path class="constellation-path" d="M 650 500 L 900 500 L 850 700 L 700 700 L 650 500" />
-                <circle class="svg-star" cx="650" cy="500" r="5" />
-                <circle class="svg-star" cx="900" cy="500" r="5" />
-                <circle class="svg-star" cx="850" cy="700" r="5" />
-                <circle class="svg-star" cx="700" cy="700" r="5" />
-            </g>
-        </svg>
-        
-        <!-- Text labels positioned absolutely to match the main project nodes in the SVG -->
-        <div class="project-stars">
-            <div class="star-label" style="top: 22%; left: 25%;">Kepler's Eye</div>
-            <div class="star-label" style="top: 26%; left: 75%;">AI Personality<br>Island</div>
-            <div class="star-label" style="top: 68.75%; left: 30%;">Crypto Genome</div>
-            <div class="star-label" style="top: 75%; left: 77.5%;">Propensity Engine</div>
         </div>
-        </section>
-    </div> <!-- End of space-journey Timeline Container -->
-
-    <!-- Phase 6: Scene 4 - The Glasshouse (Horizontal Multimedia Scroll) -->
-    <section id="scene-4" class="scene">
-        <div class="horizontal-scroll-container">
-            <!-- Card 1 -->
-            <div class="glass-card">
-                <h3>Kepler's Eye</h3>
-                <div class="card-grid">
-                    <div class="card-col">
-                        <ul class="workflow-list">
-                            <li><span class="neon-cyan">&gt;</span> Problem Statement & Dataset</li>
-                            <li><span class="neon-cyan">&gt;</span> Data Cleaning & EDA Visuals</li>
-                            <li><span class="neon-cyan">&gt;</span> Feature Engineering & Model Architecture</li>
-                            <li><span class="neon-cyan">&gt;</span> Evaluation Metrics (Accuracy, Precision, Recall, F1, RMSE)</li>
-                            <li><span class="neon-cyan">&gt;</span> Business Impact</li>
-                        </ul>
-                    </div>
-                    <div class="card-col">
-                        <!-- Multimedia space -->
-                        <div class="media-container"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="glass-card">
-                <h3>AI-Powered Personality Island</h3>
-                <div class="card-grid">
-                    <div class="card-col">
-                        <ul class="workflow-list">
-                            <li><span class="neon-cyan">&gt;</span> Problem Statement & Dataset</li>
-                            <li><span class="neon-cyan">&gt;</span> Data Cleaning & EDA Visuals</li>
-                            <li><span class="neon-cyan">&gt;</span> Feature Engineering & Model Architecture</li>
-                            <li><span class="neon-cyan">&gt;</span> Evaluation Metrics (Accuracy, Precision, Recall, F1, RMSE)</li>
-                            <li><span class="neon-cyan">&gt;</span> Business Impact</li>
-                        </ul>
-                    </div>
-                    <div class="card-col">
-                        <div class="media-container"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="glass-card">
-                <h3>Crypto Genome</h3>
-                <div class="card-grid">
-                    <div class="card-col">
-                        <ul class="workflow-list">
-                            <li><span class="neon-cyan">&gt;</span> Problem Statement & Dataset</li>
-                            <li><span class="neon-cyan">&gt;</span> Data Cleaning & EDA Visuals</li>
-                            <li><span class="neon-cyan">&gt;</span> Feature Engineering & Model Architecture</li>
-                            <li><span class="neon-cyan">&gt;</span> Evaluation Metrics (Accuracy, Precision, Recall, F1, RMSE)</li>
-                            <li><span class="neon-cyan">&gt;</span> Business Impact</li>
-                        </ul>
-                    </div>
-                    <div class="card-col">
-                        <div class="media-container"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="glass-card">
-                <h3>E-commerce Propensity Engine</h3>
-                <div class="card-grid">
-                    <div class="card-col">
-                        <ul class="workflow-list">
-                            <li><span class="neon-cyan">&gt;</span> Problem Statement & Dataset</li>
-                            <li><span class="neon-cyan">&gt;</span> Data Cleaning & EDA Visuals</li>
-                            <li><span class="neon-cyan">&gt;</span> Feature Engineering & Model Architecture</li>
-                            <li><span class="neon-cyan">&gt;</span> Evaluation Metrics (Accuracy, Precision, Recall, F1, RMSE)</li>
-                            <li><span class="neon-cyan">&gt;</span> Business Impact</li>
-                        </ul>
-                    </div>
-                    <div class="card-col">
-                        <div class="media-container"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Phase 7: Scene 5 - Hyperdrive & Info Screen -->
-    <section id="scene-5" class="scene">
-        <div class="hyperdrive-zone">
-            <!-- Layers of stars mapping to hyperdrive light streaks -->
-            <div class="warp-bg layer-a"></div>
-            <div class="warp-bg layer-b"></div>
-        </div>
-        
-        <!-- Final White Info Screen -->
-        <div id="white-screen">
-            <div class="transmission-tail">
-                <h2 style="color: black; margin-bottom: 20px; font-size: 3rem;">Mission Complete</h2>
-                <a href="#" class="contact-link dark">GitHub</a>
-                <a href="#" class="contact-link dark">LinkedIn</a>
-                <a href="#" class="contact-link dark">Email</a>
-                <a href="#" class="contact-link dark">Resume</a>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <script src="main.js"></script>
 </body>

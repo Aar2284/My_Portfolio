@@ -1,547 +1,322 @@
-/* Phase 2: Global CSS Variables & Typography */
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap');
-
 :root {
-    --color-neon-cyan: #00ffff;
-    --color-deep-indigo: #0b0c10;
-    --color-space-black: #050505;
-    --color-launchpad-gray: #1f2833;
-    --color-text-primary: #c5c6c7;
-    --color-earth-green: #2a6a42;
-    --color-sky-blue: #4a90e2;
-    --color-cloud-white: #e0e0e0;
-    
-    --font-hacker: 'Consolas', 'Inconsolata', monospace;
+    --bg-dark: #0a001a;
+    --magenta: #ff00ff;
+    --cyan: #00ffff;
+    --white: #ffffff;
+    --indigo: #2e004e;
+    --font-header: 'Montserrat', sans-serif;
+    --font-sub: 'Space Grotesk', sans-serif;
 }
 
-/* Base Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body, html {
-    width: 100%;
-    min-height: 100vh;
-    font-family: var(--font-hacker);
-    background-color: var(--color-space-black);
-    color: var(--color-text-primary);
+body {
+    background-color: var(--bg-dark);
+    color: var(--white);
+    font-family: var(--font-sub);
     overflow-x: hidden;
-    cursor: none; /* Hide default cursor */
 }
 
-/* Custom Cursor Logic */
-.cursor-comet {
+#bg-canvas {
     position: fixed;
     top: 0;
     left: 0;
-    width: 20px;
-    height: 20px;
-    background-color: var(--color-neon-cyan);
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
     pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 15px var(--color-neon-cyan), 0 0 30px var(--color-neon-cyan);
-    transition: transform 0.1s ease-out;
 }
 
-.cursor-trail {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    background-color: rgba(0, 255, 255, 0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.15s ease-out;
-}
-
-/* Typography styles */
-.hacker-text {
-    font-family: var(--font-hacker);
-    color: var(--color-text-primary);
-    font-size: 3rem;
-    letter-spacing: 2px;
-}
-
-.role-text {
-    font-size: 1.2rem;
-    color: var(--color-neon-cyan);
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-.btn-primary {
-    display: inline-block;
-    padding: 12px 24px;
-    border: 1px solid var(--color-neon-cyan);
-    background: transparent;
-    color: var(--color-neon-cyan);
-    text-decoration: none;
-    font-family: var(--font-hacker);
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
-}
-
-.btn-primary:hover {
-    background: var(--color-neon-cyan);
-    color: var(--color-space-black);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-}
-
-/* Scene Setup */
 .scene {
     position: relative;
     width: 100%;
     min-height: 100vh;
-}
-
-/* ========================================================================= */
-/* Space Journey Container */
-/* ========================================================================= */
-#space-journey {
-    position: relative;
-    width: 100%;
-    height: 100vh;
     overflow: hidden;
+    z-index: 2;
 }
 
-/* ========================================================================= */
-/* Phase 3: Scene 1 - Earth Launchpad & Ignition */
-/* ========================================================================= */
-#scene-1 {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden; /* Contains the earth moving down */
-}
-
-/* The Sky */
-.sky-background {
-    position: absolute;
+/* --- Persistent Nav --- */
+.top-nav {
+    position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, var(--color-sky-blue) 0%, #b3d4ff 100%);
-    z-index: 1;
-}
-
-.sky-black-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(180deg, #050505 0%, #0b0c10 100%);
-    opacity: 0; /* Animated to 1 on scroll */
-    z-index: 2;
-}
-
-/* Clouds Layer */
-.clouds-layer {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.cloud {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    filter: blur(8px);
-    opacity: 0.8;
-}
-
-.cloud-1 { width: 300px; height: 100px; top: 20%; left: -10%; }
-.cloud-2 { width: 400px; height: 150px; top: 40%; right: -15%; }
-.cloud-3 { width: 250px; height: 80px; top: 60%; left: 20%; }
-.cloud-4 { width: 500px; height: 200px; bottom: 10%; left: 50%; transform: translateX(-50%); }
-
-/* The Earth Foreground */
-.launchpad-container {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100vh; /* Changed from 60vh to explicitly fill the entire first screen */
-    z-index: 3;
+    padding: 20px 50px;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
 }
 
-.earth-hills {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: auto; /* Maintains true aspect ratio without cropping sides */
-    z-index: 4;
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    margin-right: 30px;
+    opacity: 0.7;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: var(--font-header);
+    font-weight: 700;
 }
 
-.smoke-layer {
+/* --- Phase 1: Hero --- */
+.hero-layers {
     position: absolute;
-    bottom: -10vh;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 150vw;
-    height: 30vh;
-    background: radial-gradient(ellipse at bottom, rgba(224, 224, 224, 0.6) 0%, transparent 60%);
-    filter: blur(20px);
-    z-index: 7;
-    opacity: 0;
-    pointer-events: none;
+    top: 0; left: 0; width: 100%; height: 100%;
 }
 
-/* Intro Text */
-.intro-content {
+.layer {
     position: absolute;
-    top: 30vh; /* Container is 100vh now, so this places it nicely in the upper portion of the sky */
-    left: 45vw; /* Positioned to the right of the rocket */
-    z-index: 10;
-    opacity: 1; /* Starts visible on the launchpad */
+    top: 0; left: 0; width: 100%; height: 100%;
 }
 
-/* Rocket Assembly */
-.rocket-assembly {
-    position: absolute;
-    bottom: 10vw; /* Relative to the viewport width, locking it to the image's height scale */
-    left: 23.5%; /* Nudged 0.5cm right */
-    transform: translateX(-50%); /* Starts straight */
-    width: 100px;
-    height: 250px;
-    z-index: 20;
+.layer-planet-left {
+    width: 35vw; height: 35vw;
+    left: 5vw; top: 15vh;
 }
 
-.rocket-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.layer-planet-right {
+    width: 50vw; height: 50vw;
+    right: -5vw; top: -5vh;
+}
+
+.asset-img {
+    width: 100%; height: 100%;
     object-fit: contain;
 }
 
-/* Fire ready to ignite */
-.rocket-fire {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 60px;
-    background: radial-gradient(circle, #ff9900 20%, #ff3366 60%, transparent 80%);
-    filter: blur(5px);
-    opacity: 0; /* Hidden initially */
-    z-index: 5;
-}
-
-/* ========================================================================= */
-/* Phase 4: Scene 2 - The Orbital Shatter (Tech Stack) */
-/* ========================================================================= */
-#scene-2 {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100vh;
-    pointer-events: none; /* Required so hover events reach scene 1 or standard scroll */
-}
-
-/* Neon utility classes */
-.neon-cyan { color: var(--color-neon-cyan); }
-
-.tech-nodes {
-    position: relative;
-    width: 100%;
-    height: 100%;
+.layer-rocket-wrap {
     z-index: 10;
 }
 
-/* Base Node style */
-.node {
+.spaceship {
     position: absolute;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--color-text-primary);
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
-    /* Set opacity manually via GSAP later */
-    opacity: 0; 
-    white-space: nowrap;
-    /* We now position the nodes relative to their flying parts instead of absolute to the screen */
+    bottom: 5%;
+    right: 5%;
+    width: 100px;
 }
 
-.tech-subtext {
-    font-size: 1rem;
-    font-weight: normal;
-    color: var(--color-cloud-white);
-    display: block;
-    margin-top: 5px;
-    text-shadow: none;
+.rocket-assembly {
+    position: relative;
+    transform: rotate(-45deg);
+    transform-origin: center;
 }
 
-/* Attach nodes relatively near their respective rocket layers */
-/* We will map these correctly when we nest them in HTML */
-.node-1 { top: -20px; left: 120%; } /* Nose Cone */
-/* Set node-2 (Left Booster) so text extends to the left, but we will limit how far left the booster moves */
-.node-2 { top: 20px; right: 120%; text-align: right; } 
-.node-3 { top: 50px; left: 120%; } /* Main Core */
-/* Set node-4 (Right Booster) to sit on its right side so it doesn't overlap the core */
-.node-4 { top: 100px; left: 120%; } 
-.node-5 { bottom: 0; left: 120%; } /* Engine Block */
-
-/* ========================================================================= */
-/* Phase 5: Scene 3 - The Constellation Grid */
-/* ========================================================================= */
-#scene-3 {
+.r-part {
     position: absolute;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 5;
-    opacity: 0; /* Animated in via GSAP */
-    pointer-events: none; /* Let clicks pass until GSAP enables it */
-    overflow: hidden;
+    width: 100%;
+    height: auto;
 }
 
-.starfield {
+.rocket-flame {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    /* A quick hack for a CSS starfield pattern instead of an image */
-    background-image: 
-      radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
-      radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
-      radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
-    background-size: 550px 550px, 350px 350px, 250px 250px; 
-    background-position: 0 0, 40px 60px, 130px 270px;
-    opacity: 0.5;
-    z-index: 1;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--cyan), transparent);
+    filter: blur(4px);
+    border-radius: 50% 50% 0 0;
 }
 
-.constellation-svg {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 2;
-    overflow: visible;
-}
-
-.constellation-path {
-    fill: none;
-    stroke: var(--color-neon-cyan);
-    stroke-width: 4;
-    opacity: 1;
-    filter: drop-shadow(0 0 8px var(--color-neon-cyan));
-    /* array and offset handled by JS per path */
-}
-
-.svg-star {
-    fill: var(--color-space-black);
-    stroke: var(--color-neon-cyan);
-    stroke-width: 3;
-    transition: all 0.3s ease;
-}
-
-.svg-star:hover {
-    fill: var(--color-neon-cyan);
-    cursor: pointer;
-    box-shadow: 0 0 20px var(--color-neon-cyan);
-}
-
-.project-stars {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 3;
-    pointer-events: none; /* Let clicks pass to the SVG nodes */
-}
-
-.star-label {
-    position: absolute;
-    color: var(--color-neon-cyan);
-    font-size: 1.4rem;
-    font-weight: bold;
-    transform: translate(-50%, -50%); /* Center inside the polygon */
-    text-shadow: 0 0 15px var(--color-space-black), 0 0 5px var(--color-space-black);
-    opacity: 0; /* Animated in via GSAP */
+.hero-text-content {
+    position: relative;
+    z-index: 50;
     text-align: center;
-}
-
-/* ========================================================================= */
-/* Phase 6: Scene 4 - The Glasshouse (Horizontal Scroll) */
-/* ========================================================================= */
-#scene-4 {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--color-space-black);
-}
-
-.horizontal-scroll-container {
-    display: flex;
-    /* 4 cards each roughly 100vw */
-    width: 400vw; 
-    height: 100vh;
-    padding: 10vh 5vw;
-}
-
-.glass-card {
-    flex: 0 0 90vw; /* Take up 90% of screen width */
-    height: 80vh;
-    margin-right: 10vw; /* Space between cards */
-    background: rgba(255, 255, 255, 0.05); /* Extremely subtle white */
-    backdrop-filter: blur(15px); /* Frosted glass effect */
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(0, 255, 255, 0.2);
-    border-radius: 20px;
-    padding: 40px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.glass-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--color-neon-cyan);
-    box-shadow: 0 15px 40px rgba(0, 255, 255, 0.15);
-}
-
-.glass-card h3 {
-    font-size: 2.5rem;
-    color: var(--color-text-primary);
-    margin-bottom: 20px;
-}
-
-.card-grid {
-    display: flex;
-    gap: 30px;
-    height: calc(100% - 60px);
-}
-
-.card-col {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.workflow-list {
-    list-style: none;
-    font-size: 1.1rem;
-    color: var(--color-cloud-white);
-    line-height: 1.6;
-}
-
-.workflow-list li {
-    margin-bottom: 20px;
-}
-
-.media-container {
-    flex-grow: 1;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-    border: 1px dashed rgba(255, 255, 255, 0.2);
-    display: flex;
-    justify-content: center;
     align-items: center;
-    color: #455a64;
-    font-family: var(--font-hacker);
-    overflow: hidden;
-    position: relative;
+    justify-content: center;
+    height: 100vh;
 }
 
-.media-container::after {
-    content: ">> MULTIMEDIA_INJECTION_POINT_PENDING";
-    font-size: 1.5rem;
+.main-title {
+    font-family: var(--font-header);
+    font-size: 8rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.sub-title {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    max-width: 600px;
+    line-height: 1.6;
+    margin: 20px 0 40px;
+}
+
+.btn-hero {
+    padding: 18px 50px;
+    border: 2px solid var(--white);
+    color: var(--white);
+    text-decoration: none;
+    font-family: var(--font-header);
+    font-weight: 700;
     letter-spacing: 2px;
 }
 
-/* ========================================================================= */
-/* ========================================================================= */
-/* Phase 7: Scene 5 - Hyperdrive Warp Jump */
-/* ========================================================================= */
-#scene-5 {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--color-space-black);
-}
-
-.hyperdrive-zone {
+/* --- Phase 2: Skills --- */
+.skills-track {
     width: 100%;
     height: 100vh;
-    position: relative;
-    perspective: 1000px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
 }
 
-.hyper-streak {
+.skill-slide {
     position: absolute;
-    top: 50%; left: 50%;
-    width: 3px;
-    height: 10px; /* Starts as a small star */
-    background: white;
-    transform-origin: top center;
-    opacity: 0; /* visible via GSAP */
-    border-radius: 2px;
-    box-shadow: 0 0 10px white, 0 0 20px var(--color-neon-cyan);
-    z-index: 1;
-}
-
-/* White Screen Overlay */
-#white-screen {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background-color: #f8f9fa; /* Nice bright white */
-    z-index: 10;
-    opacity: 0;
-    pointer-events: none; /* enable when visible via GSAP */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.transmission-tail {
+    width: 100%; height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
-    opacity: 0; /* animated in */
-    transform: translateY(50px);
+    justify-content: center;
+    visibility: hidden;
 }
 
-.contact-link {
-    color: var(--color-neon-cyan);
-    font-size: 2rem;
-    font-weight: bold;
+.planet-skill { width: 400px; height: 400px; }
+
+/* --- Phase 3: Project Showcase (Diagonal Wipe & Split-Screen) --- */
+.diagonal-wipe-container {
+    width: 100%;
+    height: 100vh;
+}
+
+.project-split-card {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    visibility: hidden;
+    /* This will be animated with clip-path in JS */
+}
+
+.content-side {
+    flex: 1;
+    background-color: var(--white);
+    color: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10%;
+}
+
+.visual-side {
+    flex: 1;
+    background-color: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.card-ui {
+    width: 100%;
+}
+
+.project-tag {
+    font-family: var(--font-header);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--magenta);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.card-ui h2 {
+    font-family: var(--font-header);
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.card-ui p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.tech-pills span {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.btn-project {
+    display: inline-block;
+    padding: 16px 40px;
+    background-color: var(--bg-dark);
+    color: var(--white);
     text-decoration: none;
-    text-transform: uppercase;
-    text-shadow: 0 0 15px var(--color-neon-cyan);
-    transition: all 0.3s ease;
+    font-family: var(--font-header);
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-.contact-link:hover {
-    color: white;
-    text-shadow: 0 0 30px white;
-    transform: scale(1.1);
+.project-asset {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
 }
 
-.contact-link.dark {
-    font-family: var(--font-hacker);
-    color: var(--color-space-black);
-    text-shadow: none;
-    font-size: 2.5rem;
+.holographic-ui {
+    position: absolute;
+    top: 10%; right: 5%;
 }
 
-.contact-link.dark:hover {
-    color: var(--color-neon-cyan);
-    transform: scale(1.1);
+.holo-panel {
+    width: 150px; height: 100px;
+    background: rgba(0, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--cyan);
+    border-radius: 15px;
+}
+
+/* --- Phase 4 & 5 --- */
+.full-scene-asset {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.landscape-text, .winter-text {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.footer-rewind {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#back-to-top {
+    padding: 20px 40px;
+    background: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
+    font-family: var(--font-header);
+    cursor: pointer;
 }
