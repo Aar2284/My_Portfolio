@@ -169,7 +169,7 @@ body, html {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 60vh;
+    height: 100vh; /* Changed from 60vh to explicitly fill the entire first screen */
     z-index: 3;
     display: flex;
     justify-content: center;
@@ -178,25 +178,11 @@ body, html {
 
 .earth-hills {
     position: absolute;
-    bottom: -10vh; /* Hide the flat bottom ellipse */
-    width: 150vw;
-    height: 50vh;
-    background: radial-gradient(ellipse at top, var(--color-earth-green), #1c4d2e);
-    border-radius: 50% 50% 0 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: auto; /* Maintains true aspect ratio without cropping sides */
     z-index: 4;
-}
-
-.launchpad {
-    position: absolute;
-    bottom: 20vh;
-    left: 20%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 40px;
-    background-color: var(--color-launchpad-gray);
-    border-top: 5px solid #455a64;
-    z-index: 5;
-    border-radius: 5px 5px 0 0;
 }
 
 .smoke-layer {
@@ -216,8 +202,8 @@ body, html {
 /* Intro Text */
 .intro-content {
     position: absolute;
-    top: -20vh; /* Placed just above the green earth curve inside the container */
-    left: 40vw; /* Positioned to the right of the rocket */
+    top: 30vh; /* Container is 100vh now, so this places it nicely in the upper portion of the sky */
+    left: 45vw; /* Positioned to the right of the rocket */
     z-index: 10;
     opacity: 1; /* Starts visible on the launchpad */
 }
@@ -225,8 +211,8 @@ body, html {
 /* Rocket Assembly */
 .rocket-assembly {
     position: absolute;
-    bottom: calc(20vh + 35px); /* Rest on the launchpad */
-    left: 20%; /* Moved launchpad to the left side */
+    bottom: 10vw; /* Relative to the viewport width, locking it to the image's height scale */
+    left: 23.5%; /* Nudged 0.5cm right */
     transform: translateX(-50%); /* Starts straight */
     width: 100px;
     height: 250px;
