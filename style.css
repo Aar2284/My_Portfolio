@@ -63,65 +63,59 @@ body {
     font-weight: 700;
 }
 
-/* --- Phase 1: Hero --- */
-.hero-layers {
+/* --- Phase 1: Hero Elements (CSS Only) --- */
+.hero-elements {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100vh;
+    overflow: hidden;
+    z-index: 5; /* Behind text (50), in front of canvas (1) */
+    pointer-events: none;
 }
 
-.layer {
+.planet {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.2));
 }
 
-.layer-planet-left {
-    width: 35vw; height: 35vw;
-    left: 5vw; top: 15vh;
+.planet-1 {
+    width: 200px; height: 200px;
+    top: 15%; left: 10%;
+    background: radial-gradient(circle at 30% 30%, #4a00e0, #8e2de2);
 }
 
-.layer-planet-right {
-    width: 50vw; height: 50vw;
-    right: -5vw; top: -5vh;
+.planet-2 {
+    width: 120px; height: 120px;
+    top: 60%; left: 15%;
+    background: radial-gradient(circle at 30% 30%, #00c6ff, #0072ff);
 }
 
-.asset-img {
-    width: 100%; height: 100%;
-    object-fit: contain;
+.planet-3 {
+    width: 60px; height: 60px;
+    top: 25%; right: 20%;
+    background: radial-gradient(circle at 30% 30%, #f093fb, #f5576c);
 }
 
-.layer-rocket-wrap {
-    z-index: 10;
+.planet-4 {
+    width: 150px; height: 120px; /* Oval-ish */
+    bottom: 20%; right: 10%;
+    background: radial-gradient(circle at 30% 30%, #5f2c82, #49a09d);
+    border-radius: 50% 40% 60% 30%;
 }
 
-.spaceship {
+.planet-5 {
+    width: 40px; height: 40px;
+    top: 10%; right: 40%;
+    background: radial-gradient(circle at 30% 30%, #ff00cc, #333399);
+}
+
+.rocket {
     position: absolute;
-    bottom: 5%;
-    right: 5%;
-    width: 100px;
-}
-
-.rocket-assembly {
-    position: relative;
+    bottom: 10%; right: 10%;
+    width: 80px; height: 120px;
     transform: rotate(-45deg);
-    transform-origin: center;
-}
-
-.r-part {
-    position: absolute;
-    width: 100%;
-    height: auto;
-}
-
-.rocket-flame {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--cyan), transparent);
-    filter: blur(4px);
-    border-radius: 50% 50% 0 0;
+    z-index: 10;
 }
 
 .hero-text-content {
@@ -303,6 +297,42 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+
+/* Infinite Chimney Smoke */
+.cabin-overlay {
+    position: absolute;
+    bottom: 30vh;
+    right: 25%;
+    width: 200px; height: 150px;
+    z-index: 10;
+}
+
+.chimney-smoke {
+    position: absolute;
+    top: -20px;
+    left: 45px;
+}
+
+.s-p {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    opacity: 0;
+    animation: smokeBillow 3.5s infinite linear;
+}
+
+.p1 { animation-delay: 0s; }
+.p2 { animation-delay: 1s; }
+.p3 { animation-delay: 2s; }
+.p4 { animation-delay: 2.5s; }
+
+@keyframes smokeBillow {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 0.6; }
+    100% { transform: translateY(-120px) translateX(20px) scale(4); opacity: 0; }
 }
 
 .footer-rewind {

@@ -31,25 +31,27 @@
             
             <!-- Phase 1: Hero Section (GSAP Hero Parallax) -->
             <section id="hero" class="scene">
-                <div class="hero-layers">
-                    <!-- Layered Image Assets -->
-                    <div class="layer layer-planet-left">
-                        <img src="assets/planet-hero-left.png" alt="" class="asset-img">
-                    </div>
-                    <div class="layer layer-planet-right">
-                        <img src="assets/planet-hero-right.png" alt="" class="asset-img">
-                    </div>
-                    <div class="layer layer-rocket-wrap">
-                        <div class="spaceship">
-                            <div class="rocket-assembly">
-                                <img src="assets/rocket-layer-5.svg" class="r-part p5">
-                                <img src="assets/rocket-layer-4.svg" class="r-part p4">
-                                <img src="assets/rocket-layer-3.svg" class="r-part p3">
-                                <img src="assets/rocket-layer-2.svg" class="r-part p2">
-                                <img src="assets/rocket-layer-1.svg" class="r-part p1">
-                                <div class="rocket-flame"></div>
-                            </div>
-                        </div>
+                <div class="hero-elements">
+                    <div class="planet planet-1"></div>
+                    <div class="planet planet-2"></div>
+                    <div class="planet planet-3"></div>
+                    <div class="planet planet-4"></div>
+                    <div class="planet planet-5"></div>
+                    
+                    <div class="rocket">
+                        <svg viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Rocket Fins -->
+                            <path d="M10 80 L0 95 L10 90 Z" fill="#ff00ff" />
+                            <path d="M50 80 L60 95 L50 90 Z" fill="#ff00ff" />
+                            <!-- Rocket Body -->
+                            <path d="M30 5 L50 30 L50 85 L10 85 L10 30 Z" fill="#00ffff" />
+                            <!-- Nose Cone -->
+                            <path d="M30 5 L40 20 L20 20 Z" fill="#ff00ff" />
+                            <!-- Window -->
+                            <circle cx="30" cy="40" r="6" fill="white" opacity="0.3" />
+                            <!-- Flame -->
+                            <path d="M20 85 L30 100 L40 85 Z" fill="#ff00ff" opacity="0.8" />
+                        </svg>
                     </div>
                 </div>
                 <div class="hero-text-content">
@@ -140,6 +142,16 @@
 
             <section id="winter" class="scene">
                 <img src="assets/winter-cabin-scene.png" class="full-scene-asset">
+                <div class="cabin-overlay">
+                    <div class="cabin-window-glow"></div>
+                    <div class="chimney-smoke">
+                        <!-- CSS-only Smoke Particles -->
+                        <div class="s-p p1"></div>
+                        <div class="s-p p2"></div>
+                        <div class="s-p p3"></div>
+                        <div class="s-p p4"></div>
+                    </div>
+                </div>
                 <div class="winter-text">
                     <h2>Safe as Houses</h2>
                     <p>Security and reliability at the core of every deployment.</p>
