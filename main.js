@@ -29,6 +29,39 @@ heroTl.to(".hero-planet-main", { yPercent: -50, scale: 2, filter: "blur(20px)", 
       .to(".hero-rocket", { yPercent: -200, xPercent: -150, scale: 0.3, opacity: 0, ease: "power2.in" }, 0)
       .to(".hero-content", { yPercent: 100, scale: 0.8, filter: "blur(10px)", opacity: 0, ease: "power2.in" }, 0);
 
+// --- Hero Idle Animations (Always Moving) ---
+
+// Infinite drift for the rocket (Traverses the entire screen)
+gsap.to(".rocket-wrapper", {
+    x: "-85vw",
+    y: "-85vh",
+    duration: 20,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+});
+
+// High-frequency vibration for engine firing
+gsap.to(".rocket-wrapper svg", {
+    x: "random(-1, 1)",
+    y: "random(-1, 1)",
+    duration: 0.05,
+    repeat: -1,
+    yoyo: true,
+    ease: "none"
+});
+
+// Continuous subtle drift for debris
+gsap.to(".debris", {
+    y: "random(-100, 100)",
+    x: "random(-50, 50)",
+    rotation: "random(-180, 180)",
+    duration: "random(10, 20)",
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+});
+
 // --- Phase 2: Skills Sequence ---
 const slides = gsap.utils.toArray(".skill-slide");
 gsap.set(slides, { x: "100vw", scale: 0.8, opacity: 0, filter: "blur(10px)", visibility: "visible" });
@@ -60,14 +93,13 @@ projects.forEach((proj, i) => {
     const initialTitle = proj.querySelector(".proj-initial-title");
     const leftInfo = proj.querySelector(".proj-left");
     const holoCard = proj.querySelector(".holo-card");
+    const diagonalBg = proj.querySelector(".diagonal-bg");
     const stars = constGraphic.querySelectorAll(".c-star");
 
     // Initial Setup
-    // Position relative to screen center:
-    // Left: 0% of right-half means exact middle of the screen.
     gsap.set(constGraphic, { 
         left: "0%", 
-        top: "50%", // Dead vertical center
+        top: "50%", 
         xPercent: -50, 
         yPercent: -50, 
         scale: 1.8, 
@@ -75,7 +107,6 @@ projects.forEach((proj, i) => {
         opacity: 0 
     });
     
-    // Title is already width: 100vw, so just center vertically relative to constellation
     gsap.set(initialTitle, { 
         y: 100, 
         opacity: 0,
@@ -88,7 +119,7 @@ projects.forEach((proj, i) => {
         scrollTrigger: {
             trigger: proj,
             start: "top top",
-            end: "+=250%", // Slightly more scroll for smoothness
+            end: "+=250%",
             pin: true,
             scrub: 1
         }
@@ -99,8 +130,9 @@ projects.forEach((proj, i) => {
           .to(stars, { scale: 1, opacity: 1, stagger: 0.1, duration: 1, ease: "back.out(2)" }, "-=1")
           .to(initialTitle, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1 }, "-=0.5")
           
-          // Scene 2: Transition to split-screen layout
+          // Scene 2: Transition to split-screen layout with diagonal wipe
           .to(initialTitle, { opacity: 0, y: -100, scale: 1.2, filter: "blur(15px)", duration: 1, ease: "power2.in" })
+          .to(diagonalBg, { clipPath: "polygon(0% 0%, 60% 0%, 40% 100%, 0% 100%)", duration: 1.5, ease: "expo.inOut" }, "-=0.8")
           .to(constGraphic, { 
               left: "50%", // Move to center of the right half
               top: "50%", 
@@ -108,7 +140,7 @@ projects.forEach((proj, i) => {
               rotation: 12, 
               duration: 2, 
               ease: "power4.inOut" 
-          }, "-=0.5")
+          }, "-=1.5")
           .to(leftInfo, { opacity: 1, x: 0, duration: 1.5, ease: "expo.out" }, "-=1")
           .to(holoCard, { opacity: 1, x: 0, duration: 1.5, ease: "expo.out" }, "-=1.2")
           
