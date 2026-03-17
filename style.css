@@ -452,8 +452,8 @@ body {
     pointer-events: none;
 }
 
-/* --- About Me Cinematic Redesign (V3) --- */
-.about-overlay-v3 {
+/* --- About Me Immersive Neural HUD (V4) --- */
+.about-overlay-v4 {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
@@ -464,117 +464,125 @@ body {
     justify-content: center;
     visibility: hidden;
     overflow: hidden;
+    opacity: 0;
 }
 
-#about-bg-canvas {
+#about-neural-canvas {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.4;
 }
 
-.glass-portal {
+.bg-text-decor {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-header);
+    font-size: 15vw;
+    color: rgba(255, 255, 255, 0.02);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hud-container {
     position: relative;
-    width: 85vw;
-    height: 80vh;
-    background: rgba(255, 255, 255, 0.03);
+    width: 95vw;
+    height: 90vh;
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(30px);
-    border-radius: 40px;
-    padding: 60px;
-    transform: perspective(1000px) rotateX(10deg) scale(0.8);
-    opacity: 0;
+    backdrop-filter: blur(40px);
+    z-index: 10;
     display: flex;
     flex-direction: column;
+    padding: 40px;
+    transform: perspective(2000px) scale(1.1) translateZ(200px);
+    opacity: 0;
 }
 
-.portal-close {
+.hud-close {
     position: absolute;
     top: 30px; right: 40px;
     background: transparent; border: none;
     display: flex; align-items: center; gap: 15px;
     cursor: pointer; opacity: 0.5; transition: 0.3s;
+    z-index: 50;
 }
-.portal-close:hover { opacity: 1; transform: scale(1.05); }
-.portal-close svg { width: 30px; height: 30px; }
-.portal-close span { font-family: monospace; font-size: 0.7rem; color: #fff; letter-spacing: 2px; }
+.hud-close:hover { opacity: 1; }
+.close-icon { width: 20px; height: 2px; background: #fff; position: relative; }
+.close-icon::before { content: ""; position: absolute; width: 100%; height: 100%; background: #fff; transform: rotate(90deg); }
+.close-text { font-family: monospace; font-size: 0.7rem; color: #fff; letter-spacing: 3px; }
 
-.portal-main {
+.hud-main {
     flex: 1;
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1.2fr;
-    gap: 40px;
+    grid-template-columns: 0.8fr 2fr 1fr;
+    gap: 60px;
     align-items: center;
+    padding: 40px 0;
 }
 
-/* Identity Section */
-.glitch-title {
+/* HUD Left */
+.hud-left { display: flex; align-items: flex-start; gap: 40px; height: 100%; }
+.vertical-title {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
     font-family: var(--font-header);
-    font-size: 3rem;
-    font-weight: 900;
-    letter-spacing: -1px;
-    position: relative;
-    margin-bottom: 10px;
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    padding-right: 20px;
 }
 
-.status-badge {
-    display: inline-block;
-    padding: 6px 15px;
-    background: var(--cyan);
-    color: #000;
-    font-weight: 900;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    border-radius: 4px;
-    margin-bottom: 40px;
+.academic-stats { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
+.stat-box { border-left: 2px solid var(--cyan); padding-left: 20px; }
+.stat-label { display: block; font-family: monospace; font-size: 0.6rem; color: var(--magenta); margin-bottom: 5px; }
+.stat-value { display: block; font-family: var(--font-header); font-size: 1.2rem; color: #fff; }
+
+/* HUD Center */
+.hud-center {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 40px;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.p-mod { margin-bottom: 35px; }
-.p-mod-tag { font-family: monospace; font-size: 0.6rem; color: var(--magenta); margin-bottom: 10px; letter-spacing: 3px; }
-.p-mod-content h3 { font-size: 1.4rem; margin-bottom: 10px; }
-.p-mod-content p { color: #aaa; line-height: 1.6; }
-
-.p-interest-list { display: flex; flex-direction: column; gap: 8px; }
-.p-interest-list span { font-size: 1rem; color: #fff; padding-left: 15px; border-left: 2px solid var(--cyan); }
-
-/* Center: Visual Orb */
-.orb-container {
-    position: relative;
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
+.narrative-wrapper {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 30px;
 }
+.narrative-wrapper::-webkit-scrollbar { width: 2px; }
+.narrative-wrapper::-webkit-scrollbar-thumb { background: var(--cyan); }
 
-.orb-rings { position: absolute; width: 300px; height: 300px; }
-.orb-ring {
-    position: absolute; border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 50%;
-    top: 0; left: 0; width: 100%; height: 100%;
+.narrative-block { margin-bottom: 40px; }
+.narrative-block p { font-size: 1.1rem; line-height: 1.8; color: #bbb; }
+.highlight-text { font-size: 1.4rem !important; color: #fff !important; font-weight: 700; margin-bottom: 20px; border-left: 4px solid var(--cyan); padding-left: 25px; }
+
+/* HUD Right */
+.hud-right { height: 100%; display: flex; align-items: center; justify-content: center; }
+.projection-container { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+
+.projection-rings { position: absolute; width: 400px; height: 400px; }
+.ring-item {
+    position: absolute; border: 1px solid rgba(0, 255, 255, 0.1); border-radius: 50%;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
 }
-.r1 { transform: rotateX(60deg) rotateY(20deg); animation: orbRot 10s infinite linear; }
-.r2 { transform: rotateX(-60deg) rotateY(-20deg); animation: orbRot 15s infinite linear reverse; border-style: dashed; }
-.r3 { transform: rotateY(90deg); animation: orbRot 8s infinite linear; }
+.ring-item:nth-child(1) { width: 100%; height: 100%; animation: ringRotate 20s infinite linear; }
+.ring-item:nth-child(2) { width: 75%; height: 75%; border-style: dashed; animation: ringRotate 15s infinite linear reverse; }
+.ring-item:nth-child(3) { width: 125%; height: 40%; border-color: rgba(255, 0, 255, 0.2); transform: translate(-50%, -50%) rotateX(70deg); }
 
-@keyframes orbRot { from { transform: rotate(0deg) rotateX(60deg); } to { transform: rotate(360deg) rotateX(60deg); } }
+@keyframes ringRotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-.humanoid-wrapper { width: 200px; height: 200px; position: relative; z-index: 5; }
-.humanoid-svg { width: 100%; height: 100%; filter: drop-shadow(0 0 20px var(--cyan)); }
+.projection-svg { width: 300px; height: auto; position: relative; z-index: 5; filter: drop-shadow(0 0 30px var(--cyan)); }
 
-#humanoid-arm {
-    transform-origin: 120px 85px;
-    animation: humanWave 2s infinite ease-in-out;
-}
+.live-readout { position: absolute; bottom: 10%; right: 0; font-family: monospace; font-size: 0.7rem; color: var(--cyan); opacity: 0.6; }
 
-@keyframes humanWave {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(-25deg); }
-}
+/* HUD Bottom */
+.hud-bottom { margin-top: auto; }
+.hud-line { width: 100%; height: 1px; background: linear-gradient(to right, var(--cyan), transparent); margin-bottom: 20px; }
+.hud-meta { display: flex; justify-content: space-between; font-family: monospace; font-size: 0.6rem; color: #555; letter-spacing: 2px; }
 
-/* Right: Vision */
-.p-vision-text p { font-size: 1rem; color: #ccc; line-height: 1.8; margin-bottom: 20px; }
-
-.data-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
-.data-row span { font-family: monospace; font-size: 0.6rem; color: #666; width: 40px; }
-.data-bar { flex: 1; height: 4px; background: rgba(255, 255, 255, 0.1); overflow: hidden; }
-.fill { height: 100%; background: var(--cyan); }
-.f1 { width: 80%; animation: barLoad 2s infinite alternate; }
-.f2 { width: 40%; background: var(--magenta); animation: barLoad 3s infinite alternate-reverse; }
-
-@keyframes barLoad { from { opacity: 0.5; transform: translateX(-50%); } to { opacity: 1; transform: translateX(0); } }
+#humanoid-arm { transform-origin: 122px 85px; animation: humanWave 2s infinite ease-in-out; }
+@keyframes humanWave { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-25deg); } }

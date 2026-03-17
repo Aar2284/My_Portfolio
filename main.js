@@ -84,49 +84,63 @@ outroTl.from(".aurora-bg", { opacity: 0, scale: 1.5, filter: "blur(100px)", dura
 
 gsap.to(".final-fade", { scrollTrigger: { trigger: "#phase4-outro", start: "90% top", end: "bottom top", scrub: true }, opacity: 1, ease: "none" });
 
-// --- Cinematic About Me Modal Logic (V3) ---
+// --- Cinematic About Me HUD Logic (V4) ---
 const aboutBtn = document.querySelector('.hero-cta.secondary');
 const aboutOverlay = document.getElementById('about-overlay');
-const glassPortal = document.querySelector('.glass-portal');
+const hudContainer = document.querySelector('.hud-container');
 const closeAbout = document.getElementById('close-about');
 
-// Particle Background for Modal
-const canvas = document.getElementById('about-bg-canvas');
+// Neural Canvas Logic
+const canvas = document.getElementById('about-neural-canvas');
 const ctx = canvas.getContext('2d');
-let particles = [];
+let dots = [];
 
-function initAboutCanvas() {
+function initNeuralCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    particles = [];
-    for(let i=0; i<100; i++) {
-        particles.push({
+    dots = [];
+    for(let i=0; i<80; i++) {
+        dots.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            size: Math.random() * 2,
-            speedX: (Math.random() - 0.5) * 0.5,
-            speedY: (Math.random() - 0.5) * 0.5
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3
         });
     }
 }
 
-function drawAboutParticles() {
+function drawNeuralNetwork() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "rgba(0, 255, 255, 0.5)";
-    particles.forEach(p => {
+    ctx.strokeStyle = "rgba(0, 255, 255, 0.1)";
+    ctx.fillStyle = "rgba(0, 255, 255, 0.3)";
+    
+    dots.forEach((d, i) => {
+        d.x += d.vx; d.y += d.vy;
+        if(d.x < 0 || d.x > canvas.width) d.vx *= -1;
+        if(d.y < 0 || d.y > canvas.height) d.vy *= -1;
+        
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(d.x, d.y, 1.5, 0, Math.PI*2);
         ctx.fill();
-        p.x += p.speedX; p.y += p.speedY;
-        if(p.x < 0) p.x = canvas.width; if(p.x > canvas.width) p.x = 0;
-        if(p.y < 0) p.y = canvas.height; if(p.y > canvas.height) p.y = 0;
+        
+        for(let j=i+1; j<dots.length; j++) {
+            let d2 = dots[j];
+            let dist = Math.hypot(d.x - d2.x, d.y - d2.y);
+            if(dist < 150) {
+                ctx.lineWidth = 1 - dist/150;
+                ctx.beginPath();
+                ctx.moveTo(d.x, d.y);
+                ctx.lineTo(d2.x, d2.y);
+                ctx.stroke();
+            }
+        }
     });
-    requestAnimationFrame(drawAboutParticles);
+    requestAnimationFrame(drawNeuralNetwork);
 }
 
-window.addEventListener('resize', initAboutCanvas);
-initAboutCanvas();
-drawAboutParticles();
+window.addEventListener('resize', initNeuralCanvas);
+initNeuralCanvas();
+drawNeuralNetwork();
 
 if (aboutBtn && aboutOverlay) {
     aboutBtn.addEventListener('click', (e) => {
@@ -134,17 +148,18 @@ if (aboutBtn && aboutOverlay) {
         gsap.set(aboutOverlay, { visibility: "visible" });
         
         const tl = gsap.timeline();
-        tl.to(aboutOverlay, { backgroundColor: "rgba(0,0,0,0.9)", duration: 0.5 })
-          .to(glassPortal, { 
+        tl.to(aboutOverlay, { opacity: 1, duration: 0.4 })
+          .to(hudContainer, { 
               opacity: 1, 
               scale: 1, 
-              rotateX: 0, 
+              translateZ: 0, 
               duration: 1.2, 
               ease: "expo.out" 
-          }, "-=0.3")
-          .from(".portal-left, .portal-right", { x: (i) => i === 0 ? -50 : 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.8")
-          .from(".orb-ring", { scale: 0, opacity: 0, stagger: 0.1, duration: 1, ease: "back.out(1.7)" }, "-=1")
-          .from(".p-mod", { y: 20, opacity: 0, stagger: 0.1, duration: 0.8 }, "-=0.5");
+          }, "-=0.2")
+          .from(".hud-left", { x: -100, opacity: 0, duration: 1 }, "-=0.8")
+          .from(".hud-right", { x: 100, opacity: 0, duration: 1 }, "-=1")
+          .from(".narrative-block", { y: 30, opacity: 0, stagger: 0.2, duration: 0.8 }, "-=0.6")
+          .from(".vertical-title", { opacity: 0, scaleY: 0, duration: 1 }, "-=1");
     });
 }
 
@@ -153,13 +168,13 @@ if (closeAbout) {
         gsap.timeline({
             onComplete: () => gsap.set(aboutOverlay, { visibility: "hidden" })
         })
-        .to(glassPortal, { 
-            scale: 0.8, 
-            rotateX: -15, 
+        .to(hudContainer, { 
+            scale: 1.1, 
+            translateZ: 200, 
             opacity: 0, 
             duration: 0.8, 
             ease: "expo.in" 
         })
-        .to(aboutOverlay, { backgroundColor: "rgba(0,0,0,0)", duration: 0.4 }, "-=0.4");
+        .to(aboutOverlay, { opacity: 0, duration: 0.4 }, "-=0.4");
     });
 }

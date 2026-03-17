@@ -14,78 +14,90 @@
 </head>
 <body>
 
-    <!-- Cinematic About Me Modal -->
-    <div id="about-overlay" class="about-overlay-v3">
-        <!-- Background Particle Canvas for Modal -->
-        <canvas id="about-bg-canvas"></canvas>
+    <!-- Cinematic About Me Overlay (V4 - Immersive Neural HUD) -->
+    <div id="about-overlay" class="about-overlay-v4">
+        <canvas id="about-neural-canvas"></canvas>
         
-        <div class="glass-portal">
-            <button id="close-about" class="portal-close">
-                <svg viewBox="0 0 40 40"><path d="M10 10 L30 30 M30 10 L10 30" stroke="white" stroke-width="2"/></svg>
-                <span>CLOSE_INTERFACE</span>
+        <!-- Large Background Text Decor -->
+        <div class="bg-text-decor">NEURAL_DECRYPT</div>
+
+        <div class="hud-container">
+            <button id="close-about" class="hud-close">
+                <span class="close-icon"></span>
+                <span class="close-text">DISCONNECT</span>
             </button>
 
-            <div class="portal-main">
-                <!-- Left: Dynamic Identity -->
-                <div class="portal-left">
-                    <div class="identity-header">
-                        <div class="glitch-title" data-text="AARYAN KALIA">AARYAN KALIA</div>
-                        <div class="status-badge">STUDENT // DATA_SCIENCE</div>
-                    </div>
-
-                    <div class="portal-modules">
-                        <div class="p-mod">
-                            <div class="p-mod-tag">ACADEMIC_PATH</div>
-                            <div class="p-mod-content">
-                                <h3>B.Tech CSE Student</h3>
-                                <p>Navigating the complex dimensions of Computer Science with a core focus on Data Intelligence.</p>
-                            </div>
+            <!-- Main Content Grid -->
+            <div class="hud-main">
+                <!-- Left Section: Vertical Branding & Academic Info -->
+                <div class="hud-left">
+                    <h2 class="vertical-title">ABOUT_ME</h2>
+                    <div class="academic-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">IDENTIFICATION</span>
+                            <span class="stat-value">Aaryan Kalia</span>
                         </div>
-                        <div class="p-mod">
-                            <div class="p-mod-tag">CORE_INTERESTS</div>
-                            <div class="p-interest-list">
-                                <span>Deep Learning</span>
-                                <span>Statistical Analysis</span>
-                                <span>Big Data Architectures</span>
-                            </div>
+                        <div class="stat-box">
+                            <span class="stat-label">ACADEMIC_STATUS</span>
+                            <span class="stat-value">B.Tech CSE Student</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">CORE_FOCUS</span>
+                            <span class="stat-value">Data Science</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Center: Motion Graphics Core -->
-                <div class="portal-center">
-                    <div class="orb-container">
-                        <div class="orb-glow"></div>
-                        <div class="orb-rings">
-                            <div class="orb-ring r1"></div>
-                            <div class="orb-ring r2"></div>
-                            <div class="orb-ring r3"></div>
+                <!-- Center Section: The Core Narrative -->
+                <div class="hud-center">
+                    <div class="narrative-wrapper">
+                        <div class="narrative-block">
+                            <p class="highlight-text">I am a data science enthusiast with a strong curiosity for uncovering patterns, building intelligent solutions, and transforming complex information into meaningful insight.</p>
+                            <p>My work is driven by a blend of analytical thinking, creativity, and a deep interest in how data can be used to solve real-world problems.</p>
                         </div>
-                        <!-- Waving Vector Person -->
-                        <div class="humanoid-wrapper">
-                            <svg viewBox="0 0 200 200" class="humanoid-svg">
-                                <circle cx="100" cy="50" r="20" fill="white" class="h-head" />
-                                <path d="M80 80 Q100 75 120 80 L130 160 L70 160 Z" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1" />
-                                <path id="humanoid-arm" d="M120 85 L150 60" stroke="white" stroke-width="4" stroke-linecap="round" fill="none" />
-                                <circle cx="150" cy="60" r="3" fill="var(--cyan)" />
-                            </svg>
+                        <div class="narrative-block">
+                            <p>I enjoy exploring data not just for what it shows, but for the stories it tells. Whether working with structured datasets, building predictive systems, or designing data-driven experiences, I focus on creating solutions that are both technically sound and impactful.</p>
+                        </div>
+                        <div class="narrative-block">
+                            <p>What defines me most is a mindset of continuous learning, adaptability, and purpose. I approach every challenge with curiosity and commitment, aiming to turn ideas into meaningful outcomes through data, innovation, and insight.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right: Vision & Narrative -->
-                <div class="portal-right">
-                    <div class="p-mod">
-                        <div class="p-mod-tag">THE_VISION</div>
-                        <div class="p-vision-text">
-                            <p>Data isn't just numbers to me; it's a living, breathing landscape waiting to be explored. As a student, I'm constantly evolving my methods to build predictive models that aren't just accurate, but meaningful.</p>
-                            <p>I aim to craft digital experiences where intelligence meets aesthetics, turning complex datasets into clear, cinematic stories.</p>
+                <!-- Right Section: Visual Projection -->
+                <div class="hud-right">
+                    <div class="projection-container">
+                        <div class="projection-rings">
+                            <div class="ring-item"></div>
+                            <div class="ring-item"></div>
+                            <div class="ring-item"></div>
+                        </div>
+                        <svg viewBox="0 0 200 200" class="projection-svg">
+                            <defs>
+                                <linearGradient id="projGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#00ffff" stop-opacity="0.8" />
+                                    <stop offset="100%" stop-color="#ff00ff" stop-opacity="0.2" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="50" r="22" fill="url(#projGrad)" stroke="white" stroke-width="0.5" />
+                            <path d="M78 80 Q100 75 122 80 L130 160 L70 160 Z" fill="url(#projGrad)" stroke="white" stroke-width="0.5" />
+                            <path id="humanoid-arm" d="M122 85 L155 55" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" />
+                            <circle cx="155" cy="55" r="4" fill="white" />
+                        </svg>
+                        <div class="live-readout">
+                            <div class="readout-line">>> SYNC_RATE: 98.4%</div>
+                            <div class="readout-line">>> STATUS: STABLE</div>
                         </div>
                     </div>
-                    <div class="p-live-data">
-                        <div class="data-row"><span>LOAD:</span><div class="data-bar"><div class="fill f1"></div></div></div>
-                        <div class="data-row"><span>SYNC:</span><div class="data-bar"><div class="fill f2"></div></div></div>
-                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom UI Decor -->
+            <div class="hud-bottom">
+                <div class="hud-line"></div>
+                <div class="hud-meta">
+                    <span>AARYAN_KALIA_SYSTEM_OS_V4.0</span>
+                    <span>© 2026 NEURAL_EXPANSE</span>
                 </div>
             </div>
         </div>
@@ -226,7 +238,6 @@
                 </div>
 
                 <div class="project-wrapper">
-                    <div class="diagonal-bg"></div>
                     <div class="proj-layout">
                         <div class="proj-left">
                             <div class="proj-info">
