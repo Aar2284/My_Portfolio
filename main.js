@@ -173,3 +173,28 @@ gsap.to(".final-fade", {
     opacity: 1,
     ease: "none"
 });
+
+// --- About Me Card Logic ---
+const aboutBtn = document.querySelector('.hero-cta.secondary');
+const aboutOverlay = document.getElementById('about-overlay');
+const closeAbout = document.getElementById('close-about');
+const scientificCard = document.querySelector('.scientific-card');
+
+aboutBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    gsap.set(aboutOverlay, { visibility: "visible" });
+    gsap.timeline()
+        .to(aboutOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" })
+        .fromTo(scientificCard, 
+            { scale: 0.8, filter: "blur(20px)", opacity: 0 }, 
+            { scale: 1, filter: "blur(0px)", opacity: 1, duration: 0.8, ease: "back.out(1.7)" }, 
+            "-=0.3"
+        );
+});
+
+closeAbout.addEventListener('click', () => {
+    gsap.timeline()
+        .to(scientificCard, { scale: 0.8, filter: "blur(20px)", opacity: 0, duration: 0.5, ease: "power2.in" })
+        .to(aboutOverlay, { opacity: 0, duration: 0.5, ease: "power2.in" })
+        .set(aboutOverlay, { visibility: "hidden" });
+});

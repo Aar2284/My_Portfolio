@@ -451,3 +451,131 @@ body {
     opacity: 0;
     pointer-events: none;
 }
+
+/* --- About Me Overlay --- */
+.about-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(10, 0, 26, 0.95);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.scientific-card {
+    position: relative;
+    width: 80vw;
+    height: 70vh;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    padding: 60px;
+    display: flex;
+    overflow: hidden;
+}
+
+.card-corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--cyan);
+}
+.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+.close-btn {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-size: 2.5rem;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+.close-btn:hover { opacity: 1; color: var(--cyan); }
+
+.card-content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 40px;
+}
+
+.card-left {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-left h2 {
+    font-size: 2.5rem;
+    color: var(--cyan);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.detail-row {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 5px;
+}
+
+.label { color: var(--magenta); font-weight: 700; margin-right: 15px; font-size: 0.9rem; }
+.value { font-family: var(--font-header); font-size: 1.2rem; }
+
+.bio-text {
+    margin-top: 30px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.card-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.person-container {
+    width: 100%;
+    max-width: 300px;
+    position: relative;
+}
+
+.waving-person { width: 100%; height: auto; }
+
+#arm {
+    transform-origin: 130px 85px;
+    animation: wave 1.5s infinite ease-in-out;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-20deg); }
+}
+
+.scan-line {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--cyan);
+    box-shadow: 0 0 15px var(--cyan);
+    animation: scan 4s infinite linear;
+    opacity: 0.5;
+}
+
+@keyframes scan {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
