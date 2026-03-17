@@ -14,6 +14,83 @@
 </head>
 <body>
 
+    <!-- Cinematic About Me Modal -->
+    <div id="about-overlay" class="about-overlay-v3">
+        <!-- Background Particle Canvas for Modal -->
+        <canvas id="about-bg-canvas"></canvas>
+        
+        <div class="glass-portal">
+            <button id="close-about" class="portal-close">
+                <svg viewBox="0 0 40 40"><path d="M10 10 L30 30 M30 10 L10 30" stroke="white" stroke-width="2"/></svg>
+                <span>CLOSE_INTERFACE</span>
+            </button>
+
+            <div class="portal-main">
+                <!-- Left: Dynamic Identity -->
+                <div class="portal-left">
+                    <div class="identity-header">
+                        <div class="glitch-title" data-text="AARYAN KALIA">AARYAN KALIA</div>
+                        <div class="status-badge">STUDENT // DATA_SCIENCE</div>
+                    </div>
+
+                    <div class="portal-modules">
+                        <div class="p-mod">
+                            <div class="p-mod-tag">ACADEMIC_PATH</div>
+                            <div class="p-mod-content">
+                                <h3>B.Tech CSE Student</h3>
+                                <p>Navigating the complex dimensions of Computer Science with a core focus on Data Intelligence.</p>
+                            </div>
+                        </div>
+                        <div class="p-mod">
+                            <div class="p-mod-tag">CORE_INTERESTS</div>
+                            <div class="p-interest-list">
+                                <span>Deep Learning</span>
+                                <span>Statistical Analysis</span>
+                                <span>Big Data Architectures</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center: Motion Graphics Core -->
+                <div class="portal-center">
+                    <div class="orb-container">
+                        <div class="orb-glow"></div>
+                        <div class="orb-rings">
+                            <div class="orb-ring r1"></div>
+                            <div class="orb-ring r2"></div>
+                            <div class="orb-ring r3"></div>
+                        </div>
+                        <!-- Waving Vector Person -->
+                        <div class="humanoid-wrapper">
+                            <svg viewBox="0 0 200 200" class="humanoid-svg">
+                                <circle cx="100" cy="50" r="20" fill="white" class="h-head" />
+                                <path d="M80 80 Q100 75 120 80 L130 160 L70 160 Z" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1" />
+                                <path id="humanoid-arm" d="M120 85 L150 60" stroke="white" stroke-width="4" stroke-linecap="round" fill="none" />
+                                <circle cx="150" cy="60" r="3" fill="var(--cyan)" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Vision & Narrative -->
+                <div class="portal-right">
+                    <div class="p-mod">
+                        <div class="p-mod-tag">THE_VISION</div>
+                        <div class="p-vision-text">
+                            <p>Data isn't just numbers to me; it's a living, breathing landscape waiting to be explored. As a student, I'm constantly evolving my methods to build predictive models that aren't just accurate, but meaningful.</p>
+                            <p>I aim to craft digital experiences where intelligence meets aesthetics, turning complex datasets into clear, cinematic stories.</p>
+                        </div>
+                    </div>
+                    <div class="p-live-data">
+                        <div class="data-row"><span>LOAD:</span><div class="data-bar"><div class="fill f1"></div></div></div>
+                        <div class="data-row"><span>SYNC:</span><div class="data-bar"><div class="fill f2"></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="smooth-wrapper">
         <div id="smooth-content">
 
@@ -224,80 +301,6 @@
                 <div class="final-fade"></div>
             </section>
 
-        </div>
-    </div>
-
-    <div id="about-overlay" class="about-overlay">
-        <div class="scientific-card">
-            <!-- Decorative UI Elements -->
-            <div class="ui-glitch-lines"></div>
-            <div class="ui-status-bar">
-                <span class="status-dot"></span>
-                <span class="status-text">SYSTEM ACTIVE // PROFILE_DECRYPTED</span>
-            </div>
-            
-            <button id="close-about" class="close-btn">&times;</button>
-            
-            <div class="card-content">
-                <!-- Left: Profile Data -->
-                <div class="card-left">
-                    <div class="profile-header">
-                        <span class="rank-tag">RANK: LEAD DEVELOPER</span>
-                        <h2 class="font-header">AARYAN KALIA</h2>
-                    </div>
-
-                    <div class="data-modules">
-                        <div class="data-module">
-                            <div class="module-label">MISSION</div>
-                            <p>Augmenting reality through intelligent data architectures and immersive motion graphics.</p>
-                        </div>
-                        <div class="data-grid-small">
-                            <div class="data-module">
-                                <div class="module-label">STATUS</div>
-                                <div class="module-val">B.TECH CSE</div>
-                            </div>
-                            <div class="data-module">
-                                <div class="module-label">BASE</div>
-                                <div class="module-val">EARTH_COORDS</div>
-                            </div>
-                        </div>
-                        <div class="data-module bio-box">
-                            <div class="module-label">BIO_ENCRYPTION_V2</div>
-                            <p>Specializing in Machine Learning and Data Visualization. I transform complex data into cinematic digital experiences that feel alive.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Hologram Projection -->
-                <div class="card-right">
-                    <div class="hologram-stage">
-                        <div class="hologram-glow"></div>
-                        <div class="hologram-circles">
-                            <div class="h-circle c1"></div>
-                            <div class="h-circle c2"></div>
-                        </div>
-                        <!-- Stylized Waving Person (Improved) -->
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="waving-person">
-                            <defs>
-                                <linearGradient id="holo-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" stop-color="var(--cyan)" stop-opacity="0.8" />
-                                    <stop offset="100%" stop-color="var(--cyan)" stop-opacity="0.1" />
-                                </linearGradient>
-                            </defs>
-                            <circle cx="100" cy="50" r="25" fill="url(#holo-grad)" stroke="var(--cyan)" stroke-width="1" />
-                            <path d="M75 80 Q100 75 125 80 L135 160 L65 160 Z" fill="url(#holo-grad)" stroke="var(--cyan)" stroke-width="1" />
-                            <path id="arm" d="M125 85 L160 55" stroke="var(--cyan)" stroke-width="6" stroke-linecap="round" fill="none" />
-                            <circle cx="160" cy="55" r="4" fill="var(--cyan)" />
-                        </svg>
-                        <div class="scan-beam"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Progress Bar Bottom -->
-            <div class="card-footer-progress">
-                <div class="progress-fill"></div>
-            </div>
         </div>
     </div>
 

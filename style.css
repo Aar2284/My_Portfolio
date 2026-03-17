@@ -452,115 +452,129 @@ body {
     pointer-events: none;
 }
 
-/* --- About Me Overlay --- */
-.about-overlay {
+/* --- About Me Cinematic Redesign (V3) --- */
+.about-overlay-v3 {
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(5, 0, 15, 0.9);
-    z-index: 2000;
+    width: 100vw; height: 100vh;
+    background: #000;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
     visibility: hidden;
-    backdrop-filter: blur(20px);
-}
-
-.scientific-card {
-    position: relative;
-    width: 75vw;
-    height: 80vh;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-    border: 1px solid rgba(0, 255, 255, 0.15);
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(0, 255, 255, 0.05);
-    padding: 0;
-    display: flex;
-    flex-direction: column;
     overflow: hidden;
 }
 
-/* UI Decor */
-.ui-status-bar {
-    padding: 15px 30px;
-    background: rgba(0, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.status-dot {
-    width: 8px; height: 8px;
-    background: var(--cyan);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--cyan);
-    animation: pulseStatus 1s infinite alternate;
-}
-
-@keyframes pulseStatus { from { opacity: 0.4; } to { opacity: 1; } }
-
-.status-text { font-family: var(--font-header); font-size: 0.7rem; letter-spacing: 2px; color: var(--cyan); }
-
-.card-content { display: flex; flex: 1; padding: 50px; gap: 60px; }
-
-/* Left Side */
-.card-left { flex: 1.2; display: flex; flex-direction: column; gap: 40px; }
-
-.rank-tag { font-size: 0.75rem; color: var(--magenta); font-weight: 900; letter-spacing: 3px; }
-
-.profile-header h2 { font-size: 4rem; color: var(--white); margin-top: 10px; line-height: 1; }
-
-.data-modules { display: flex; flex-direction: column; gap: 25px; }
-
-.data-module {
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.03);
-    border-left: 3px solid var(--cyan);
-}
-
-.module-label { font-size: 0.65rem; color: rgba(0, 255, 255, 0.5); font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; }
-
-.data-grid-small { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-
-.module-val { font-family: var(--font-header); font-size: 1.1rem; color: var(--white); }
-
-.bio-box { border-left-color: var(--magenta); }
-
-/* Right Side: Hologram */
-.card-right { flex: 1; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(0, 255, 255, 0.05) 0%, transparent 70%); }
-
-.hologram-stage { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-
-.hologram-circles { position: absolute; bottom: 10%; width: 200px; height: 60px; }
-
-.h-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateX(75deg); border: 2px solid var(--cyan); border-radius: 50%; opacity: 0.3; }
-.c1 { width: 100%; height: 100%; animation: hSpin 10s infinite linear; }
-.c2 { width: 70%; height: 70%; border-style: dashed; animation: hSpin 5s infinite linear reverse; }
-
-@keyframes hSpin { from { transform: translate(-50%, -50%) rotateX(75deg) rotate(0deg); } to { transform: translate(-50%, -50%) rotateX(75deg) rotate(360deg); } }
-
-.waving-person { width: 280px; height: auto; filter: drop-shadow(0 0 15px var(--cyan)); }
-
-.scan-beam {
+#about-bg-canvas {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.2), transparent);
-    background-size: 100% 20px;
-    animation: scanMove 3s infinite linear;
-    pointer-events: none;
+    opacity: 0.4;
 }
 
-@keyframes scanMove { from { background-position: 0 -100px; } to { background-position: 0 500px; } }
+.glass-portal {
+    position: relative;
+    width: 85vw;
+    height: 80vh;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(30px);
+    border-radius: 40px;
+    padding: 60px;
+    transform: perspective(1000px) rotateX(10deg) scale(0.8);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+}
 
-.card-footer-progress { height: 4px; background: rgba(255, 255, 255, 0.1); width: 100%; }
-.progress-fill { height: 100%; width: 60%; background: var(--cyan); box-shadow: 0 0 15px var(--cyan); }
-
-.close-btn {
+.portal-close {
     position: absolute;
-    top: 15px; right: 20px;
-    background: transparent; border: none; color: var(--white);
-    font-size: 2rem; cursor: pointer; opacity: 0.3; transition: all 0.3s;
-    z-index: 10;
+    top: 30px; right: 40px;
+    background: transparent; border: none;
+    display: flex; align-items: center; gap: 15px;
+    cursor: pointer; opacity: 0.5; transition: 0.3s;
 }
-.close-btn:hover { opacity: 1; transform: rotate(90deg); color: var(--cyan); }
+.portal-close:hover { opacity: 1; transform: scale(1.05); }
+.portal-close svg { width: 30px; height: 30px; }
+.portal-close span { font-family: monospace; font-size: 0.7rem; color: #fff; letter-spacing: 2px; }
+
+.portal-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.2fr;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Identity Section */
+.glitch-title {
+    font-family: var(--font-header);
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 15px;
+    background: var(--cyan);
+    color: #000;
+    font-weight: 900;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    margin-bottom: 40px;
+}
+
+.p-mod { margin-bottom: 35px; }
+.p-mod-tag { font-family: monospace; font-size: 0.6rem; color: var(--magenta); margin-bottom: 10px; letter-spacing: 3px; }
+.p-mod-content h3 { font-size: 1.4rem; margin-bottom: 10px; }
+.p-mod-content p { color: #aaa; line-height: 1.6; }
+
+.p-interest-list { display: flex; flex-direction: column; gap: 8px; }
+.p-interest-list span { font-size: 1rem; color: #fff; padding-left: 15px; border-left: 2px solid var(--cyan); }
+
+/* Center: Visual Orb */
+.orb-container {
+    position: relative;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.orb-rings { position: absolute; width: 300px; height: 300px; }
+.orb-ring {
+    position: absolute; border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 50%;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
+.r1 { transform: rotateX(60deg) rotateY(20deg); animation: orbRot 10s infinite linear; }
+.r2 { transform: rotateX(-60deg) rotateY(-20deg); animation: orbRot 15s infinite linear reverse; border-style: dashed; }
+.r3 { transform: rotateY(90deg); animation: orbRot 8s infinite linear; }
+
+@keyframes orbRot { from { transform: rotate(0deg) rotateX(60deg); } to { transform: rotate(360deg) rotateX(60deg); } }
+
+.humanoid-wrapper { width: 200px; height: 200px; position: relative; z-index: 5; }
+.humanoid-svg { width: 100%; height: 100%; filter: drop-shadow(0 0 20px var(--cyan)); }
+
+#humanoid-arm {
+    transform-origin: 120px 85px;
+    animation: humanWave 2s infinite ease-in-out;
+}
+
+@keyframes humanWave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-25deg); }
+}
+
+/* Right: Vision */
+.p-vision-text p { font-size: 1rem; color: #ccc; line-height: 1.8; margin-bottom: 20px; }
+
+.data-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+.data-row span { font-family: monospace; font-size: 0.6rem; color: #666; width: 40px; }
+.data-bar { flex: 1; height: 4px; background: rgba(255, 255, 255, 0.1); overflow: hidden; }
+.fill { height: 100%; background: var(--cyan); }
+.f1 { width: 80%; animation: barLoad 2s infinite alternate; }
+.f2 { width: 40%; background: var(--magenta); animation: barLoad 3s infinite alternate-reverse; }
+
+@keyframes barLoad { from { opacity: 0.5; transform: translateX(-50%); } to { opacity: 1; transform: translateX(0); } }
