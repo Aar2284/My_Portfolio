@@ -1,7 +1,8 @@
 // Initialize Lenis Smooth Scroll
 const lenis = new Lenis({
-    duration: 1.2,
+    duration: 1.5,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
 });
 
 function raf(time) {
@@ -13,163 +14,130 @@ requestAnimationFrame(raf);
 // Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
 
-// --- 1. Canvas Particle System (Background) ---
-const canvas = document.getElementById('bg-canvas');
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    const resizeCanvas = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class Particle {
-        constructor() {
-            this.init();
-        }
-        init() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 1;
-            this.speedY = Math.random() * 0.5 + 0.2;
-            this.drift = Math.random() * 0.5 - 0.25;
-            this.opacity = Math.random() * 0.5 + 0.2;
-        }
-        update() {
-            this.y += this.speedY;
-            this.x += this.drift;
-            if (this.y > canvas.height) {
-                this.y = -10;
-                this.x = Math.random() * canvas.width;
-            }
-        }
-        draw() {
-            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    for (let i = 0; i < 150; i++) particles.push(new Particle());
-
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-        requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-}
-
-// --- 2. GSAP Idle Animations (Planets & Rocket) ---
-
-// Gentle Hover for Planets
-gsap.to(".planet-1", { y: 25, duration: 4, repeat: -1, yoyo: true, ease: "sine.inOut" });
-gsap.to(".planet-2", { y: -20, duration: 3.2, repeat: -1, yoyo: true, ease: "sine.inOut" });
-gsap.to(".planet-3", { y: 15, duration: 5, repeat: -1, yoyo: true, ease: "sine.inOut" });
-gsap.to(".planet-4", { y: -30, duration: 4.5, repeat: -1, yoyo: true, ease: "sine.inOut" });
-gsap.to(".planet-5", { y: 18, duration: 3.8, repeat: -1, yoyo: true, ease: "sine.inOut" });
-
-// Rocket: Action A - Mechanical Vibration (Thrust)
-gsap.to(".rocket", {
-    x: "+=1.5",
-    y: "+=1.5",
-    rotation: "+=1",
-    duration: 0.05,
-    repeat: -1,
-    yoyo: true,
-    ease: "none"
-});
-
-// Rocket: Action B - Forward Drift (Momentum)
-gsap.to(".rocket", {
-    x: "-=20",
-    y: "-=20",
-    duration: 2.5,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut"
-});
-
-// --- 3. Scroll Transitions ---
-
-// Hero Parallax (Depth Effect)
-const heroParallax = gsap.timeline({
+// --- Phase 1: Hero Parallax ---
+const heroTl = gsap.timeline({
     scrollTrigger: {
-        trigger: "#hero",
+        trigger: "#phase1-hero",
         start: "top top",
         end: "bottom top",
-        scrub: 1
+        scrub: true
     }
 });
 
-heroParallax.to(".rocket", { yPercent: -300, xPercent: 100, ease: "none" }, 0)
-            .to(".planet-1", { yPercent: -50, ease: "none" }, 0)
-            .to(".planet-2", { yPercent: -100, ease: "none" }, 0)
-            .to(".planet-3", { yPercent: -20, ease: "none" }, 0)
-            .to(".planet-4", { yPercent: -150, ease: "none" }, 0)
-            .to(".planet-5", { yPercent: -80, ease: "none" }, 0)
-            .to(".hero-text-content", { opacity: 0, y: -100, ease: "none" }, 0);
+heroTl.to(".hero-planet-main", { yPercent: -50, scale: 2, filter: "blur(20px)", opacity: 0, ease: "power2.in" }, 0)
+      .to(".hero-moon", { yPercent: -80, scale: 0.2, filter: "blur(10px)", opacity: 0, ease: "power2.in" }, 0)
+      .to(".hero-rocket", { yPercent: -200, xPercent: -150, scale: 0.3, opacity: 0, ease: "power2.in" }, 0)
+      .to(".hero-content", { yPercent: 100, scale: 0.8, filter: "blur(10px)", opacity: 0, ease: "power2.in" }, 0);
 
-// Skills Planet Sequence (Existing Logic)
+// --- Phase 2: Skills Sequence ---
+const slides = gsap.utils.toArray(".skill-slide");
+gsap.set(slides, { x: "100vw", scale: 0.8, opacity: 0, filter: "blur(10px)", visibility: "visible" });
+
 const skillsTl = gsap.timeline({
     scrollTrigger: {
-        trigger: "#skills",
+        trigger: "#phase2-skills",
         start: "top top",
-        end: "+=300%",
+        end: "+=800%", 
         pin: true,
         scrub: 1
     }
 });
 
-const skillSlides = gsap.utils.toArray(".skill-slide");
-skillSlides.forEach((slide, i) => {
-    skillsTl.fromTo(slide, 
-        { x: "100%", visibility: "visible" }, 
-        { x: "0%", duration: 1, ease: "power2.out" }
-    );
-    skillsTl.to(slide, { duration: 1.5 });
-    if (i < skillSlides.length - 1) {
-        skillsTl.to(slide, { x: "-100%", duration: 0.8, ease: "power2.in" });
-    } else {
-        skillsTl.to(slide, { x: "-100%", duration: 0.8, ease: "power2.in" });
+slides.forEach((slide, i) => {
+    skillsTl.to(slide, { x: "0vw", opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5, ease: "expo.out" })
+            .to({}, { duration: 2 }); // Hold
+
+    if (i !== slides.length - 1) {
+        skillsTl.to(slide, { x: "-100vw", scale: 1.2, opacity: 0, filter: "blur(10px)", duration: 1.2, ease: "expo.in" });
     }
 });
 
-// Split-Screen Project Showcase (Diagonal Mask Wipe)
-const projectsTl = gsap.timeline({
-    scrollTrigger: {
-        trigger: "#projects",
-        start: "top top",
-        end: "+=400%",
-        pin: true,
-        scrub: 1
-    }
-});
+// --- Phase 3: Projects Showcase ---
+const projects = gsap.utils.toArray(".project-wrapper");
 
-const projectCards = gsap.utils.toArray(".project-split-card");
-projectCards.forEach((card, i) => {
-    projectsTl.fromTo(card, 
-        { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)", visibility: "visible" },
-        { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)", duration: 1, ease: "power2.inOut" }
-    );
-    projectsTl.to(card, { duration: 2 });
-    if (i < projectCards.length - 1) {
-        projectsTl.to(card, { y: "-100%", duration: 1, ease: "power2.in" });
-    }
-});
+projects.forEach((proj, i) => {
+    const constGraphic = proj.querySelector(".constellation-graphic");
+    const initialTitle = proj.querySelector(".proj-initial-title");
+    const leftInfo = proj.querySelector(".proj-left");
+    const holoCard = proj.querySelector(".holo-card");
+    const stars = constGraphic.querySelectorAll(".c-star");
 
-// Back to Top
-const backToTop = document.getElementById('back-to-top');
-if (backToTop) {
-    backToTop.addEventListener('click', () => {
-        lenis.scrollTo(0, { duration: 2 });
+    // Initial Setup
+    // Position relative to screen center:
+    // Left: 0% of right-half means exact middle of the screen.
+    gsap.set(constGraphic, { 
+        left: "0%", 
+        top: "50%", // Dead vertical center
+        xPercent: -50, 
+        yPercent: -50, 
+        scale: 1.8, 
+        filter: "blur(15px)", 
+        opacity: 0 
     });
-}
+    
+    // Title is already width: 100vw, so just center vertically relative to constellation
+    gsap.set(initialTitle, { 
+        y: 100, 
+        opacity: 0,
+        filter: "blur(10px)"
+    });
+
+    gsap.set(stars, { scale: 0, opacity: 0 });
+
+    const projTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: proj,
+            start: "top top",
+            end: "+=250%", // Slightly more scroll for smoothness
+            pin: true,
+            scrub: 1
+        }
+    });
+
+    // Scene 1: Reveal in the exact center
+    projTl.to(constGraphic, { opacity: 1, filter: "blur(0px)", scale: 1.5, duration: 1.5, ease: "power4.out" })
+          .to(stars, { scale: 1, opacity: 1, stagger: 0.1, duration: 1, ease: "back.out(2)" }, "-=1")
+          .to(initialTitle, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1 }, "-=0.5")
+          
+          // Scene 2: Transition to split-screen layout
+          .to(initialTitle, { opacity: 0, y: -100, scale: 1.2, filter: "blur(15px)", duration: 1, ease: "power2.in" })
+          .to(constGraphic, { 
+              left: "50%", // Move to center of the right half
+              top: "50%", 
+              scale: 0.8, 
+              rotation: 12, 
+              duration: 2, 
+              ease: "power4.inOut" 
+          }, "-=0.5")
+          .to(leftInfo, { opacity: 1, x: 0, duration: 1.5, ease: "expo.out" }, "-=1")
+          .to(holoCard, { opacity: 1, x: 0, duration: 1.5, ease: "expo.out" }, "-=1.2")
+          
+          // Aesthetic Hold
+          .to({}, { duration: 2 });
+});
+
+// --- Phase 4: Outro ---
+const outroTl = gsap.timeline({
+    scrollTrigger: {
+        trigger: "#phase4-outro",
+        start: "top bottom",
+        end: "bottom bottom",
+        scrub: true
+    }
+});
+
+outroTl.from(".aurora-bg", { opacity: 0, scale: 1.5, filter: "blur(100px)", duration: 2 })
+       .from(".mountains", { y: 200, ease: "power2.out" }, 0.5)
+       .from(".outro-content h2", { scale: 0.5, filter: "blur(20px)", opacity: 0, duration: 1.5, ease: "expo.out" }, 1)
+       .from(".outro-links a", { y: 50, opacity: 0, stagger: 0.2, duration: 1, ease: "back.out(1.7)" }, 1.5);
+
+gsap.to(".final-fade", {
+    scrollTrigger: {
+        trigger: "#phase4-outro",
+        start: "90% top",
+        end: "bottom top",
+        scrub: true
+    },
+    opacity: 1,
+    ease: "none"
+});

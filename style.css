@@ -3,9 +3,8 @@
     --magenta: #ff00ff;
     --cyan: #00ffff;
     --white: #ffffff;
-    --indigo: #2e004e;
-    --font-header: 'Montserrat', sans-serif;
-    --font-sub: 'Space Grotesk', sans-serif;
+    --font-header: 'Syncopate', sans-serif;
+    --font-sub: 'Montserrat', sans-serif;
 }
 
 * {
@@ -21,332 +20,408 @@ body {
     overflow-x: hidden;
 }
 
-#bg-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
 .scene {
     position: relative;
-    width: 100%;
+    width: 100vw;
     min-height: 100vh;
     overflow: hidden;
-    z-index: 2;
 }
 
-/* --- Persistent Nav --- */
-.top-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 20px 50px;
+/* --- Phase 1: Hero Section --- */
+#phase1-hero {
+    background: radial-gradient(circle at 50% 50%, #1a0033 0%, var(--bg-dark) 100%);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    z-index: 1000;
+    justify-content: center;
 }
 
-.nav-links a {
-    color: var(--white);
-    text-decoration: none;
-    margin-right: 30px;
-    opacity: 0.7;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-family: var(--font-header);
-    font-weight: 700;
-}
-
-/* --- Phase 1: Hero Elements (CSS Only) --- */
-.hero-elements {
+.parallax-layer {
     position: absolute;
     top: 0; left: 0;
-    width: 100%; height: 100vh;
-    overflow: hidden;
-    z-index: 5; /* Behind text (50), in front of canvas (1) */
+    width: 100%; height: 100%;
     pointer-events: none;
 }
 
-.planet {
+.hero-planet-main {
+    z-index: 2;
+    top: 60%;
+    left: -10%;
+    width: 40vw;
+    height: 40vw;
+}
+
+.hero-planet-main svg { width: 100%; height: 100%; }
+
+.hero-moon {
+    z-index: 1;
+    top: 10%;
+    left: 70%;
+    width: 20vw;
+    height: 20vw;
+}
+
+.hero-moon svg { width: 100%; height: 100%; }
+
+.debris-layer {
     position: absolute;
-    border-radius: 50%;
-    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.2));
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 3;
+    pointer-events: none;
 }
 
-.planet-1 {
-    width: 200px; height: 200px;
-    top: 15%; left: 10%;
-    background: radial-gradient(circle at 30% 30%, #4a00e0, #8e2de2);
+.debris {
+    position: absolute;
+    background: var(--cyan);
+    opacity: 0.5;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
 
-.planet-2 {
-    width: 120px; height: 120px;
-    top: 60%; left: 15%;
-    background: radial-gradient(circle at 30% 30%, #00c6ff, #0072ff);
+.d1 { width: 20px; height: 20px; top: 20%; left: 20%; }
+.d2 { width: 15px; height: 15px; top: 60%; left: 80%; background: var(--magenta); }
+.d3 { width: 30px; height: 30px; top: 80%; left: 30%; }
+.d4 { width: 10px; height: 10px; top: 30%; left: 60%; }
+.d5 { width: 25px; height: 25px; top: 10%; left: 40%; background: var(--magenta); }
+
+.hero-rocket {
+    z-index: 4;
 }
 
-.planet-3 {
-    width: 60px; height: 60px;
-    top: 25%; right: 20%;
-    background: radial-gradient(circle at 30% 30%, #f093fb, #f5576c);
-}
-
-.planet-4 {
-    width: 150px; height: 120px; /* Oval-ish */
-    bottom: 20%; right: 10%;
-    background: radial-gradient(circle at 30% 30%, #5f2c82, #49a09d);
-    border-radius: 50% 40% 60% 30%;
-}
-
-.planet-5 {
-    width: 40px; height: 40px;
-    top: 10%; right: 40%;
-    background: radial-gradient(circle at 30% 30%, #ff00cc, #333399);
-}
-
-.rocket {
+.rocket-wrapper {
     position: absolute;
     bottom: 10%; right: 10%;
-    width: 80px; height: 120px;
+    width: 100px; height: 160px;
     transform: rotate(-45deg);
-    z-index: 10;
 }
 
-.hero-text-content {
+.rocket-wrapper svg { width: 100%; height: 100%; }
+
+.rocket-smoke {
+    position: absolute;
+    bottom: -40px; left: 50%;
+    transform: translateX(-50%);
+    width: 20px; height: 60px;
+    background: linear-gradient(to bottom, var(--magenta), transparent);
+    filter: blur(8px);
+}
+
+.hero-content {
     position: relative;
-    z-index: 50;
+    z-index: 10;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
 }
 
-.main-title {
+.hero-title {
     font-family: var(--font-header);
-    font-size: 8rem;
+    font-size: 6vw;
     font-weight: 900;
-    letter-spacing: -2px;
+    color: var(--white);
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    margin-bottom: 20px;
+    letter-spacing: 0.1em;
 }
 
-.sub-title {
+.hero-subtitle {
     font-size: 1.2rem;
-    opacity: 0.8;
+    font-weight: 400;
+    color: #ccc;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
     max-width: 600px;
-    line-height: 1.6;
-    margin: 20px 0 40px;
 }
 
-.btn-hero {
-    padding: 18px 50px;
-    border: 2px solid var(--white);
+.hero-cta {
+    display: inline-block;
+    padding: 20px 60px;
+    font-family: var(--font-header);
+    font-size: 1.5rem;
+    font-weight: 700;
     color: var(--white);
     text-decoration: none;
-    font-family: var(--font-header);
-    font-weight: 700;
-    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    border: 4px solid var(--cyan);
+    box-shadow: 0 0 20px var(--cyan), inset 0 0 20px var(--cyan);
+    transition: all 0.3s ease;
 }
 
-/* --- Phase 2: Skills --- */
-.skills-track {
-    width: 100%;
+.hero-cta:hover {
+    background: var(--cyan);
+    color: var(--bg-dark);
+    box-shadow: 0 0 40px var(--cyan), inset 0 0 40px var(--cyan);
+}
+
+/* --- Phase 2: Skills Section --- */
+.skills-container {
+    position: relative;
+    width: 100vw;
     height: 100vh;
-    display: flex;
 }
 
 .skill-slide {
     position: absolute;
-    width: 100%; height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    visibility: hidden;
-}
-
-.planet-skill { width: 400px; height: 400px; }
-
-/* --- Phase 3: Project Showcase (Diagonal Wipe & Split-Screen) --- */
-.diagonal-wipe-container {
-    width: 100%;
-    height: 100vh;
-}
-
-.project-split-card {
-    position: absolute;
     top: 0; left: 0;
-    width: 100%; height: 100%;
+    width: 100vw; height: 100vh;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10vw;
     visibility: hidden;
-    /* This will be animated with clip-path in JS */
 }
 
-.content-side {
+.skill-planet-wrapper {
     flex: 1;
-    background-color: var(--white);
-    color: var(--bg-dark);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10%;
+    justify-content: flex-end;
 }
 
-.visual-side {
-    flex: 1;
-    background-color: var(--bg-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.skill-planet {
+    width: 40vh; height: 40vh;
+    border-radius: 50%;
     position: relative;
 }
 
-.card-ui {
-    width: 100%;
+.p-coding {
+    background: radial-gradient(circle at 30% 30%, #a0a0a0, #404040);
+    box-shadow: inset -20px -20px 40px rgba(0,0,0,0.8), 0 0 30px var(--cyan);
+    border: 2px solid var(--cyan);
 }
 
-.project-tag {
-    font-family: var(--font-header);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--magenta);
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+.p-eda {
+    background: 
+        linear-gradient(rgba(0, 255, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-color: #002233;
+    box-shadow: inset -20px -20px 40px rgba(0,0,0,0.8), 0 0 20px #00ffff;
 }
 
-.card-ui h2 {
+.p-viz {
+    background: 
+        linear-gradient(rgba(255, 0, 255, 0.2) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(255, 0, 255, 0.2) 2px, transparent 2px);
+    background-size: 30px 30px;
+    background-color: #330033;
+    box-shadow: inset -20px -20px 40px rgba(0,0,0,0.8), 0 0 20px #ff00ff;
+}
+
+.p-tools {
+    background: radial-gradient(circle at 30% 30%, #00ffff, #005555);
+    box-shadow: inset -20px -20px 40px rgba(0,0,0,0.8);
+}
+
+.planet-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 160%; height: 40%;
+    transform: translate(-50%, -50%) rotate(30deg);
+    border: 15px solid rgba(255, 0, 255, 0.6);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--magenta), inset 0 0 20px var(--magenta);
+}
+
+.skill-text {
+    flex: 1;
+    padding-right: 10vw;
+}
+
+.skill-text h2 {
     font-family: var(--font-header);
     font-size: 3.5rem;
-    font-weight: 900;
+    color: var(--cyan);
     margin-bottom: 20px;
     line-height: 1.1;
 }
 
-.card-ui p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
+.skill-text p {
+    font-size: 1.5rem;
+    color: var(--white);
     opacity: 0.8;
 }
 
-.tech-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 40px;
-}
-
-.tech-pills span {
-    background-color: rgba(0, 0, 0, 0.05);
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 700;
-}
-
-.btn-project {
-    display: inline-block;
-    padding: 16px 40px;
-    background-color: var(--bg-dark);
-    color: var(--white);
-    text-decoration: none;
-    font-family: var(--font-header);
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-.project-asset {
-    width: 80%;
-    height: 80%;
-    object-fit: contain;
-}
-
-.holographic-ui {
-    position: absolute;
-    top: 10%; right: 5%;
-}
-
-.holo-panel {
-    width: 150px; height: 100px;
-    background: rgba(0, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--cyan);
-    border-radius: 15px;
-}
-
-/* --- Phase 4 & 5 --- */
-.full-scene-asset {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: 1;
-}
-
-.landscape-text, .winter-text {
+/* --- Phase 3: Projects Section --- */
+.project-wrapper {
     position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #110022 0%, var(--bg-dark) 100%);
+    overflow: hidden;
+}
+
+.proj-layout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.proj-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5vw 0 10vw;
     z-index: 10;
+    opacity: 0;
+}
+
+.proj-info h3 {
+    color: var(--magenta);
+    font-family: var(--font-header);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.proj-info h2 {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 30px;
+}
+
+.proj-info p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.proj-right {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.constellation-graphic {
+    position: absolute;
+    width: 80vh;
+    height: 80vh;
+}
+
+.c-star.glow {
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+.holo-card {
+    position: absolute;
+    right: 10vw;
+    width: 400px;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    z-index: 20;
+}
+
+.holo-content {
+    color: var(--cyan);
+    font-family: var(--font-header);
+    font-size: 0.9rem;
     text-align: center;
+    letter-spacing: 2px;
+}
+
+.proj-initial-title {
+    position: absolute;
+    bottom: 15vh;
+    left: 0;
+    width: 100vw;
+    text-align: center;
+    font-family: var(--font-header);
+    font-size: 3rem;
+    color: var(--white);
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Phase 4: Outro Section --- */
+#phase4-outro {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
 
-/* Infinite Chimney Smoke */
-.cabin-overlay {
+.aurora-bg {
     position: absolute;
-    bottom: 30vh;
-    right: 25%;
-    width: 200px; height: 150px;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255, 0, 255, 0.15) 0%, rgba(0, 0, 0, 0) 50%);
+    filter: blur(60px);
+    z-index: 1;
+}
+
+.mountains {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 30vh;
+    z-index: 2;
+}
+
+.mountains svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.outro-content {
+    position: relative;
     z-index: 10;
+    text-align: center;
 }
 
-.chimney-smoke {
-    position: absolute;
-    top: -20px;
-    left: 45px;
+.outro-content h2 {
+    font-family: var(--font-header);
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 40px;
+    background: linear-gradient(to right, var(--cyan), var(--magenta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.s-p {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    opacity: 0;
-    animation: smokeBillow 3.5s infinite linear;
-}
-
-.p1 { animation-delay: 0s; }
-.p2 { animation-delay: 1s; }
-.p3 { animation-delay: 2s; }
-.p4 { animation-delay: 2.5s; }
-
-@keyframes smokeBillow {
-    0% { transform: translateY(0) scale(1); opacity: 0; }
-    10% { opacity: 0.6; }
-    100% { transform: translateY(-120px) translateX(20px) scale(4); opacity: 0; }
-}
-
-.footer-rewind {
-    height: 50vh;
+.outro-links {
     display: flex;
-    align-items: center;
+    gap: 30px;
     justify-content: center;
 }
 
-#back-to-top {
-    padding: 20px 40px;
-    background: transparent;
-    border: 2px solid var(--white);
+.outro-links a {
     color: var(--white);
-    font-family: var(--font-header);
-    cursor: pointer;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 10px 30px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.outro-links a:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.final-fade {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: var(--bg-dark);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
 }

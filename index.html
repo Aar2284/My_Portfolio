@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aaryan Kalia // Portfolio</title>
+    <title>Aaryan Kalia | Immersive Portfolio</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Syncopate:wght@700&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -13,154 +13,210 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 </head>
 <body>
-    <!-- Canvas Particle System (Fixed Background) -->
-    <canvas id="bg-canvas"></canvas>
-
-    <nav class="top-nav">
-        <div class="nav-links">
-            <a href="#hero">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <div class="lang-toggle">EN</div>
-    </nav>
 
     <div id="smooth-wrapper">
         <div id="smooth-content">
-            
-            <!-- Phase 1: Hero Section (GSAP Hero Parallax) -->
-            <section id="hero" class="scene">
-                <div class="hero-elements">
-                    <div class="planet planet-1"></div>
-                    <div class="planet planet-2"></div>
-                    <div class="planet planet-3"></div>
-                    <div class="planet planet-4"></div>
-                    <div class="planet planet-5"></div>
-                    
-                    <div class="rocket">
+
+            <!-- Phase 1: The Hero Section -->
+            <section id="phase1-hero" class="scene">
+                <div class="debris-layer">
+                    <div class="debris d1"></div>
+                    <div class="debris d2"></div>
+                    <div class="debris d3"></div>
+                    <div class="debris d4"></div>
+                    <div class="debris d5"></div>
+                </div>
+
+                <div class="hero-planet-main parallax-layer" data-speed="0.2">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad-planet" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#3a0ca3" />
+                                <stop offset="100%" stop-color="#0a001a" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="100" cy="100" r="95" fill="url(#grad-planet)" stroke="#ff00ff" stroke-width="2"/>
+                        <path d="M5 100 L195 100 M100 5 L100 195 M30 30 L170 170 M30 170 L170 30" stroke="#ff00ff" stroke-width="0.5" opacity="0.3"/>
+                    </svg>
+                </div>
+
+                <div class="hero-moon parallax-layer" data-speed="0.4">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" fill="#ff00ff" opacity="0.8" filter="blur(4px)"/>
+                        <circle cx="50" cy="50" r="40" fill="#00ffff" opacity="0.5"/>
+                    </svg>
+                </div>
+
+                <div class="hero-rocket parallax-layer" data-speed="0.8">
+                    <div class="rocket-wrapper">
                         <svg viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Rocket Fins -->
                             <path d="M10 80 L0 95 L10 90 Z" fill="#ff00ff" />
                             <path d="M50 80 L60 95 L50 90 Z" fill="#ff00ff" />
-                            <!-- Rocket Body -->
                             <path d="M30 5 L50 30 L50 85 L10 85 L10 30 Z" fill="#00ffff" />
-                            <!-- Nose Cone -->
-                            <path d="M30 5 L40 20 L20 20 Z" fill="#ff00ff" />
-                            <!-- Window -->
-                            <circle cx="30" cy="40" r="6" fill="white" opacity="0.3" />
-                            <!-- Flame -->
-                            <path d="M20 85 L30 100 L40 85 Z" fill="#ff00ff" opacity="0.8" />
+                            <path d="M30 5 L40 20 L20 20 Z" fill="#ffffff" />
+                            <circle cx="30" cy="40" r="6" fill="#0a001a" />
                         </svg>
+                        <div class="rocket-smoke"></div>
                     </div>
                 </div>
-                <div class="hero-text-content">
-                    <h1 class="main-title">AARYAN KALIA</h1>
-                    <p class="sub-title">Augmenting the future with AI-Powered Intelligence and Data Visualization.</p>
-                    <a href="#" class="btn-hero">MY RESUME ></a>
+
+                <div class="hero-content">
+                    <h1 class="hero-title">AARYAN KALIA</h1>
+                    <p class="hero-subtitle">B.Tech CSE Student | Developer | Machine Learning Enthusiast</p>
+                    <a href="#" class="hero-cta">MY RESUME</a>
                 </div>
             </section>
 
-            <!-- Phase 2: Skills Planet Sequence -->
-            <section id="skills" class="scene">
-                <div class="skills-track">
-                    <div class="skill-slide" id="skill-coding">
-                        <div class="planet-skill"><img src="assets/skill-planet-1.png" class="asset-img"></div>
-                        <div class="skill-info">
+            <!-- Phase 2: "My Skills" -->
+            <section id="phase2-skills" class="scene">
+                <div class="skills-container">
+                    <div class="skill-slide">
+                        <div class="skill-planet-wrapper"><div class="skill-planet p-coding"></div></div>
+                        <div class="skill-text">
                             <h2>My Coding Languages</h2>
                             <p>Python, C++, Java, PL/SQL</p>
                         </div>
                     </div>
-                    <div class="skill-slide" id="skill-eda">
-                        <div class="planet-skill"><img src="assets/skill-planet-2.png" class="asset-img"></div>
-                        <div class="skill-info">
+                    <div class="skill-slide">
+                        <div class="skill-planet-wrapper"><div class="skill-planet p-eda"></div></div>
+                        <div class="skill-text">
                             <h2>EDA</h2>
-                            <p>Pandas, NumPy, Scikit-Learn</p>
+                            <p>Pandas, NumPy,</p>
+                        </div>
+                    </div>
+                    <div class="skill-slide">
+                        <div class="skill-planet-wrapper"><div class="skill-planet p-viz"></div></div>
+                        <div class="skill-text">
+                            <h2>Visualizations</h2>
+                            <p>Power BI, Matplotlib, Seaborn, Plotly</p>
+                        </div>
+                    </div>
+                    <div class="skill-slide">
+                        <div class="skill-planet-wrapper"><div class="skill-planet p-tools"><div class="planet-ring"></div></div></div>
+                        <div class="skill-text">
+                            <h2>Tools & Technologies</h2>
+                            <p>Machine Learning, Flask,</p>
+                        </div>
+                    </div>
+                    <div class="skill-slide">
+                        <div class="skill-planet-wrapper"><div class="skill-planet p-viz"></div></div>
+                        <div class="skill-text">
+                            <h2>Visualizations</h2>
+                            <p>Power BI, Custom Dashboards</p>
+                        </div>
+                    </div>
+                    <div class="skill-slide">
+                        <div class="skill-planet-wrapper"><div class="skill-planet p-viz"></div></div>
+                        <div class="skill-text">
+                            <h2>Visualizations</h2>
+                            <p>Power BI, Custom Dashboards</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Phase 3: Split-Screen Project Showcase (Diagonal Mask Wipe) -->
-            <section id="projects" class="scene">
-                <div class="diagonal-wipe-container">
-                    <!-- Project 1 -->
-                    <div class="project-split-card" id="p1">
-                        <div class="split-left content-side">
-                            <div class="card-ui">
-                                <div class="project-tag">MACHINE LEARNING</div>
-                                <h2>World Bank Socio Economic Analysis</h2>
-                                <p>Comprehensive analysis of global socio-economic trends using World Bank datasets, featuring predictive modeling for GDP growth.</p>
-                                <div class="tech-pills">
-                                    <span>Python</span>
-                                    <span>Pandas</span>
-                                    <span>Scikit-Learn</span>
-                                    <span>Plotly</span>
-                                </div>
-                                <a href="#" class="btn-project">VIEW PROJECT ></a>
+            <!-- Phase 3: "My Projects" -->
+            <section id="phase3-projects" class="scene">
+                <div class="project-wrapper">
+                    <div class="proj-layout">
+                        <div class="proj-left">
+                            <div class="proj-info">
+                                <h3>Project 01</h3>
+                                <h2>World Bank Socio Economic Data Analysis</h2>
+                                <p>An in-depth exploration of global socio-economic trends leveraging vast World Bank datasets. Highlighting key indicators and future projections.</p>
                             </div>
                         </div>
-                        <div class="split-right visual-side">
-                            <img src="assets/polar-bear-standing.png" class="project-asset">
-                            <div class="holographic-ui">
-                                <div class="holo-panel"></div>
+                        <div class="proj-right">
+                            <div class="constellation-graphic">
+                                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M 40 40 L 80 80 L 80 140 M 160 40 L 120 80 L 120 140 M 80 100 L 120 100" stroke="#00ffff" stroke-width="2" fill="none" class="c-line"/>
+                                    <circle cx="40" cy="40" r="4" fill="#ffffff" class="c-star"/>
+                                    <circle cx="80" cy="80" r="5" fill="#00ffff" class="c-star glow"/>
+                                    <circle cx="160" cy="40" r="4" fill="#ffffff" class="c-star"/>
+                                    <circle cx="120" cy="80" r="5" fill="#00ffff" class="c-star glow"/>
+                                </svg>
+                            </div>
+                            <div class="holo-card">
+                                <div class="holo-content">Data Visualization Interface Active</div>
                             </div>
                         </div>
                     </div>
+                    <div class="proj-initial-title">World Bank Socio Economic Data Analysis</div>
+                </div>
 
-                    <!-- Project 2 -->
-                    <div class="project-split-card" id="p2">
-                        <div class="split-left content-side">
-                            <div class="card-ui">
-                                <div class="project-tag">DEVELOPMENT</div>
-                                <h2>AI Personality Island</h2>
-                                <p>An interactive visual experience driven by LLMs that maps user personality traits to a procedurally generated ecosystem.</p>
-                                <div class="tech-pills">
-                                    <span>LLMs</span>
-                                    <span>Flask</span>
-                                    <span>Tailwind</span>
-                                    <span>Three.js</span>
-                                </div>
-                                <a href="#" class="btn-project">VIEW PROJECT ></a>
+                <div class="project-wrapper">
+                    <div class="proj-layout">
+                        <div class="proj-left">
+                            <div class="proj-info">
+                                <h3>Project 02</h3>
+                                <h2>AI Powered Personality Island</h2>
+                                <p>A unique interactive experience that dynamically maps user personality traits to a procedurally generated digital ecosystem using LLMs.</p>
                             </div>
                         </div>
-                        <div class="split-right visual-side">
-                            <img src="assets/polar-bear-diving.png" class="project-asset">
+                        <div class="proj-right">
+                            <div class="constellation-graphic">
+                                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M 60 40 L 140 40 L 110 100 L 90 100 Z M 90 100 L 60 160 L 140 160 L 110 100" stroke="#ffd700" stroke-width="2" fill="none" class="c-line"/>
+                                    <circle cx="90" cy="100" r="3" fill="#ffd700" class="c-star glow"/>
+                                    <circle cx="110" cy="100" r="3" fill="#ffd700" class="c-star glow"/>
+                                    <circle cx="60" cy="160" r="5" fill="#ffffff" class="c-star"/>
+                                    <circle cx="140" cy="160" r="5" fill="#ffffff" class="c-star"/>
+                                </svg>
+                            </div>
+                            <div class="holo-card">
+                                <div class="holo-content">Neural Mapping Core Online</div>
+                            </div>
                         </div>
                     </div>
+                    <div class="proj-initial-title">AI Powered Personality Island</div>
+                </div>
+
+                <div class="project-wrapper">
+                    <div class="proj-layout">
+                        <div class="proj-left">
+                            <div class="proj-info">
+                                <h3>Project 03</h3>
+                                <h2>Crypto Genome</h2>
+                                <p>Deep algorithmic analysis of cryptocurrency market structures, identifying core genomic patterns within volatile trading data.</p>
+                            </div>
+                        </div>
+                        <div class="proj-right">
+                            <div class="constellation-graphic">
+                                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M 100 20 L 50 80 L 150 80 Z M 50 80 L 60 160 L 140 160 L 150 80" stroke="#ff00ff" stroke-width="2" fill="none" class="c-line"/>
+                                    <circle cx="100" cy="20" r="5" fill="#ff00ff" class="c-star glow"/>
+                                    <circle cx="60" cy="160" r="4" fill="#ffffff" class="c-star"/>
+                                    <circle cx="140" cy="160" r="4" fill="#ffffff" class="c-star"/>
+                                </svg>
+                            </div>
+                            <div class="holo-card">
+                                <div class="holo-content">Ledger Verification Node</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="proj-initial-title">Crypto Genome</div>
                 </div>
             </section>
 
-            <!-- Phase 4: Landscape & Cabin -->
-            <section id="landscape" class="scene">
-                <img src="assets/aurora-landscape.png" class="full-scene-asset">
-                <div class="landscape-text">
-                    <h2>Easy as A,B,C</h2>
-                    <p>Building intuitive interfaces for complex data.</p>
+            <!-- Phase 4: Outro -->
+            <section id="phase4-outro" class="scene">
+                <div class="aurora-bg"></div>
+                <div class="mountains">
+                    <svg viewBox="0 0 1000 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 200 L 0 150 L 100 80 L 250 160 L 400 40 L 550 150 L 700 90 L 850 180 L 1000 60 L 1000 200 Z" fill="#050010" stroke="#00ffff" stroke-width="2"/>
+                        <path d="M0 200 L 150 120 L 300 180 L 500 100 L 650 170 L 800 110 L 1000 150 L 1000 200 Z" fill="#0a001a" opacity="0.8"/>
+                    </svg>
                 </div>
-            </section>
-
-            <section id="winter" class="scene">
-                <img src="assets/winter-cabin-scene.png" class="full-scene-asset">
-                <div class="cabin-overlay">
-                    <div class="cabin-window-glow"></div>
-                    <div class="chimney-smoke">
-                        <!-- CSS-only Smoke Particles -->
-                        <div class="s-p p1"></div>
-                        <div class="s-p p2"></div>
-                        <div class="s-p p3"></div>
-                        <div class="s-p p4"></div>
+                <div class="outro-content">
+                    <h2>Let's Build the Future</h2>
+                    <div class="outro-links">
+                        <a href="#">Email</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">GitHub</a>
                     </div>
                 </div>
-                <div class="winter-text">
-                    <h2>Safe as Houses</h2>
-                    <p>Security and reliability at the core of every deployment.</p>
-                </div>
+                <div class="final-fade"></div>
             </section>
-
-            <footer class="footer-rewind">
-                <button id="back-to-top">REPLAY MISSION</button>
-            </footer>
 
         </div>
     </div>
