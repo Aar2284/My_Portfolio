@@ -229,45 +229,74 @@
 
     <div id="about-overlay" class="about-overlay">
         <div class="scientific-card">
-            <div class="card-corner tl"></div>
-            <div class="card-corner tr"></div>
-            <div class="card-corner bl"></div>
-            <div class="card-corner br"></div>
+            <!-- Decorative UI Elements -->
+            <div class="ui-glitch-lines"></div>
+            <div class="ui-status-bar">
+                <span class="status-dot"></span>
+                <span class="status-text">SYSTEM ACTIVE // PROFILE_DECRYPTED</span>
+            </div>
             
             <button id="close-about" class="close-btn">&times;</button>
             
             <div class="card-content">
+                <!-- Left: Profile Data -->
                 <div class="card-left">
-                    <h2 class="font-header">BIOMETRIC PROFILE: ABOUT ME</h2>
-                    <div class="detail-row">
-                        <span class="label">IDENTITY:</span>
-                        <span class="value">AARYAN KALIA</span>
+                    <div class="profile-header">
+                        <span class="rank-tag">RANK: LEAD DEVELOPER</span>
+                        <h2 class="font-header">AARYAN KALIA</h2>
                     </div>
-                    <div class="detail-row">
-                        <span class="label">STATUS:</span>
-                        <span class="value">B.TECH CSE STUDENT</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="label">SPECIALIZATION:</span>
-                        <span class="value">AI & MACHINE LEARNING</span>
-                    </div>
-                    <div class="bio-text">
-                        <p>> Initializing background check...</p>
-                        <p>> I am a passionate developer dedicated to augmenting reality through data-driven intelligence and immersive 2D/3D visualizations. My mission is to bridge the gap between complex algorithms and intuitive user experiences.</p>
+
+                    <div class="data-modules">
+                        <div class="data-module">
+                            <div class="module-label">MISSION</div>
+                            <p>Augmenting reality through intelligent data architectures and immersive motion graphics.</p>
+                        </div>
+                        <div class="data-grid-small">
+                            <div class="data-module">
+                                <div class="module-label">STATUS</div>
+                                <div class="module-val">B.TECH CSE</div>
+                            </div>
+                            <div class="data-module">
+                                <div class="module-label">BASE</div>
+                                <div class="module-val">EARTH_COORDS</div>
+                            </div>
+                        </div>
+                        <div class="data-module bio-box">
+                            <div class="module-label">BIO_ENCRYPTION_V2</div>
+                            <p>Specializing in Machine Learning and Data Visualization. I transform complex data into cinematic digital experiences that feel alive.</p>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Right: Hologram Projection -->
                 <div class="card-right">
-                    <div class="person-container">
-                        <!-- Stylized Waving Person SVG -->
+                    <div class="hologram-stage">
+                        <div class="hologram-glow"></div>
+                        <div class="hologram-circles">
+                            <div class="h-circle c1"></div>
+                            <div class="h-circle c2"></div>
+                        </div>
+                        <!-- Stylized Waving Person (Improved) -->
                         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="waving-person">
-                            <circle cx="100" cy="50" r="30" fill="var(--cyan)" />
-                            <path d="M70 80 Q100 70 130 80 L140 150 L60 150 Z" fill="var(--cyan)" opacity="0.8" />
-                            <path id="arm" d="M130 85 L170 60" stroke="var(--cyan)" stroke-width="8" stroke-linecap="round" fill="none" />
-                            <path d="M170 60 L180 40 M170 60 L185 55 M170 60 L175 35" stroke="var(--cyan)" stroke-width="4" stroke-linecap="round" />
+                            <defs>
+                                <linearGradient id="holo-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="var(--cyan)" stop-opacity="0.8" />
+                                    <stop offset="100%" stop-color="var(--cyan)" stop-opacity="0.1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="50" r="25" fill="url(#holo-grad)" stroke="var(--cyan)" stroke-width="1" />
+                            <path d="M75 80 Q100 75 125 80 L135 160 L65 160 Z" fill="url(#holo-grad)" stroke="var(--cyan)" stroke-width="1" />
+                            <path id="arm" d="M125 85 L160 55" stroke="var(--cyan)" stroke-width="6" stroke-linecap="round" fill="none" />
+                            <circle cx="160" cy="55" r="4" fill="var(--cyan)" />
                         </svg>
-                        <div class="scan-line"></div>
+                        <div class="scan-beam"></div>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Progress Bar Bottom -->
+            <div class="card-footer-progress">
+                <div class="progress-fill"></div>
             </div>
         </div>
     </div>

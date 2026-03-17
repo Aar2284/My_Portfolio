@@ -183,12 +183,24 @@ const scientificCard = document.querySelector('.scientific-card');
 aboutBtn.addEventListener('click', (e) => {
     e.preventDefault();
     gsap.set(aboutOverlay, { visibility: "visible" });
+    const dataModules = scientificCard.querySelectorAll('.data-module');
+    
     gsap.timeline()
         .to(aboutOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" })
         .fromTo(scientificCard, 
-            { scale: 0.8, filter: "blur(20px)", opacity: 0 }, 
-            { scale: 1, filter: "blur(0px)", opacity: 1, duration: 0.8, ease: "back.out(1.7)" }, 
+            { scale: 0.9, y: 50, filter: "blur(20px)", opacity: 0 }, 
+            { scale: 1, y: 0, filter: "blur(0px)", opacity: 1, duration: 0.8, ease: "power4.out" }, 
             "-=0.3"
+        )
+        .fromTo(dataModules, 
+            { x: -30, opacity: 0 }, 
+            { x: 0, opacity: 1, stagger: 0.1, duration: 0.5, ease: "power2.out" },
+            "-=0.4"
+        )
+        .fromTo(".waving-person", 
+            { scale: 0.5, opacity: 0 }, 
+            { scale: 1, opacity: 1, duration: 1, ease: "back.out(1.7)" },
+            "-=0.5"
         );
 });
 

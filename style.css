@@ -457,125 +457,110 @@ body {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(10, 0, 26, 0.95);
+    background: rgba(5, 0, 15, 0.9);
     z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
 }
 
 .scientific-card {
     position: relative;
-    width: 80vw;
-    height: 70vh;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(0, 255, 255, 0.2);
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-    padding: 60px;
+    width: 75vw;
+    height: 80vh;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(0, 255, 255, 0.05);
+    padding: 0;
     display: flex;
+    flex-direction: column;
     overflow: hidden;
 }
 
-.card-corner {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    border: 3px solid var(--cyan);
+/* UI Decor */
+.ui-status-bar {
+    padding: 15px 30px;
+    background: rgba(0, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
-.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
-.tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
-.bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
-.br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+.status-dot {
+    width: 8px; height: 8px;
+    background: var(--cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--cyan);
+    animation: pulseStatus 1s infinite alternate;
+}
+
+@keyframes pulseStatus { from { opacity: 0.4; } to { opacity: 1; } }
+
+.status-text { font-family: var(--font-header); font-size: 0.7rem; letter-spacing: 2px; color: var(--cyan); }
+
+.card-content { display: flex; flex: 1; padding: 50px; gap: 60px; }
+
+/* Left Side */
+.card-left { flex: 1.2; display: flex; flex-direction: column; gap: 40px; }
+
+.rank-tag { font-size: 0.75rem; color: var(--magenta); font-weight: 900; letter-spacing: 3px; }
+
+.profile-header h2 { font-size: 4rem; color: var(--white); margin-top: 10px; line-height: 1; }
+
+.data-modules { display: flex; flex-direction: column; gap: 25px; }
+
+.data-module {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--cyan);
+}
+
+.module-label { font-size: 0.65rem; color: rgba(0, 255, 255, 0.5); font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; }
+
+.data-grid-small { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+.module-val { font-family: var(--font-header); font-size: 1.1rem; color: var(--white); }
+
+.bio-box { border-left-color: var(--magenta); }
+
+/* Right Side: Hologram */
+.card-right { flex: 1; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(0, 255, 255, 0.05) 0%, transparent 70%); }
+
+.hologram-stage { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+
+.hologram-circles { position: absolute; bottom: 10%; width: 200px; height: 60px; }
+
+.h-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateX(75deg); border: 2px solid var(--cyan); border-radius: 50%; opacity: 0.3; }
+.c1 { width: 100%; height: 100%; animation: hSpin 10s infinite linear; }
+.c2 { width: 70%; height: 70%; border-style: dashed; animation: hSpin 5s infinite linear reverse; }
+
+@keyframes hSpin { from { transform: translate(-50%, -50%) rotateX(75deg) rotate(0deg); } to { transform: translate(-50%, -50%) rotateX(75deg) rotate(360deg); } }
+
+.waving-person { width: 280px; height: auto; filter: drop-shadow(0 0 15px var(--cyan)); }
+
+.scan-beam {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.2), transparent);
+    background-size: 100% 20px;
+    animation: scanMove 3s infinite linear;
+    pointer-events: none;
+}
+
+@keyframes scanMove { from { background-position: 0 -100px; } to { background-position: 0 500px; } }
+
+.card-footer-progress { height: 4px; background: rgba(255, 255, 255, 0.1); width: 100%; }
+.progress-fill { height: 100%; width: 60%; background: var(--cyan); box-shadow: 0 0 15px var(--cyan); }
 
 .close-btn {
     position: absolute;
-    top: 20px; right: 20px;
-    background: transparent;
-    border: none;
-    color: var(--white);
-    font-size: 2.5rem;
-    cursor: pointer;
-    opacity: 0.5;
-    transition: opacity 0.3s;
+    top: 15px; right: 20px;
+    background: transparent; border: none; color: var(--white);
+    font-size: 2rem; cursor: pointer; opacity: 0.3; transition: all 0.3s;
+    z-index: 10;
 }
-.close-btn:hover { opacity: 1; color: var(--cyan); }
-
-.card-content {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    gap: 40px;
-}
-
-.card-left {
-    flex: 1.5;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-left h2 {
-    font-size: 2.5rem;
-    color: var(--cyan);
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-}
-
-.detail-row {
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 5px;
-}
-
-.label { color: var(--magenta); font-weight: 700; margin-right: 15px; font-size: 0.9rem; }
-.value { font-family: var(--font-header); font-size: 1.2rem; }
-
-.bio-text {
-    margin-top: 30px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #ccc;
-}
-
-.card-right {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.person-container {
-    width: 100%;
-    max-width: 300px;
-    position: relative;
-}
-
-.waving-person { width: 100%; height: auto; }
-
-#arm {
-    transform-origin: 130px 85px;
-    animation: wave 1.5s infinite ease-in-out;
-}
-
-@keyframes wave {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(-20deg); }
-}
-
-.scan-line {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 2px;
-    background: var(--cyan);
-    box-shadow: 0 0 15px var(--cyan);
-    animation: scan 4s infinite linear;
-    opacity: 0.5;
-}
-
-@keyframes scan {
-    0% { top: 0%; }
-    100% { top: 100%; }
-}
+.close-btn:hover { opacity: 1; transform: rotate(90deg); color: var(--cyan); }
