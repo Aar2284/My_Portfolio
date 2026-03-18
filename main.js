@@ -36,11 +36,52 @@ gsap.to(".debris", { y: "random(-100, 100)", x: "random(-50, 50)", rotation: "ra
 
 // --- Phase 2: Skills Sequence ---
 const slides = gsap.utils.toArray(".skill-slide");
+const hudWrapper = document.querySelector(".skills-hud-wrapper");
+const hudBrackets = document.querySelectorAll(".hud-brackets div");
+const hudStatus = document.querySelector(".hud-status-bar");
+const hudScanner = document.querySelector(".hud-scanner");
+
 gsap.set(slides, { x: "100vw", scale: 0.8, opacity: 0, filter: "blur(10px)", visibility: "visible" });
 
+// 1. Entrance Animation
+gsap.fromTo(hudWrapper, 
+    { opacity: 0, scale: 0.8, y: 100 }, 
+    { 
+        opacity: 1, 
+        scale: 1, 
+        y: 0, 
+        scrollTrigger: { trigger: "#phase2-skills", start: "top bottom", end: "top top", scrub: 1 }
+    }
+);
+
+// 2. Pinned Animation
 const skillsTl = gsap.timeline({
-    scrollTrigger: { trigger: "#phase2-skills", start: "top top", end: "+=800%", pin: true, scrub: 1 }
+    scrollTrigger: { 
+        trigger: "#phase2-skills", 
+        start: "top top", 
+        end: "+=800%", 
+        pin: true, 
+        scrub: 1 
+    }
 });
+
+skillsTl.to({}, { duration: 0.8 })
+        .to(hudWrapper, { 
+            y: "-38vh", 
+            scale: 0.55, 
+            backgroundColor: "rgba(0, 255, 255, 0.08)",
+            backdropFilter: "blur(15px)",
+            border: "1px solid rgba(0, 255, 255, 0.3)",
+            duration: 2, 
+            ease: "power3.inOut" 
+        })
+        .to(hudBrackets, { opacity: 1, duration: 0.8, stagger: 0.1 }, "-=1.2")
+        .to(hudStatus, { opacity: 0.8, duration: 0.8 }, "-=1")
+        .to(hudScanner, { 
+            opacity: 0.5, 
+            duration: 0.8,
+            onStart: () => { hudScanner.style.animation = "scan 2.5s infinite linear"; }
+        }, "-=1.2");
 
 slides.forEach((slide, i) => {
     skillsTl.to(slide, { x: "0vw", opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5, ease: "expo.out" }).to({}, { duration: 2 });

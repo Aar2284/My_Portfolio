@@ -176,6 +176,89 @@ body {
     height: 100vh;
 }
 
+/* --- Skills HUD Header Module --- */
+.skills-hud-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(0, 255, 255, 0.03);
+    backdrop-filter: blur(0px);
+    border: 1px solid transparent;
+}
+
+.skills-main-title {
+    font-family: var(--font-header);
+    font-size: 5.5vw;
+    font-weight: 900;
+    color: var(--white);
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    margin: 0;
+}
+
+.hud-brackets div {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cyan);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.bracket-tl { top: -10px; left: -10px; border-right: none !important; border-bottom: none !important; }
+.bracket-tr { top: -10px; right: -10px; border-left: none !important; border-bottom: none !important; }
+.bracket-bl { bottom: -10px; left: -10px; border-right: none !important; border-top: none !important; }
+.bracket-br { bottom: -10px; right: -10px; border-left: none !important; border-top: none !important; }
+
+.hud-status-bar {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--cyan);
+    opacity: 0;
+    letter-spacing: 2px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--cyan);
+    animation: pulse 1.5s infinite;
+}
+
+.hud-scanner {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0;
+    z-index: 5;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+@keyframes scan {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
+
 .skill-slide {
     position: absolute;
     top: 0; left: 0;
