@@ -499,18 +499,71 @@ body {
     opacity: 0;
 }
 
-.hud-close {
+.ufo-close {
     position: absolute;
-    top: 30px; right: 40px;
+    top: 40px; right: 60px;
     background: transparent; border: none;
-    display: flex; align-items: center; gap: 15px;
-    cursor: pointer; opacity: 0.5; transition: 0.3s;
-    z-index: 50;
+    width: 90px; height: 60px;
+    cursor: pointer;
+    z-index: 100;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.hud-close:hover { opacity: 1; }
-.close-icon { width: 20px; height: 2px; background: #fff; position: relative; }
-.close-icon::before { content: ""; position: absolute; width: 100%; height: 100%; background: #fff; transform: rotate(90deg); }
-.close-text { font-family: monospace; font-size: 0.7rem; color: #fff; letter-spacing: 3px; }
+
+.ufo-container {
+    width: 100%; height: 100%;
+    position: relative;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.6));
+}
+
+.ufo-body {
+    position: relative;
+    width: 80px; height: 24px;
+    background: #ff3333;
+    border-radius: 50%;
+    margin-top: 15px;
+}
+
+.ufo-dome {
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50% 50% 0 0;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(2px);
+}
+
+.ufo-lights {
+    position: absolute;
+    bottom: 3px; left: 0; width: 100%; height: 6px;
+    display: flex; justify-content: space-around; padding: 0 15px;
+}
+.ufo-lights::before, .ufo-lights::after {
+    content: ""; width: 5px; height: 5px; background: #fff; border-radius: 50%;
+    box-shadow: 0 0 8px #fff; animation: ufoBlink 0.5s infinite alternate;
+}
+
+.ufo-cross {
+    position: absolute;
+    top: -6px; left: 50%;
+    transform: translateX(-50%);
+    width: 18px; height: 18px;
+    pointer-events: none;
+}
+.ufo-cross::before, .ufo-cross::after {
+    content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 2px;
+    background: #fff; transform: rotate(45deg);
+}
+.ufo-cross::after { transform: rotate(-45deg); }
+
+@keyframes ufoBlink { from { opacity: 0.3; } to { opacity: 1; } }
+@keyframes ufoHover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+.ufo-active { animation: ufoHover 2s infinite ease-in-out; }
 
 .hud-main {
     flex: 1;
@@ -528,15 +581,31 @@ body {
     transform: rotate(180deg);
     font-family: var(--font-header);
     font-size: 4rem;
-    color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.3);
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     padding-right: 20px;
 }
 
 .academic-stats { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
-.stat-box { border-left: 2px solid var(--cyan); padding-left: 20px; }
-.stat-label { display: block; font-family: monospace; font-size: 0.6rem; color: var(--magenta); margin-bottom: 5px; }
-.stat-value { display: block; font-family: var(--font-header); font-size: 1.2rem; color: #fff; }
+.stat-box { border-left: 2px solid var(--cyan); padding-left: 20px; transition: transform 0.3s ease; }
+.stat-label { 
+    display: block; 
+    font-family: monospace; 
+    font-size: 0.8rem; 
+    color: var(--cyan); 
+    margin-bottom: 5px; 
+    letter-spacing: 2px;
+    opacity: 0.7;
+}
+
+.stat-value { 
+    display: block; 
+    font-family: var(--font-header); 
+    font-size: 1.4rem; 
+    color: #fff; 
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    min-width: 200px; /* Prevent jumpy layout during decoding */
+}
 
 /* HUD Center */
 .hud-center {
@@ -557,7 +626,7 @@ body {
 .narrative-wrapper::-webkit-scrollbar-thumb { background: var(--cyan); }
 
 .narrative-block { margin-bottom: 40px; }
-.narrative-block p { font-size: 1.1rem; line-height: 1.8; color: #bbb; }
+.narrative-block p { font-size: 1.1rem; line-height: 1.8; color: #fff; opacity: 0.8; }
 .highlight-text { font-size: 1.4rem !important; color: #fff !important; font-weight: 700; margin-bottom: 20px; border-left: 4px solid var(--cyan); padding-left: 25px; }
 
 /* HUD Right */
@@ -571,18 +640,16 @@ body {
 }
 .ring-item:nth-child(1) { width: 100%; height: 100%; animation: ringRotate 20s infinite linear; }
 .ring-item:nth-child(2) { width: 75%; height: 75%; border-style: dashed; animation: ringRotate 15s infinite linear reverse; }
-.ring-item:nth-child(3) { width: 125%; height: 40%; border-color: rgba(255, 0, 255, 0.2); transform: translate(-50%, -50%) rotateX(70deg); }
+.ring-item:nth-child(3) { width: 125%; height: 40%; border-color: rgba(0, 255, 255, 0.2); transform: translate(-50%, -50%) rotateX(70deg); }
 
 @keyframes ringRotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-.projection-svg { width: 300px; height: auto; position: relative; z-index: 5; filter: drop-shadow(0 0 30px var(--cyan)); }
+.projection-gif { 
+    width: 280px; 
+    height: auto; 
+    position: relative; 
+    z-index: 5; 
+    filter: drop-shadow(0 0 20px var(--cyan));
+}
 
 .live-readout { position: absolute; bottom: 10%; right: 0; font-family: monospace; font-size: 0.7rem; color: var(--cyan); opacity: 0.6; }
-
-/* HUD Bottom */
-.hud-bottom { margin-top: auto; }
-.hud-line { width: 100%; height: 1px; background: linear-gradient(to right, var(--cyan), transparent); margin-bottom: 20px; }
-.hud-meta { display: flex; justify-content: space-between; font-family: monospace; font-size: 0.6rem; color: #555; letter-spacing: 2px; }
-
-#humanoid-arm { transform-origin: 122px 85px; animation: humanWave 2s infinite ease-in-out; }
-@keyframes humanWave { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-25deg); } }

@@ -89,6 +89,7 @@ const aboutBtn = document.querySelector('.hero-cta.secondary');
 const aboutOverlay = document.getElementById('about-overlay');
 const hudContainer = document.querySelector('.hud-container');
 const closeAbout = document.getElementById('close-about');
+const ufoClose = document.querySelector('.ufo-close');
 
 // Neural Canvas Logic
 const canvas = document.getElementById('about-neural-canvas');
@@ -142,39 +143,111 @@ window.addEventListener('resize', initNeuralCanvas);
 initNeuralCanvas();
 drawNeuralNetwork();
 
+// Decoding Effect Function
+function decodeText(element, finalString, duration = 1000) {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+    const iterations = 15;
+    let currentIteration = 0;
+    
+    return new Promise((resolve) => {
+        const interval = setInterval(() => {
+            element.innerText = finalString
+                .split("")
+                .map((char, index) => {
+                    if (index < (currentIteration / iterations) * finalString.length) {
+                        return finalString[index];
+                    }
+                    if (char === " ") return " ";
+                    return chars[Math.floor(Math.random() * chars.length)];
+                })
+                .join("");
+            
+            if (currentIteration >= iterations) {
+                clearInterval(interval);
+                element.innerText = finalString;
+                resolve();
+            }
+            currentIteration++;
+        }, duration / iterations);
+    });
+}
+
 if (aboutBtn && aboutOverlay) {
     aboutBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        gsap.set(aboutOverlay, { visibility: "visible" });
         
+        // Reset and show overlay
+        gsap.set(aboutOverlay, { visibility: "visible", opacity: 0 });
+        gsap.set(hudContainer, { opacity: 0, scale: 1.1, translateZ: 200 });
+        gsap.set(".academic-stats", { x: "40vw", y: "0vh", opacity: 0 }); 
+        gsap.set([".hud-center", ".hud-right", ".vertical-title", ".hud-bottom"], { opacity: 0 });
+        
+        // UFO Initial State (off-screen)
+        gsap.set(ufoClose, { x: 400, y: -400, opacity: 0, rotation: 45, scale: 1 });
+        ufoClose.classList.remove('ufo-active');
+
         const tl = gsap.timeline();
+        
         tl.to(aboutOverlay, { opacity: 1, duration: 0.4 })
           .to(hudContainer, { 
               opacity: 1, 
               scale: 1, 
               translateZ: 0, 
-              duration: 1.2, 
+              duration: 1, 
               ease: "expo.out" 
           }, "-=0.2")
-          .from(".hud-left", { x: -100, opacity: 0, duration: 1 }, "-=0.8")
-          .from(".hud-right", { x: 100, opacity: 0, duration: 1 }, "-=1")
-          .from(".narrative-block", { y: 30, opacity: 0, stagger: 0.2, duration: 0.8 }, "-=0.6")
-          .from(".vertical-title", { opacity: 0, scaleY: 0, duration: 1 }, "-=1");
+          
+          // UFO Fly In
+          .to(ufoClose, { 
+              x: 0, y: 0, opacity: 1, rotation: 0, 
+              duration: 1.2, ease: "back.out(1.2)",
+              onComplete: () => ufoClose.classList.add('ufo-active')
+          }, "-=0.5")
+
+          .to(".academic-stats", { 
+              opacity: 1, 
+              duration: 0.5,
+              onComplete: () => {
+                  const stats = document.querySelectorAll('.stat-value');
+                  const originalValues = Array.from(stats).map(s => s.innerText);
+                  stats.forEach((stat, i) => decodeText(stat, originalValues[i], 1200));
+              }
+          })
+          
+          .to(".academic-stats", { 
+              x: 0, y: 0, duration: 1.2, ease: "power4.inOut", delay: 1.5 
+          })
+          
+          .to(".vertical-title", { opacity: 0.3, scaleY: 1, duration: 0.8, ease: "expo.out" }, "-=0.4")
+          .to(".hud-center", { opacity: 1, x: 0, duration: 1 }, "-=0.4")
+          .from(".narrative-block", { y: 30, opacity: 0, stagger: 0.2, duration: 0.8 }, "-=0.8")
+          .to(".hud-right", { opacity: 1, x: 0, duration: 1 }, "-=1")
+          .to(".hud-bottom", { opacity: 1, duration: 0.5 }, "-=0.5");
     });
 }
 
 if (closeAbout) {
     closeAbout.addEventListener('click', () => {
-        gsap.timeline({
+        const closeTl = gsap.timeline({
             onComplete: () => gsap.set(aboutOverlay, { visibility: "hidden" })
+        });
+
+        // UFO Fly Away S-shaped path to bottom-left
+        ufoClose.classList.remove('ufo-active');
+        
+        closeTl.to(ufoClose, {
+            duration: 1.2,
+            ease: "power2.inOut",
+            keyframes: [
+                { x: -150, y: 100, rotation: -20, scale: 0.8 },
+                { x: -50, y: 400, rotation: 15, scale: 0.6 },
+                { x: -window.innerWidth - 200, y: window.innerHeight + 200, rotation: -45, scale: 0.3 }
+            ]
         })
         .to(hudContainer, { 
-            scale: 1.1, 
-            translateZ: 200, 
-            opacity: 0, 
-            duration: 0.8, 
-            ease: "expo.in" 
-        })
+            scale: 1.1, translateZ: 200, opacity: 0, 
+            duration: 0.8, ease: "expo.in" 
+        }, "-=0.8")
         .to(aboutOverlay, { opacity: 0, duration: 0.4 }, "-=0.4");
     });
 }
