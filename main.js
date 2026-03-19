@@ -45,12 +45,17 @@ gsap.set(slides, { x: "100vw", scale: 0.8, opacity: 0, filter: "blur(10px)", vis
 
 // 1. Entrance Animation
 gsap.fromTo(hudWrapper, 
-    { opacity: 0, scale: 0.8, y: 100 }, 
+    { opacity: 0, scale: 0.8, yPercent: 50 }, 
     { 
         opacity: 1, 
         scale: 1, 
-        y: 0, 
-        scrollTrigger: { trigger: "#phase2-skills", start: "top bottom", end: "top top", scrub: 1 }
+        yPercent: 0, 
+        scrollTrigger: { 
+            trigger: "#phase2-skills", 
+            start: "top bottom", 
+            end: "top top", 
+            scrub: 1 
+        }
     }
 );
 
@@ -59,34 +64,49 @@ const skillsTl = gsap.timeline({
     scrollTrigger: { 
         trigger: "#phase2-skills", 
         start: "top top", 
-        end: "+=800%", 
+        end: "+=1200%", 
         pin: true, 
         scrub: 1 
     }
 });
 
-skillsTl.to({}, { duration: 0.8 })
+const orb1 = document.querySelector(".orb-1");
+const orb2 = document.querySelector(".orb-2");
+const orbColors = ["#00ffff", "#0055ff", "#ff00ff", "#00ffaa"];
+
+// Hold at center
+skillsTl.to({}, { duration: 6 }) 
         .to(hudWrapper, { 
-            y: "-38vh", 
-            scale: 0.55, 
+            y: "-52vh", 
+            scale: 0.5, 
             backgroundColor: "rgba(0, 255, 255, 0.08)",
             backdropFilter: "blur(15px)",
             border: "1px solid rgba(0, 255, 255, 0.3)",
-            duration: 2, 
-            ease: "power3.inOut" 
+            duration: 3, 
+            ease: "power2.inOut" 
         })
-        .to(hudBrackets, { opacity: 1, duration: 0.8, stagger: 0.1 }, "-=1.2")
-        .to(hudStatus, { opacity: 0.8, duration: 0.8 }, "-=1")
+        .to(hudBrackets, { opacity: 1, duration: 1, stagger: 0.2 }, "-=2")
+        .to(hudStatus, { opacity: 0.8, duration: 1 }, "-=1.5")
         .to(hudScanner, { 
             opacity: 0.5, 
-            duration: 0.8,
+            duration: 1,
             onStart: () => { hudScanner.style.animation = "scan 2.5s infinite linear"; }
-        }, "-=1.2");
+        }, "-=2");
 
 slides.forEach((slide, i) => {
-    skillsTl.to(slide, { x: "0vw", opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5, ease: "expo.out" }).to({}, { duration: 2 });
+    // Parallax background orbs
+    skillsTl.to([orb1, orb2], { 
+        x: (i + 1) * -50, 
+        y: (i + 1) * 30, 
+        backgroundColor: orbColors[i],
+        duration: 2,
+        ease: "sine.inOut"
+    }, i === 0 ? "-=0" : "-=2");
+
+    skillsTl.to(slide, { x: "0vw", opacity: 1, scale: 1, filter: "blur(0px)", duration: 2, ease: "expo.out" });
+    skillsTl.to({}, { duration: 3 });
     if (i !== slides.length - 1) {
-        skillsTl.to(slide, { x: "-100vw", scale: 1.2, opacity: 0, filter: "blur(10px)", duration: 1.2, ease: "expo.in" });
+        skillsTl.to(slide, { x: "-100vw", scale: 1.2, opacity: 0, filter: "blur(10px)", duration: 1.5, ease: "expo.in" });
     }
 });
 

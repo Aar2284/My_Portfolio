@@ -170,10 +170,53 @@ body {
 }
 
 /* --- Phase 2: Skills Section --- */
+#phase2-skills {
+    background: #020008;
+    position: relative;
+}
+
+#phase2-skills::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 30vh;
+    background: linear-gradient(to bottom, #1a0033, transparent);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.skills-bg-atmosphere {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.15;
+    transition: background-color 1.5s ease;
+}
+
+.orb-1 {
+    width: 80vw; height: 80vw;
+    top: -20%; left: -20%;
+    background-color: var(--cyan);
+}
+
+.orb-2 {
+    width: 60vw; height: 60vw;
+    bottom: -10%; right: -10%;
+    background-color: #0055ff;
+}
+
 .skills-container {
     position: relative;
     width: 100vw;
     height: 100vh;
+    z-index: 2; /* Ensure content is above background orbs */
 }
 
 /* --- Skills HUD Header Module --- */
@@ -196,13 +239,16 @@ body {
 
 .skills-main-title {
     font-family: var(--font-header);
-    font-size: 5.5vw;
+    font-size: 5.2vw; /* Slightly smaller to ensure fit */
     font-weight: 900;
     color: var(--white);
     text-align: center;
     white-space: nowrap;
     text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
     margin: 0;
+    width: 95vw;
+    display: flex;
+    justify-content: center;
 }
 
 .hud-brackets div {
@@ -329,16 +375,102 @@ body {
 .skill-text h2 {
     font-family: var(--font-header);
     font-size: 3.5rem;
-    color: var(--cyan);
-    margin-bottom: 20px;
+    color: var(--white);
+    margin-bottom: 15px;
     line-height: 1.1;
+    letter-spacing: 2px;
+}
+
+.tech-id {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--cyan);
+    opacity: 0.6;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.chip-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.cyber-chip {
+    padding: 6px 15px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    background: rgba(0, 255, 255, 0.05);
+    color: var(--cyan);
+    font-family: monospace;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.skill-slide:hover .cyber-chip {
+    border-color: var(--cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
 }
 
 .skill-text p {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
     color: var(--white);
-    opacity: 0.8;
+    opacity: 0.7;
+    max-width: 500px;
 }
+
+/* --- Internal Planet Textures --- */
+.internal-texture {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Coding: Digital Grid */
+.p-coding { background: #000; border: 1px solid rgba(0, 255, 255, 0.3); }
+.grid-texture {
+    background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: gridScroll 10s linear infinite;
+}
+
+/* EDA: Molten Data */
+.p-eda { background: #001a33; border: 1px solid rgba(0, 150, 255, 0.4); }
+.molten-texture {
+    background: conic-gradient(from 0deg, #001a33, #00ffff, #001a33);
+    filter: blur(20px);
+    animation: rotateMolten 4s linear infinite;
+    opacity: 0.6;
+}
+
+/* Visuals: Pulse Radar */
+.p-viz { background: #1a001a; border: 1px solid rgba(255, 0, 255, 0.3); }
+.pulse-texture {
+    background: repeating-radial-gradient(circle, transparent, transparent 20px, rgba(255, 0, 255, 0.2) 21px, transparent 22px);
+    animation: radarPulse 3s ease-out infinite;
+}
+
+/* Tools: Crystal Specular */
+.p-tools { background: #002222; border: 1px solid rgba(0, 255, 150, 0.4); }
+.crystal-texture {
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+    background-size: 200% 200%;
+    animation: crystalShine 5s linear infinite;
+}
+
+@keyframes gridScroll { from { background-position: 0 0; } to { background-position: 40px 40px; } }
+@keyframes rotateMolten { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes radarPulse { 0% { transform: scale(0.8); opacity: 0; } 50% { opacity: 1; } 100% { transform: scale(1.2); opacity: 0; } }
+@keyframes crystalShine { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
 
 /* --- Phase 3: Projects Section --- */
 .project-wrapper {
