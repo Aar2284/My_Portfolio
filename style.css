@@ -169,7 +169,7 @@ body {
     box-shadow: 0 0 40px var(--magenta), inset 0 0 40px var(--magenta);
 }
 
-/* --- Phase 2: Skills Section --- */
+/* --- Phase 2: Skills Sect ion --- */
 #phase2-skills {
     background: #020008;
     position: relative;
@@ -192,24 +192,35 @@ body {
     z-index: 0;
 }
 
-.bg-orb {
+#skills-starfield {
     position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.15;
-    transition: background-color 1.5s ease;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
 }
 
-.orb-1 {
-    width: 80vw; height: 80vw;
-    top: -20%; left: -20%;
-    background-color: var(--cyan);
+.nebula-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2;
+    background: radial-gradient(circle at 30% 50%, rgba(0,255,255,0.08) 0%, transparent 60%),
+                radial-gradient(circle at 70% 30%, rgba(0,85,255,0.08) 0%, transparent 60%);
+    transition: background 1.5s ease-in-out;
+    filter: blur(20px);
+    pointer-events: none;
 }
 
-.orb-2 {
-    width: 60vw; height: 60vw;
-    bottom: -10%; right: -10%;
-    background-color: #0055ff;
+.dimensional-rift {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 50;
+    background: linear-gradient(to right, transparent, rgba(0,255,255,0.8), #fff, rgba(255,0,255,0.8), transparent);
+    clip-path: polygon(0 49%, 100% 49%, 100% 51%, 0 51%);
+    opacity: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
 }
 
 .skills-container {
@@ -322,50 +333,239 @@ body {
     justify-content: flex-end;
 }
 
-.skill-planet {
+/* --- Skill Artifacts (Replaced generic planets) --- */
+.skill-planet-wrapper > div {
     width: 40vh; height: 40vh;
-    border-radius: 50%;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
 }
 
-.p-coding {
-    background: radial-gradient(circle at 30% 30%, #a0a0a0, #404040);
-    box-shadow: inset -20px -20px 40px rgba(0,0,0,0.8), 0 0 30px var(--cyan);
-    border: 2px solid var(--cyan);
+/* ===== 1. Holographic Code Terminal (Languages) ===== */
+.code-terminal-artifact {
+    border-radius: 12px;
+    background: rgba(0, 10, 30, 0.9);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.1), inset 0 0 30px rgba(0, 255, 255, 0.03);
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    cursor: default;
+}
+.code-terminal-artifact:hover {
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.25), inset 0 0 40px rgba(0, 255, 255, 0.06);
+    border-color: rgba(0, 255, 255, 0.6);
+}
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(0, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+}
+.terminal-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+}
+.terminal-dot.red { background: #ff5f57; box-shadow: 0 0 6px #ff5f57; }
+.terminal-dot.yellow { background: #ffbd2e; box-shadow: 0 0 6px #ffbd2e; }
+.terminal-dot.green { background: #28c840; box-shadow: 0 0 6px #28c840; }
+.terminal-title {
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: rgba(0, 255, 255, 0.5);
+    margin-left: auto;
+    letter-spacing: 1px;
+}
+.code-terminal-canvas {
+    width: 100%;
+    height: calc(100% - 32px);
+    display: block;
+}
+.terminal-scanline {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+    animation: termScan 4s infinite linear;
+    pointer-events: none;
+    z-index: 5;
+}
+.terminal-glow {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 40%;
+    background: linear-gradient(to top, rgba(0, 255, 255, 0.05), transparent);
+    pointer-events: none;
+}
+@keyframes termScan {
+    0% { top: 32px; }
+    100% { top: 100%; }
 }
 
-.p-eda {
-    background: 
-        linear-gradient(rgba(0, 255, 255, 0.2) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px);
-    background-size: 20px 20px;
-    background-color: #002233;
-    box-shadow: inset -20px -20px 40px rgba(0,0,0,0.8), 0 0 20px #00ffff;
+/* ===== 2. Scatter Plot HUD (Analytics) ===== */
+.scatter-plot-artifact {
+    border-radius: 50%;
+    background: rgba(0, 10, 25, 0.85);
+    border: 1px solid rgba(0, 255, 255, 0.25);
+    box-shadow: 0 0 30px rgba(0, 200, 200, 0.1), inset 0 0 30px rgba(0, 200, 200, 0.03);
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    cursor: crosshair;
+}
+.scatter-plot-artifact:hover {
+    box-shadow: 0 0 60px rgba(0, 255, 200, 0.2), inset 0 0 40px rgba(0, 255, 200, 0.05);
+    border-color: rgba(0, 255, 200, 0.5);
+}
+.scatter-plot-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+}
+.plot-hud-frame {
+    position: absolute;
+    top: 8%; left: 8%;
+    width: 84%; height: 84%;
+    border-radius: 50%;
+    border: 1px dashed rgba(0, 255, 255, 0.12);
+    pointer-events: none;
+}
+.plot-label {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: monospace;
+    font-size: 0.6rem;
+    color: rgba(0, 255, 200, 0.5);
+    letter-spacing: 2px;
+    pointer-events: none;
 }
 
-.p-viz {
-    background: 
-        linear-gradient(rgba(255, 0, 255, 0.2) 2px, transparent 2px),
-        linear-gradient(90deg, rgba(255, 0, 255, 0.2) 2px, transparent 2px);
-    background-size: 30px 30px;
-    background-color: #330033;
-    box-shadow: inset -20px -20px 40px rgba(0,0,0,0.8), 0 0 20px #ff00ff;
+/* ===== 3. Morphing Chart Display (Visualizations) ===== */
+.chart-morph-artifact {
+    border-radius: 50%;
+    background: rgba(10, 0, 25, 0.85);
+    border: 1px solid rgba(255, 0, 255, 0.25);
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.1), inset 0 0 30px rgba(255, 0, 255, 0.03);
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    cursor: default;
+}
+.chart-morph-artifact:hover {
+    box-shadow: 0 0 60px rgba(255, 0, 255, 0.2), inset 0 0 40px rgba(255, 0, 255, 0.05);
+    border-color: rgba(255, 0, 255, 0.5);
+}
+.chart-morph-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+}
+.chart-hud-frame {
+    position: absolute;
+    top: 8%; left: 8%;
+    width: 84%; height: 84%;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 0, 255, 0.12);
+    pointer-events: none;
+}
+.chart-type-label {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: monospace;
+    font-size: 0.6rem;
+    color: rgba(255, 0, 255, 0.5);
+    letter-spacing: 2px;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: color 0.3s ease;
 }
 
-.p-tools {
-    background: radial-gradient(circle at 30% 30%, #00ffff, #005555);
-    box-shadow: inset -20px -20px 40px rgba(0,0,0,0.8);
+/* ===== 4. Labeled Orbital System (Dev Stack) ===== */
+.orbital-system {
+    transform-style: preserve-3d;
+    transform: rotateX(60deg) rotateY(-20deg);
+    transition: transform 0.6s ease;
 }
-
-.planet-ring {
+.orbital-system:hover {
+    transform: rotateX(55deg) rotateY(-15deg);
+}
+.orbital-core {
+    width: 28%; height: 28%;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--cyan), #004455);
+    box-shadow: 0 0 40px var(--cyan), 0 0 80px rgba(0, 255, 255, 0.3), inset 0 0 20px var(--white);
+    animation: corePulse 2s infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+.orbital-core span {
+    font-family: monospace;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--white);
+    text-shadow: 0 0 10px var(--cyan);
+    transform: rotateX(-60deg) rotateY(20deg);
+}
+.orbit-path {
     position: absolute;
     top: 50%; left: 50%;
-    width: 160%; height: 40%;
-    transform: translate(-50%, -50%) rotate(30deg);
-    border: 15px solid rgba(255, 0, 255, 0.6);
+    transform: translate(-50%, -50%);
     border-radius: 50%;
-    box-shadow: 0 0 20px var(--magenta), inset 0 0 20px var(--magenta);
+    border: 1px solid rgba(0, 255, 150, 0.2);
 }
+.r1 { width: 55%; height: 55%; animation: orbitSpin 10s infinite linear; }
+.r2 { width: 72%; height: 72%; animation: orbitSpin 15s infinite linear reverse; border-color: rgba(0, 255, 255, 0.2); }
+.r3 { width: 89%; height: 89%; animation: orbitSpin 20s infinite linear; }
+.r4 { width: 106%; height: 106%; border: 1px dashed rgba(255, 0, 255, 0.2); animation: orbitSpin 25s infinite linear reverse; }
+.orbital-system:hover .orbit-path { animation-duration: 30s; }
+
+.orbit-node {
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    min-width: 32px;
+    height: 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+}
+.orbit-node span {
+    font-family: monospace;
+    font-size: 0.55rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    transform: rotateX(-60deg) rotateY(20deg);
+    text-shadow: 0 0 8px currentColor;
+}
+.n1 { background: rgba(0, 255, 170, 0.25); border: 1px solid #00ffaa; color: #00ffaa; box-shadow: 0 0 12px rgba(0, 255, 170, 0.3); }
+.n2 { background: rgba(0, 255, 255, 0.25); border: 1px solid var(--cyan); color: var(--cyan); box-shadow: 0 0 12px rgba(0, 255, 255, 0.3); top: 50%; left: -18px; transform: translateY(-50%); }
+.n3 { background: rgba(255, 255, 255, 0.2); border: 1px solid var(--white); color: var(--white); box-shadow: 0 0 12px rgba(255, 255, 255, 0.3); top: auto; bottom: -12px; }
+.n4 { background: rgba(255, 0, 255, 0.25); border: 1px solid var(--magenta); color: var(--magenta); box-shadow: 0 0 12px rgba(255, 0, 255, 0.3); top: 50%; right: -22px; left: auto; transform: translateY(-50%); }
+
+.orbit-particles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+}
+
+@keyframes corePulse { 0% { transform: scale(0.9); opacity: 0.8; } 100% { transform: scale(1.1); opacity: 1; } }
+@keyframes orbitSpin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
 
 .skill-text {
     flex: 1;
@@ -393,25 +593,57 @@ body {
 .chip-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     margin-bottom: 25px;
 }
 
 .cyber-chip {
-    padding: 6px 15px;
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    background: rgba(0, 255, 255, 0.05);
+    position: relative;
+    padding: 6px 15px 6px 25px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    background: rgba(0, 255, 255, 0.02);
     color: var(--cyan);
     font-family: monospace;
     font-size: 0.9rem;
     border-radius: 2px;
     text-transform: uppercase;
     transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.cyber-chip::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 15px; height: 1px;
+    background: var(--cyan);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.cyber-chip::after {
+    content: '';
+    position: absolute;
+    left: 14px; top: 50%;
+    transform: translateY(-50%);
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 5px var(--cyan);
+    opacity: 0.5;
+    transition: all 0.3s ease;
 }
 
 .skill-slide:hover .cyber-chip {
-    border-color: var(--cyan);
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    border-color: rgba(0, 255, 255, 0.5);
+    background: rgba(0, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+}
+
+.skill-slide:hover .cyber-chip::before,
+.skill-slide:hover .cyber-chip::after {
+    opacity: 1;
 }
 
 .skill-text p {
@@ -421,56 +653,6 @@ body {
     opacity: 0.7;
     max-width: 500px;
 }
-
-/* --- Internal Planet Textures --- */
-.internal-texture {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-/* Coding: Digital Grid */
-.p-coding { background: #000; border: 1px solid rgba(0, 255, 255, 0.3); }
-.grid-texture {
-    background-image: 
-        linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
-    animation: gridScroll 10s linear infinite;
-}
-
-/* EDA: Molten Data */
-.p-eda { background: #001a33; border: 1px solid rgba(0, 150, 255, 0.4); }
-.molten-texture {
-    background: conic-gradient(from 0deg, #001a33, #00ffff, #001a33);
-    filter: blur(20px);
-    animation: rotateMolten 4s linear infinite;
-    opacity: 0.6;
-}
-
-/* Visuals: Pulse Radar */
-.p-viz { background: #1a001a; border: 1px solid rgba(255, 0, 255, 0.3); }
-.pulse-texture {
-    background: repeating-radial-gradient(circle, transparent, transparent 20px, rgba(255, 0, 255, 0.2) 21px, transparent 22px);
-    animation: radarPulse 3s ease-out infinite;
-}
-
-/* Tools: Crystal Specular */
-.p-tools { background: #002222; border: 1px solid rgba(0, 255, 150, 0.4); }
-.crystal-texture {
-    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
-    background-size: 200% 200%;
-    animation: crystalShine 5s linear infinite;
-}
-
-@keyframes gridScroll { from { background-position: 0 0; } to { background-position: 40px 40px; } }
-@keyframes rotateMolten { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes radarPulse { 0% { transform: scale(0.8); opacity: 0; } 50% { opacity: 1; } 100% { transform: scale(1.2); opacity: 0; } }
-@keyframes crystalShine { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
 
 /* --- Phase 3: Projects Section --- */
 .project-wrapper {

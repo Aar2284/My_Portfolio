@@ -155,9 +155,11 @@
 
             <!-- Phase 2: "My Skills" -->
             <section id="phase2-skills" class="scene">
+                <!-- Transition Rift -->
+                <div class="dimensional-rift"></div>
                 <div class="skills-bg-atmosphere">
-                    <div class="bg-orb orb-1"></div>
-                    <div class="bg-orb orb-2"></div>
+                    <canvas id="skills-starfield"></canvas>
+                    <div class="nebula-layer"></div>
                 </div>
                 <div class="skills-container">
                     <div class="skills-hud-wrapper">
@@ -176,12 +178,21 @@
                     </div>
                     <div class="skill-slide">
                         <div class="skill-planet-wrapper">
-                            <div class="skill-planet p-coding">
-                                <div class="internal-texture grid-texture"></div>
+                            <div class="code-terminal-artifact">
+                                <div class="terminal-header">
+                                    <span class="terminal-dot red"></span>
+                                    <span class="terminal-dot yellow"></span>
+                                    <span class="terminal-dot green"></span>
+                                    <span class="terminal-title">lang_module.sys</span>
+                                </div>
+                                <canvas class="code-terminal-canvas"></canvas>
+                                <div class="terminal-scanline"></div>
+                                <div class="terminal-glow"></div>
                             </div>
                         </div>
                         <div class="skill-text">
-                            <div class="tech-id">[ CORE_STABILITY: 98% ] [ DATA_TYPE: ALGORITHMIC ]</div>
+                            <div class="tech-id">[ CORE_STABILITY: <span class="ticker" data-target="98">0</span>% ] [
+                                DATA_TYPE: ALGORITHMIC ]</div>
                             <h2>Languages</h2>
                             <div class="chip-container">
                                 <span class="cyber-chip">Python</span>
@@ -194,12 +205,15 @@
                     </div>
                     <div class="skill-slide">
                         <div class="skill-planet-wrapper">
-                            <div class="skill-planet p-eda">
-                                <div class="internal-texture molten-texture"></div>
+                            <div class="scatter-plot-artifact">
+                                <canvas class="scatter-plot-canvas"></canvas>
+                                <div class="plot-hud-frame"></div>
+                                <div class="plot-label">ANALYSIS_ENGINE</div>
                             </div>
                         </div>
                         <div class="skill-text">
-                            <div class="tech-id">[ SYNC_RATE: 94% ] [ DATA_TYPE: ANALYTICAL ]</div>
+                            <div class="tech-id">[ SYNC_RATE: <span class="ticker" data-target="94">0</span>% ] [
+                                DATA_TYPE: ANALYTICAL ]</div>
                             <h2>Analytics</h2>
                             <div class="chip-container">
                                 <span class="cyber-chip">Pandas</span>
@@ -212,12 +226,15 @@
                     </div>
                     <div class="skill-slide">
                         <div class="skill-planet-wrapper">
-                            <div class="skill-planet p-viz">
-                                <div class="internal-texture pulse-texture"></div>
+                            <div class="chart-morph-artifact">
+                                <canvas class="chart-morph-canvas"></canvas>
+                                <div class="chart-hud-frame"></div>
+                                <div class="chart-type-label">RENDERING: BAR_CHART</div>
                             </div>
                         </div>
                         <div class="skill-text">
-                            <div class="tech-id">[ RENDER_ENGINE: ACTIVE ] [ DATA_TYPE: VISUAL ]</div>
+                            <div class="tech-id">[ RENDER_ENGINE: <span class="ticker-text"
+                                    data-target="ACTIVE">STANDBY</span> ] [ DATA_TYPE: VISUAL ]</div>
                             <h2>Visualizations</h2>
                             <div class="chip-container">
                                 <span class="cyber-chip">Power BI</span>
@@ -230,13 +247,26 @@
                     </div>
                     <div class="skill-slide">
                         <div class="skill-planet-wrapper">
-                            <div class="skill-planet p-tools">
-                                <div class="internal-texture crystal-texture"></div>
-                                <div class="planet-ring"></div>
+                            <div class="orbital-system">
+                                <div class="orbital-core"><span>&lt;/&gt;</span></div>
+                                <div class="orbit-path r1">
+                                    <div class="orbit-node n1"><span>ML</span></div>
+                                </div>
+                                <div class="orbit-path r2">
+                                    <div class="orbit-node n2"><span>Flask</span></div>
+                                </div>
+                                <div class="orbit-path r3">
+                                    <div class="orbit-node n3"><span>Git</span></div>
+                                </div>
+                                <div class="orbit-path r4">
+                                    <div class="orbit-node n4"><span>Docker</span></div>
+                                </div>
+                                <div class="orbit-particles"></div>
                             </div>
                         </div>
                         <div class="skill-text">
-                            <div class="tech-id">[ SYSTEM_LOAD: OPTIMAL ] [ DATA_TYPE: INTEGRATION ]</div>
+                            <div class="tech-id">[ SYSTEM_LOAD: <span class="ticker-text"
+                                    data-target="OPTIMAL">IDLE</span> ] [ DATA_TYPE: INTEGRATION ]</div>
                             <h2>Dev Stack</h2>
                             <div class="chip-container">
                                 <span class="cyber-chip">Machine Learning</span>
