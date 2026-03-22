@@ -18,6 +18,8 @@ body {
     color: var(--white);
     font-family: var(--font-sub);
     overflow-x: hidden;
+    width: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 .scene {
@@ -1523,10 +1525,11 @@ body {
 .hud-main {
     flex: 1;
     display: grid;
-    grid-template-columns: 0.8fr 2fr 1fr;
-    gap: 60px;
+    grid-template-columns: 1fr 2fr 1fr; 
+    gap: 3vw; 
     align-items: center;
-    padding: 40px 0;
+    padding: 2vw 0;
+    width: 100%;
 }
 
 /* HUD Left */
@@ -1556,10 +1559,10 @@ body {
 .stat-value { 
     display: block; 
     font-family: var(--font-header); 
-    font-size: 1.4rem; 
-    color: #fff; 
+    font-size: clamp(1rem, 1.2vw, 1.4rem); 
+    color: #fff;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-    min-width: 200px; /* Prevent jumpy layout during decoding */
+    width: 100%;
 }
 
 /* HUD Center */
@@ -1588,7 +1591,14 @@ body {
 .hud-right { height: 100%; display: flex; align-items: center; justify-content: center; }
 .projection-container { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 
-.projection-rings { position: absolute; width: 400px; height: 400px; }
+.projection-rings { 
+    position: absolute; 
+    width: 25vw; 
+    height: 25vw; 
+    max-width: 400px; 
+    max-height: 400px;
+}
+
 .ring-item {
     position: absolute; border: 1px solid rgba(0, 255, 255, 0.1); border-radius: 50%;
     top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -1600,9 +1610,10 @@ body {
 @keyframes ringRotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 
 .projection-gif { 
-    width: 280px; 
+    width: 18vw; 
+    max-width: 280px; 
     height: auto; 
-    position: relative; 
+    position: relative;
     z-index: 5; 
     filter: drop-shadow(0 0 20px var(--cyan));
 }
