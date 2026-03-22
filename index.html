@@ -7,6 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -150,6 +151,15 @@
                         <a href="assets/Aaryan(CV).pdf" target="_blank" class="hero-cta">PREVIEW CV</a>
                         <a href="assets/Aaryan(CV).pdf" download="Aaryan_Kalia_Resume.pdf" class="hero-cta tertiary">DOWNLOAD CV</a>
                         <a href="#" class="hero-cta secondary">ABOUT ME</a>
+                    </div>
+                    <div class="hero-socials">
+                        <a href="https://github.com/Aar2284" target="_blank" class="social-icon github" aria-label="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        
+                        <a href="https://www.linkedin.com/in/aaryan-kalia/" target="_blank" class="social-icon linkedin" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -549,12 +559,55 @@
                         <path d="M0 200 L 150 120 L 300 180 L 500 100 L 650 170 L 800 110 L 1000 150 L 1000 200 Z" fill="#0a001a" opacity="0.8"/>
                     </svg>
                 </div>
-                <div class="outro-content">
-                    <h2>Let's Build the Future</h2>
-                    <div class="outro-links">
-                        <a href="#">Email</a>
-                        <a href="#">LinkedIn</a>
-                        <a href="#">GitHub</a>
+                <div class="outro-content contact-wrapper">
+                    <div class="contact-header">
+                        <h2>CONTACT</h2>
+                        <p>Let's talk about ideas, collaborations, or opportunities.</p>
+                    </div>
+                    
+                    <div class="contact-layout">
+                        <div class="contact-info">
+                            <div class="info-box">
+                                <span class="info-label">EMAIL</span>
+                                <a href="mailto:aaryankalia165@gmail.com" class="info-value">aaryankalia165@gmail.com</a>
+                            </div>
+                            <div class="info-box">
+                                <span class="info-label">GITHUB</span>
+                                <a href="https://github.com/Aar2284" target="_blank" class="info-value">github.com/Aar2284</a>
+                            </div>
+                            <div class="info-box">
+                                <span class="info-label">LINKEDIN</span>
+                                <a href="https://linkedin.com/in/aaryan-kalia" target="_blank" class="info-value">linkedin.com/in/aaryan-kalia</a>
+                            </div>
+                            <div class="info-box">
+                                <span class="info-label">LOCATION</span>
+                                <span class="info-value">Nawanshahr, Punjab</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-form-card">
+                            <form onsubmit="event.preventDefault(); alert('Form submitted!');">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>NAME</label>
+                                        <input type="text" placeholder="Your name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>EMAIL</label>
+                                        <input type="email" placeholder="you@example.com" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>MESSAGE</label>
+                                    <textarea rows="4" placeholder="Say hello..." required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">SEND MESSAGE</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-footer">
+                    <p>© 2026 Aaryan Kalia. Crafted with space-inspired aesthetic.</p>
                     </div>
                 </div>
                 <div class="final-fade"></div>
