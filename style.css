@@ -219,6 +219,17 @@ body {
     box-shadow: 0 0 40px var(--magenta), inset 0 0 40px var(--magenta);
 }
 
+.hero-cta.tertiary {
+    border-color: #00ffaa;
+    box-shadow: 0 0 20px rgba(0, 255, 170, 0.6), inset 0 0 20px rgba(0, 255, 170, 0.6);
+}
+
+.hero-cta.tertiary:hover {
+    background: #00ffaa;
+    color: var(--bg-dark);
+    box-shadow: 0 0 40px #00ffaa, inset 0 0 40px #00ffaa;
+}
+
 /* --- Phase 2: Education Dossier --- */
 #phase2-education {
     background: #020008;
@@ -1619,6 +1630,47 @@ body {
 }
 
 .live-readout { position: absolute; bottom: 10%; right: 0; font-family: monospace; font-size: 0.7rem; color: var(--cyan); opacity: 0.6; }
+
+/* =========================================
+   LAPTOP & TABLET RESCUE (THE 80% MIDDLE ZONE)
+   ========================================= */
+@media (min-width: 851px) and (max-width: 1200px) {
+    /* 1. Give the About Me text more room to breathe */
+    .hud-main {
+        grid-template-columns: 1fr 1.5fr 1fr !important; 
+        gap: 1.5vw !important;
+    }
+    .stat-value {
+        font-size: 1.1rem !important; /* Prevents text from pushing boundaries */
+    }
+    .projection-rings {
+        width: 18vw !important;
+        height: 18vw !important;
+    }
+    .projection-gif {
+        width: 14vw !important;
+    }
+
+    /* 2. Shrink the massive padding in the Education section */
+    .dossier-body {
+        padding: 20px 30px !important; 
+    }
+    .dossier-institution {
+        font-size: 2.2rem !important; /* Scales down the University title */
+    }
+    .dossier-meta {
+        font-size: 0.9rem !important;
+    }
+    
+    /* 3. Scale down the 3D Planets in Skills */
+    .skill-planet-wrapper > div {
+        width: 30vh !important;
+        height: 30vh !important;
+    }
+    .skill-text h2 {
+        font-size: 2.5rem !important;
+    }
+}
 
 /* =========================================
    MOBILE & TABLET RESCUE (STACKING OVERRIDE)
