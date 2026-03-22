@@ -655,11 +655,11 @@ body {
 }
 
 /* --- Phase 3: Projects Section --- */
+
 .project-wrapper {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(circle at center, #110022 0%, var(--bg-dark) 100%);
     overflow: hidden;
 }
 
@@ -698,11 +698,12 @@ body {
 }
 
 .proj-info h2 {
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 4vw, 4rem);
     font-weight: 900;
     line-height: 1.1;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     color: var(--bg-dark); /* Dark text for white bg */
+    max-width: 65vw;
 }
 
 .proj-info p {

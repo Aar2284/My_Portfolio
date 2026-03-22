@@ -159,11 +159,15 @@ projects.forEach((proj, i) => {
           .to(stars, { scale: 1, opacity: 1, stagger: 0.1, duration: 1, ease: "back.out(2)" }, "-=1")
           .to(initialTitle, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1 }, "-=0.5")
           .to(initialTitle, { opacity: 0, y: -100, scale: 1.2, filter: "blur(15px)", duration: 1, ease: "power2.in" })
-          .to(diagonalBg, { clipPath: "polygon(0% 0%, 60% 0%, 40% 100%, 0% 100%)", duration: 1.5, ease: "expo.inOut" }, "-=0.8")
-          .to(constGraphic, { left: "50%", top: "50%", scale: 0.8, rotation: 12, duration: 2, ease: "power4.inOut" }, "-=1.5")
+          .to(diagonalBg, { clipPath: "polygon(0% 0%, 75% 0%, 55% 100%, 0% 100%)", duration: 1.5, ease: "expo.inOut" }, "-=0.8")
+          .to(constGraphic, { left: "70%", top: "50%", scale: 0.8, rotation: 12, duration: 2, ease: "power4.inOut" }, "-=1.5")
           .to(leftInfo, { opacity: 1, x: 0, duration: 1.5, ease: "expo.out" }, "-=1")
           .to(holoCard, { opacity: 1, x: 0, duration: 1.5, ease: "expo.out" }, "-=1.2")
           .to({}, { duration: 2 });
+});
+
+window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
 });
 
 // --- Phase 4: Outro ---
