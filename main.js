@@ -14,7 +14,7 @@ requestAnimationFrame(raf);
 // Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Phase 1: Hero Parallax ---
+// === Phase 1: Hero Parallax ===
 const heroTl = gsap.timeline({
     scrollTrigger: {
         trigger: "#phase1-hero",
@@ -34,7 +34,109 @@ gsap.to(".rocket-wrapper", { x: "-85vw", y: "-85vh", duration: 20, repeat: -1, y
 gsap.to(".rocket-wrapper svg", { x: "random(-1, 1)", y: "random(-1, 1)", duration: 0.05, repeat: -1, yoyo: true, ease: "none" });
 gsap.to(".debris", { y: "random(-100, 100)", x: "random(-50, 50)", rotation: "random(-180, 180)", duration: "random(10, 20)", repeat: -1, yoyo: true, ease: "sine.inOut" });
 
-// --- Phase 2: Skills Sequence ---
+// === Phase 2: Education Dossier ===
+// Phase 1: Entrance scrub (heading fades/scales in as section scrolls into view)
+const eduHeading = document.querySelector(".edu-heading-wrapper");
+if (eduHeading) {
+    gsap.fromTo(eduHeading,
+        { opacity: 0, scale: 0.8, yPercent: 50 },
+        {
+            opacity: 1, scale: 1, yPercent: 0,
+            scrollTrigger: {
+                trigger: "#phase2-education",
+                start: "top bottom",
+                end: "top top",
+                scrub: 1
+            }
+        }
+    );
+}
+
+// Elements for decorative sub-animations
+const eduCrosshairs = document.querySelectorAll(".edu-crosshairs div");
+const eduStatusBar = document.querySelector(".edu-status-bar");
+const eduScanner = document.querySelector(".edu-scanner");
+
+const dossierCards = gsap.utils.toArray(".dossier-card");
+if (dossierCards.length) {
+    // Initial state: 3D perspective setup for cards (ALL hidden initially!)
+    gsap.set(dossierCards, { opacity: 0, scale: 0.85, rotationX: -15, y: 50, filter: "blur(15px)" });
+
+    const eduTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#phase2-education",
+            start: "top top",
+            end: `+=${dossierCards.length * 100 + 400}%`,
+            pin: true,
+            scrub: 1
+        }
+    });
+
+    // Phase 2: Hold at center (heading sits big for a beat)
+    eduTl.to({}, { duration: 4 });
+
+    // Phase 3: Shrink & dock heading to top
+    // Since top starts at 35%, -31vh puts it cleanly at precisely 4vh off the ceiling edge!
+    eduTl.to(eduHeading, {
+        y: "-31vh",
+        scale: 0.45,
+        backgroundColor: "rgba(255, 0, 255, 0.08)",
+        backdropFilter: "blur(15px)",
+        border: "1px solid rgba(255, 0, 255, 0.3)",
+        duration: 3,
+        ease: "power2.inOut"
+    });
+
+    // Phase 3b: Concurrent decorative sub-animations
+    eduTl.to(eduCrosshairs, { opacity: 1, duration: 1, stagger: 0.2 }, "-=2");
+    eduTl.to(eduStatusBar, { opacity: 0.8, duration: 1 }, "-=1.5");
+    eduTl.to(eduScanner, {
+        opacity: 0.5,
+        duration: 1,
+        onStart: () => { eduScanner.style.animation = "eduScan 2.5s infinite linear"; }
+    }, "-=2");
+
+    // Small pause before cards begin
+    eduTl.to({}, { duration: 1 });
+
+    // Card stack transitions
+    dossierCards.forEach((card, i) => {
+        const ringFill = card.querySelector('.ring-fill');
+        const percent = ringFill ? (parseInt(ringFill.getAttribute('data-percent'), 10) || 0) : 0;
+        const fullCircumference = 314;
+        const targetOffset = fullCircumference - (fullCircumference * (percent / 100));
+
+        if (i === 0) {
+            // Fade in FIRST card natively (no longer starts visible!)
+            eduTl.to(card, { opacity: 1, scale: 1, rotationX: 0, y: 0, filter: "blur(0px)", duration: 1 });
+            
+            // First card ring animates in synchronously with card spawn
+            if (ringFill) {
+                eduTl.fromTo(ringFill,
+                    { strokeDashoffset: fullCircumference },
+                    { strokeDashoffset: targetOffset, duration: 1, ease: "power2.out" },
+                    "-=0.5"
+                );
+            }
+            eduTl.to({}, { duration: 1.5 }); // Hold for reading
+        } else {
+            // Fade out previous card, fade in current
+            eduTl.to(dossierCards[i-1], { opacity: 0, scale: 1.1, rotationX: 15, y: -50, filter: "blur(15px)", duration: 1 })
+                 .to(card, { opacity: 1, scale: 1, rotationX: 0, y: 0, filter: "blur(0px)", duration: 1 }, "-=0.5");
+
+            if (ringFill) {
+                eduTl.fromTo(ringFill,
+                    { strokeDashoffset: fullCircumference },
+                    { strokeDashoffset: targetOffset, duration: 1, ease: "power2.out" },
+                    "-=0.5"
+                );
+            }
+            eduTl.to({}, { duration: 1.5 }); // Hold for reading
+        }
+    });
+}
+
+// === Phase 3: Skills Sequence ===
 const slides = gsap.utils.toArray(".skill-slide");
 const hudWrapper = document.querySelector(".skills-hud-wrapper");
 const hudBrackets = document.querySelectorAll(".hud-brackets div");
@@ -51,7 +153,7 @@ gsap.fromTo(hudWrapper,
         scale: 1, 
         yPercent: 0, 
         scrollTrigger: { 
-            trigger: "#phase2-skills", 
+            trigger: "#phase3-skills", 
             start: "top bottom", 
             end: "top top", 
             scrub: 1 
@@ -62,7 +164,7 @@ gsap.fromTo(hudWrapper,
 // 2. Pinned Animation
 const skillsTl = gsap.timeline({
     scrollTrigger: { 
-        trigger: "#phase2-skills", 
+        trigger: "#phase3-skills", 
         start: "top top", 
         end: "+=1200%", 
         pin: true, 
@@ -140,7 +242,7 @@ slides.forEach((slide, i) => {
     }
 });
 
-// --- Phase 3: Projects Showcase ---
+// === Phase 4: Projects Showcase ===
 const projects = gsap.utils.toArray(".project-wrapper");
 projects.forEach((proj, i) => {
     const constGraphic = proj.querySelector(".constellation-graphic");
@@ -170,14 +272,14 @@ window.addEventListener('load', () => {
     ScrollTrigger.refresh();
 });
 
-// --- Phase 4: Outro ---
-const outroTl = gsap.timeline({ scrollTrigger: { trigger: "#phase4-outro", start: "top bottom", end: "bottom bottom", scrub: true } });
+// === Phase 5: Outro ===
+const outroTl = gsap.timeline({ scrollTrigger: { trigger: "#phase5-outro", start: "top bottom", end: "bottom bottom", scrub: true } });
 outroTl.from(".aurora-bg", { opacity: 0, scale: 1.5, filter: "blur(100px)", duration: 2 })
        .from(".mountains", { y: 200, ease: "power2.out" }, 0.5)
        .from(".outro-content h2", { scale: 0.5, filter: "blur(20px)", opacity: 0, duration: 1.5, ease: "expo.out" }, 1)
        .from(".outro-links a", { y: 50, opacity: 0, stagger: 0.2, duration: 1, ease: "back.out(1.7)" }, 1.5);
 
-gsap.to(".final-fade", { scrollTrigger: { trigger: "#phase4-outro", start: "90% top", end: "bottom top", scrub: true }, opacity: 1, ease: "none" });
+gsap.to(".final-fade", { scrollTrigger: { trigger: "#phase5-outro", start: "90% top", end: "bottom top", scrub: true }, opacity: 1, ease: "none" });
 
 // --- Cinematic About Me HUD Logic (V4) ---
 const aboutBtn = document.querySelector('.hero-cta.secondary');
@@ -346,7 +448,6 @@ if (closeAbout) {
         .to(aboutOverlay, { opacity: 0, duration: 0.4 }, "-=0.4");
     });
 }
-
 // --- Neural Cosmos Redesign Logic ---
 
 // 1. Starfield Background

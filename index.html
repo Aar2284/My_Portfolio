@@ -153,8 +153,138 @@
                 </div>
             </section>
 
-            <!-- Phase 2: "My Skills" -->
-            <section id="phase2-skills" class="scene">
+            <!-- Phase 2: "Education - Mission Dossier" -->
+            <section id="phase2-education" class="scene">
+                <canvas id="edu-starfield"></canvas>
+                
+                <!-- Education Heading (3-Phase Animation) -->
+                <div class="edu-heading-wrapper">
+                    <!-- Crosshair corner decorations -->
+                    <div class="edu-crosshairs">
+                        <div class="crosshair-tl"></div>
+                        <div class="crosshair-tr"></div>
+                        <div class="crosshair-bl"></div>
+                        <div class="crosshair-br"></div>
+                    </div>
+                    <!-- Scanner sweep -->
+                    <div class="edu-scanner"></div>
+                    <!-- Main title -->
+                    <div class="edu-heading-decoration">
+                        <span class="edu-dec-line left"></span>
+                        <h2 class="edu-main-title">EDUCATION</h2>
+                        <span class="edu-dec-line right"></span>
+                    </div>
+                    <!-- Classification status bar -->
+                    <div class="edu-status-bar">
+                        <span class="edu-status-dot"></span>
+                        <span class="edu-status-text">CLASSIFICATION: LEVEL_3 // ARCHIVE_OPEN</span>
+                    </div>
+                </div>
+
+                <div class="dossier-section">
+                    <!-- Scan line overlay -->
+                    <div class="dossier-scanline"></div>
+
+                    <!-- Dossier Card 1: 10th Grade -->
+                    <div class="dossier-card" data-card="1">
+                        <div class="dossier-inner">
+                            <div class="dossier-header">
+                                <span class="dossier-file-id">MISSION_FILE: 001</span>
+                                <span class="dossier-class">// SECONDARY EDUCATION</span>
+                            </div>
+                            <div class="dossier-body">
+                                <div class="dossier-info">
+                                    <h2 class="dossier-institution">Shivalik Public School</h2>
+                                    <div class="dossier-meta">
+                                        <span class="dossier-stream">CLASS: 10th</span>
+                                        <span class="dossier-year">YEAR: 2021</span>
+                                    </div>
+                                </div>
+                                <div class="dossier-ring-container">
+                                    <svg class="progress-ring" viewBox="0 0 120 120">
+                                        <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                                        <circle class="ring-fill" cx="60" cy="60" r="50" data-percent="85"/>
+                                    </svg>
+                                    <span class="ring-label">[82%]</span>
+                                </div>
+                            </div>
+                            <div class="dossier-footer">
+                                <span class="dossier-status">DATA_STATUS: VERIFIED</span>
+                                <span class="dossier-counter">01 / 03</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dossier Card 2: 12th Grade -->
+                    <div class="dossier-card" data-card="2">
+                        <div class="dossier-inner">
+                            <div class="dossier-header">
+                                <span class="dossier-file-id">MISSION_FILE: 002</span>
+                                <span class="dossier-class">// HIGHER SECONDARY</span>
+                            </div>
+                            <div class="dossier-body">
+                                <div class="dossier-info">
+                                    <h2 class="dossier-institution">Shivalik Public School</h2>
+                                    <div class="dossier-meta">
+                                        <span class="dossier-stream">CLASS: 12th</span>
+                                        <span class="dossier-stream">STREAM: Non-Medical</span>
+                                        <span class="dossier-year">YEAR: 2023</span>
+                                    </div>
+                                </div>
+                                <div class="dossier-ring-container">
+                                    <svg class="progress-ring" viewBox="0 0 120 120">
+                                        <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                                        <circle class="ring-fill" cx="60" cy="60" r="50" data-percent="90"/>
+                                    </svg>
+                                    <span class="ring-label">[77%]</span>
+                                </div>
+                            </div>
+                            <div class="dossier-footer">
+                                <span class="dossier-status">DATA_STATUS: VERIFIED</span>
+                                <span class="dossier-counter">02 / 03</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dossier Card 3: B.Tech -->
+                    <div class="dossier-card" data-card="3">
+                        <div class="dossier-inner">
+                            <div class="dossier-header">
+                                <span class="dossier-file-id">MISSION_FILE: 003</span>
+                                <span class="dossier-class">// University</span>
+                            </div>
+                            <div class="dossier-body">
+                                <div class="dossier-info">
+                                    <h2 class="dossier-institution">Lovely Professional University</h2>
+                                    <div class="dossier-meta">
+                                        <span class="dossier-stream">STREAM: B. Tech CSE</span>
+                                        <span class="dossier-year">PERIOD: 2023-2027</span>
+                                    </div>
+                                    <div class="chip-container" style="margin-top: 30px;">
+                                        <span class="cyber-chip">Specialization: Data Science</span>
+                                        <span class="cyber-chip">Open Minor: Game Development</span>
+                                    </div>
+                                </div>
+                                <div class="dossier-ring-container">
+                                    <svg class="progress-ring" viewBox="0 0 120 120">
+                                        <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                                        <circle class="ring-fill" cx="60" cy="60" r="50" data-percent="88"/>
+                                    </svg>
+                                    <span class="ring-label">[7.6]</span>
+                                </div>
+                            </div>
+                            <div class="dossier-footer">
+                                <span class="dossier-status">DATA_STATUS: ACTIVE_PROCESSING</span>
+                                <span class="dossier-counter">03 / 03</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Phase 3: "My Skills" -->
+            <section id="phase3-skills" class="scene">
                 <!-- Transition Rift -->
                 <div class="dimensional-rift"></div>
                 <div class="skills-bg-atmosphere">
@@ -280,8 +410,8 @@
                 </div>
             </section>
 
-            <!-- Phase 3: "My Projects" -->
-            <section id="phase3-projects" class="scene">
+            <!-- Phase 4: "My Projects" -->
+            <section id="phase4-projects" class="scene">
                 <div class="project-wrapper">
                     <div class="diagonal-bg"></div>
                     <div class="proj-layout">
@@ -373,8 +503,8 @@
                 </div>
             </section>
 
-            <!-- Phase 4: Outro -->
-            <section id="phase4-outro" class="scene">
+            <!-- Phase 5: Outro -->
+            <section id="phase5-outro" class="scene">
                 <div class="aurora-bg"></div>
                 <div class="mountains">
                     <svg viewBox="0 0 1000 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
