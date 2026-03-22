@@ -37,8 +37,10 @@ body {
 
 .parallax-layer {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
 }
 
@@ -50,7 +52,10 @@ body {
     height: 40vw;
 }
 
-.hero-planet-main svg { width: 100%; height: 100%; }
+.hero-planet-main svg {
+    width: 100%;
+    height: 100%;
+}
 
 .hero-moon {
     z-index: 1;
@@ -60,12 +65,17 @@ body {
     height: 20vw;
 }
 
-.hero-moon svg { width: 100%; height: 100%; }
+.hero-moon svg {
+    width: 100%;
+    height: 100%;
+}
 
 .debris-layer {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 3;
     pointer-events: none;
 }
@@ -77,11 +87,42 @@ body {
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
 
-.d1 { width: 20px; height: 20px; top: 20%; left: 20%; }
-.d2 { width: 15px; height: 15px; top: 60%; left: 80%; background: var(--magenta); }
-.d3 { width: 30px; height: 30px; top: 80%; left: 30%; }
-.d4 { width: 10px; height: 10px; top: 30%; left: 60%; }
-.d5 { width: 25px; height: 25px; top: 10%; left: 40%; background: var(--magenta); }
+.d1 {
+    width: 20px;
+    height: 20px;
+    top: 20%;
+    left: 20%;
+}
+
+.d2 {
+    width: 15px;
+    height: 15px;
+    top: 60%;
+    left: 80%;
+    background: var(--magenta);
+}
+
+.d3 {
+    width: 30px;
+    height: 30px;
+    top: 80%;
+    left: 30%;
+}
+
+.d4 {
+    width: 10px;
+    height: 10px;
+    top: 30%;
+    left: 60%;
+}
+
+.d5 {
+    width: 25px;
+    height: 25px;
+    top: 10%;
+    left: 40%;
+    background: var(--magenta);
+}
 
 .hero-rocket {
     z-index: 4;
@@ -89,18 +130,25 @@ body {
 
 .rocket-wrapper {
     position: absolute;
-    bottom: 10%; right: 10%;
-    width: 100px; height: 160px;
+    bottom: 10%;
+    right: 10%;
+    width: 100px;
+    height: 160px;
     transform: rotate(-45deg);
 }
 
-.rocket-wrapper svg { width: 100%; height: 100%; }
+.rocket-wrapper svg {
+    width: 100%;
+    height: 100%;
+}
 
 .rocket-smoke {
     position: absolute;
-    bottom: -40px; left: 50%;
+    bottom: -40px;
+    left: 50%;
     transform: translateX(-50%);
-    width: 20px; height: 60px;
+    width: 20px;
+    height: 60px;
     background: linear-gradient(to bottom, var(--magenta), transparent);
     filter: blur(8px);
 }
@@ -457,7 +505,10 @@ body {
 #phase3-skills::before {
     content: "";
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 30vh;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30vh;
     background: linear-gradient(to bottom, #1a0033, transparent);
     z-index: 1;
     pointer-events: none;
@@ -465,26 +516,32 @@ body {
 
 .skills-bg-atmosphere {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     z-index: 0;
 }
 
 #skills-starfield {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 1;
 }
 
 .nebula-layer {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 2;
-    background: radial-gradient(circle at 30% 50%, rgba(0,255,255,0.08) 0%, transparent 60%),
-                radial-gradient(circle at 70% 30%, rgba(0,85,255,0.08) 0%, transparent 60%);
+    background: radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 70% 30%, rgba(0, 85, 255, 0.08) 0%, transparent 60%);
     transition: background 1.5s ease-in-out;
     filter: blur(20px);
     pointer-events: none;
@@ -492,10 +549,12 @@ body {
 
 .dimensional-rift {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 50;
-    background: linear-gradient(to right, transparent, rgba(0,255,255,0.8), #fff, rgba(255,0,255,0.8), transparent);
+    background: linear-gradient(to right, transparent, rgba(0, 255, 255, 0.8), #fff, rgba(255, 0, 255, 0.8), transparent);
     clip-path: polygon(0 49%, 100% 49%, 100% 51%, 0 51%);
     opacity: 0;
     pointer-events: none;
@@ -506,7 +565,8 @@ body {
     position: relative;
     width: 100vw;
     height: 100vh;
-    z-index: 2; /* Ensure content is above background orbs */
+    z-index: 2;
+    /* Ensure content is above background orbs */
 }
 
 /* --- Skills HUD Header Module --- */
@@ -529,7 +589,8 @@ body {
 
 .skills-main-title {
     font-family: var(--font-header);
-    font-size: 5.2vw; /* Slightly smaller to ensure fit */
+    font-size: 5.2vw;
+    /* Slightly smaller to ensure fit */
     font-weight: 900;
     color: var(--white);
     text-align: center;
@@ -550,10 +611,33 @@ body {
     transition: all 0.5s ease;
 }
 
-.bracket-tl { top: -10px; left: -10px; border-right: none !important; border-bottom: none !important; }
-.bracket-tr { top: -10px; right: -10px; border-left: none !important; border-bottom: none !important; }
-.bracket-bl { bottom: -10px; left: -10px; border-right: none !important; border-top: none !important; }
-.bracket-br { bottom: -10px; right: -10px; border-left: none !important; border-top: none !important; }
+.bracket-tl {
+    top: -10px;
+    left: -10px;
+    border-right: none !important;
+    border-bottom: none !important;
+}
+
+.bracket-tr {
+    top: -10px;
+    right: -10px;
+    border-left: none !important;
+    border-bottom: none !important;
+}
+
+.bracket-bl {
+    bottom: -10px;
+    left: -10px;
+    border-right: none !important;
+    border-top: none !important;
+}
+
+.bracket-br {
+    bottom: -10px;
+    right: -10px;
+    border-left: none !important;
+    border-top: none !important;
+}
 
 .hud-status-bar {
     margin-top: 10px;
@@ -578,27 +662,43 @@ body {
 
 .hud-scanner {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 2px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
     background: linear-gradient(90deg, transparent, var(--cyan), transparent);
     opacity: 0;
     z-index: 5;
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
 @keyframes scan {
-    0% { top: 0%; }
-    100% { top: 100%; }
+    0% {
+        top: 0%;
+    }
+
+    100% {
+        top: 100%;
+    }
 }
 
 .skill-slide {
     position: absolute;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -613,8 +713,9 @@ body {
 }
 
 /* --- Skill Artifacts (Replaced generic planets) --- */
-.skill-planet-wrapper > div {
-    width: 40vh; height: 40vh;
+.skill-planet-wrapper>div {
+    width: 40vh;
+    height: 40vh;
     position: relative;
     display: flex;
     align-items: center;
@@ -633,10 +734,12 @@ body {
     transition: box-shadow 0.4s ease, border-color 0.4s ease;
     cursor: default;
 }
+
 .code-terminal-artifact:hover {
     box-shadow: 0 0 50px rgba(0, 255, 255, 0.25), inset 0 0 40px rgba(0, 255, 255, 0.06);
     border-color: rgba(0, 255, 255, 0.6);
 }
+
 .terminal-header {
     display: flex;
     align-items: center;
@@ -645,13 +748,28 @@ body {
     background: rgba(0, 255, 255, 0.05);
     border-bottom: 1px solid rgba(0, 255, 255, 0.15);
 }
+
 .terminal-dot {
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
 }
-.terminal-dot.red { background: #ff5f57; box-shadow: 0 0 6px #ff5f57; }
-.terminal-dot.yellow { background: #ffbd2e; box-shadow: 0 0 6px #ffbd2e; }
-.terminal-dot.green { background: #28c840; box-shadow: 0 0 6px #28c840; }
+
+.terminal-dot.red {
+    background: #ff5f57;
+    box-shadow: 0 0 6px #ff5f57;
+}
+
+.terminal-dot.yellow {
+    background: #ffbd2e;
+    box-shadow: 0 0 6px #ffbd2e;
+}
+
+.terminal-dot.green {
+    background: #28c840;
+    box-shadow: 0 0 6px #28c840;
+}
+
 .terminal-title {
     font-family: monospace;
     font-size: 0.7rem;
@@ -659,30 +777,43 @@ body {
     margin-left: auto;
     letter-spacing: 1px;
 }
+
 .code-terminal-canvas {
     width: 100%;
     height: calc(100% - 32px);
     display: block;
 }
+
 .terminal-scanline {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 2px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
     background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
     animation: termScan 4s infinite linear;
     pointer-events: none;
     z-index: 5;
 }
+
 .terminal-glow {
     position: absolute;
-    bottom: 0; left: 0;
-    width: 100%; height: 40%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
     background: linear-gradient(to top, rgba(0, 255, 255, 0.05), transparent);
     pointer-events: none;
 }
+
 @keyframes termScan {
-    0% { top: 32px; }
-    100% { top: 100%; }
+    0% {
+        top: 32px;
+    }
+
+    100% {
+        top: 100%;
+    }
 }
 
 /* ===== 2. Scatter Plot HUD (Analytics) ===== */
@@ -696,24 +827,30 @@ body {
     transition: box-shadow 0.4s ease, border-color 0.4s ease;
     cursor: crosshair;
 }
+
 .scatter-plot-artifact:hover {
     box-shadow: 0 0 60px rgba(0, 255, 200, 0.2), inset 0 0 40px rgba(0, 255, 200, 0.05);
     border-color: rgba(0, 255, 200, 0.5);
 }
+
 .scatter-plot-canvas {
     width: 100%;
     height: 100%;
     display: block;
     border-radius: 50%;
 }
+
 .plot-hud-frame {
     position: absolute;
-    top: 8%; left: 8%;
-    width: 84%; height: 84%;
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
     border-radius: 50%;
     border: 1px dashed rgba(0, 255, 255, 0.12);
     pointer-events: none;
 }
+
 .plot-label {
     position: absolute;
     bottom: 12%;
@@ -737,24 +874,30 @@ body {
     transition: box-shadow 0.4s ease, border-color 0.4s ease;
     cursor: default;
 }
+
 .chart-morph-artifact:hover {
     box-shadow: 0 0 60px rgba(255, 0, 255, 0.2), inset 0 0 40px rgba(255, 0, 255, 0.05);
     border-color: rgba(255, 0, 255, 0.5);
 }
+
 .chart-morph-canvas {
     width: 100%;
     height: 100%;
     display: block;
     border-radius: 50%;
 }
+
 .chart-hud-frame {
     position: absolute;
-    top: 8%; left: 8%;
-    width: 84%; height: 84%;
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
     border-radius: 50%;
     border: 1px dashed rgba(255, 0, 255, 0.12);
     pointer-events: none;
 }
+
 .chart-type-label {
     position: absolute;
     bottom: 12%;
@@ -775,11 +918,14 @@ body {
     transform: rotateX(60deg) rotateY(-20deg);
     transition: transform 0.6s ease;
 }
+
 .orbital-system:hover {
     transform: rotateX(55deg) rotateY(-15deg);
 }
+
 .orbital-core {
-    width: 28%; height: 28%;
+    width: 28%;
+    height: 28%;
     border-radius: 50%;
     background: radial-gradient(circle, var(--cyan), #004455);
     box-shadow: 0 0 40px var(--cyan), 0 0 80px rgba(0, 255, 255, 0.3), inset 0 0 20px var(--white);
@@ -789,6 +935,7 @@ body {
     justify-content: center;
     z-index: 10;
 }
+
 .orbital-core span {
     font-family: monospace;
     font-size: 1.4rem;
@@ -797,22 +944,50 @@ body {
     text-shadow: 0 0 10px var(--cyan);
     transform: rotateX(-60deg) rotateY(20deg);
 }
+
 .orbit-path {
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     border: 1px solid rgba(0, 255, 150, 0.2);
 }
-.r1 { width: 55%; height: 55%; animation: orbitSpin 10s infinite linear; }
-.r2 { width: 72%; height: 72%; animation: orbitSpin 15s infinite linear reverse; border-color: rgba(0, 255, 255, 0.2); }
-.r3 { width: 89%; height: 89%; animation: orbitSpin 20s infinite linear; }
-.r4 { width: 106%; height: 106%; border: 1px dashed rgba(255, 0, 255, 0.2); animation: orbitSpin 25s infinite linear reverse; }
-.orbital-system:hover .orbit-path { animation-duration: 30s; }
+
+.r1 {
+    width: 55%;
+    height: 55%;
+    animation: orbitSpin 10s infinite linear;
+}
+
+.r2 {
+    width: 72%;
+    height: 72%;
+    animation: orbitSpin 15s infinite linear reverse;
+    border-color: rgba(0, 255, 255, 0.2);
+}
+
+.r3 {
+    width: 89%;
+    height: 89%;
+    animation: orbitSpin 20s infinite linear;
+}
+
+.r4 {
+    width: 106%;
+    height: 106%;
+    border: 1px dashed rgba(255, 0, 255, 0.2);
+    animation: orbitSpin 25s infinite linear reverse;
+}
+
+.orbital-system:hover .orbit-path {
+    animation-duration: 30s;
+}
 
 .orbit-node {
     position: absolute;
-    top: -12px; left: 50%;
+    top: -12px;
+    left: 50%;
     transform: translateX(-50%);
     min-width: 32px;
     height: 24px;
@@ -822,6 +997,7 @@ body {
     justify-content: center;
     padding: 0 8px;
 }
+
 .orbit-node span {
     font-family: monospace;
     font-size: 0.55rem;
@@ -831,20 +1007,74 @@ body {
     transform: rotateX(-60deg) rotateY(20deg);
     text-shadow: 0 0 8px currentColor;
 }
-.n1 { background: rgba(0, 255, 170, 0.25); border: 1px solid #00ffaa; color: #00ffaa; box-shadow: 0 0 12px rgba(0, 255, 170, 0.3); }
-.n2 { background: rgba(0, 255, 255, 0.25); border: 1px solid var(--cyan); color: var(--cyan); box-shadow: 0 0 12px rgba(0, 255, 255, 0.3); top: 50%; left: -18px; transform: translateY(-50%); }
-.n3 { background: rgba(255, 255, 255, 0.2); border: 1px solid var(--white); color: var(--white); box-shadow: 0 0 12px rgba(255, 255, 255, 0.3); top: auto; bottom: -12px; }
-.n4 { background: rgba(255, 0, 255, 0.25); border: 1px solid var(--magenta); color: var(--magenta); box-shadow: 0 0 12px rgba(255, 0, 255, 0.3); top: 50%; right: -22px; left: auto; transform: translateY(-50%); }
+
+.n1 {
+    background: rgba(0, 255, 170, 0.25);
+    border: 1px solid #00ffaa;
+    color: #00ffaa;
+    box-shadow: 0 0 12px rgba(0, 255, 170, 0.3);
+}
+
+.n2 {
+    background: rgba(0, 255, 255, 0.25);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+    top: 50%;
+    left: -18px;
+    transform: translateY(-50%);
+}
+
+.n3 {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--white);
+    color: var(--white);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+    top: auto;
+    bottom: -12px;
+}
+
+.n4 {
+    background: rgba(255, 0, 255, 0.25);
+    border: 1px solid var(--magenta);
+    color: var(--magenta);
+    box-shadow: 0 0 12px rgba(255, 0, 255, 0.3);
+    top: 50%;
+    right: -22px;
+    left: auto;
+    transform: translateY(-50%);
+}
 
 .orbit-particles {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
 }
 
-@keyframes corePulse { 0% { transform: scale(0.9); opacity: 0.8; } 100% { transform: scale(1.1); opacity: 1; } }
-@keyframes orbitSpin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes corePulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+@keyframes orbitSpin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
 
 .skill-text {
     flex: 1;
@@ -893,9 +1123,11 @@ body {
 .cyber-chip::before {
     content: '';
     position: absolute;
-    left: 0; top: 50%;
+    left: 0;
+    top: 50%;
     transform: translateY(-50%);
-    width: 15px; height: 1px;
+    width: 15px;
+    height: 1px;
     background: var(--cyan);
     opacity: 0.5;
     transition: all 0.3s ease;
@@ -904,9 +1136,11 @@ body {
 .cyber-chip::after {
     content: '';
     position: absolute;
-    left: 14px; top: 50%;
+    left: 14px;
+    top: 50%;
     transform: translateY(-50%);
-    width: 3px; height: 3px;
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
     background: var(--cyan);
     box-shadow: 0 0 5px var(--cyan);
@@ -934,10 +1168,6 @@ body {
 }
 
 /* --- Phase 4: Projects Section --- */
-#phase4-projects {
-    background: #020008;
-    position: relative;
-}
 
 .project-wrapper {
     position: relative;
@@ -948,10 +1178,13 @@ body {
 
 .diagonal-bg {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: var(--white);
-    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); /* Start hidden */
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    /* Start hidden */
     z-index: 1;
 }
 
@@ -977,7 +1210,7 @@ body {
     color: var(--magenta);
     font-family: var(--font-header);
     letter-spacing: 3px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .proj-info h2 {
@@ -985,14 +1218,46 @@ body {
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 25px;
-    color: var(--bg-dark); /* Dark text for white bg */
+    color: var(--bg-dark);
+    /* Dark text for white bg */
     max-width: 65vw;
 }
 
-.proj-info p {
+/* STAR Text Formatting */
+.star-block {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 65vw;
+}
+
+.star-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding-left: 15px;
+    border-left: 2px solid var(--magenta);
+}
+
+.star-label {
+    font-family: monospace;
     font-size: 1.2rem;
-    line-height: 1.6;
-    color: #333; /* Dark text for white bg */
+    font-weight: bold;
+    color: var(--cyan);
+    background: rgba(0, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    min-width: 32px;
+    text-align: center;
+}
+
+.star-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #222; /* Dark text for the white diagonal bg */
+    margin: 0;
+    padding-top: 2px;
 }
 
 .proj-right {
@@ -1003,26 +1268,30 @@ body {
     justify-content: center;
 }
 
-.constellation-graphic {
+.proj-bg-image {
     position: absolute;
-    width: 80vh;
-    height: 80vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    opacity: 0;
+    filter: brightness(0.2) blur(3px); /* Darkened and slightly blurred to act as pure background */
+    z-index: 0;
+    pointer-events: none;
 }
 
-.c-star.glow {
-    filter: drop-shadow(0 0 10px currentColor);
-}
-
-.holo-card {
+.holo-card.proj-foreground {
     position: absolute;
-    right: 10vw;
-    width: 400px;
-    height: 250px;
+    width: 45vw; /* Responsive width ensures it doesn't clip */
+    max-width: 650px;
+    height: 50vh;
+    max-height: 400px;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(0, 255, 255, 0.3);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 255, 255, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1030,12 +1299,12 @@ body {
     z-index: 20;
 }
 
-.holo-content {
-    color: var(--cyan);
-    font-family: var(--font-header);
-    font-size: 0.9rem;
-    text-align: center;
-    letter-spacing: 2px;
+.holo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px; /* Slightly smaller to fit inside glass border */
+    opacity: 0.9;
 }
 
 .proj-initial-title {
@@ -1051,7 +1320,6 @@ body {
     z-index: 5;
     pointer-events: none;
 }
-
 /* --- Phase 5: Outro Section --- */
 #phase5-outro {
     display: flex;
@@ -1062,17 +1330,20 @@ body {
 
 .aurora-bg {
     position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
     background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(255, 0, 255, 0.15) 0%, rgba(0, 0, 0, 0) 50%);
+        radial-gradient(ellipse at 80% 20%, rgba(255, 0, 255, 0.15) 0%, rgba(0, 0, 0, 0) 50%);
     filter: blur(60px);
     z-index: 1;
 }
 
 .mountains {
     position: absolute;
-    bottom: 0; left: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 30vh;
     z-index: 2;
@@ -1097,6 +1368,7 @@ body {
     margin-bottom: 40px;
     background: linear-gradient(to right, var(--cyan), var(--magenta));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -1125,8 +1397,10 @@ body {
 
 .final-fade {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: var(--bg-dark);
     z-index: 100;
     opacity: 0;

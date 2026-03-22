@@ -14,7 +14,7 @@ requestAnimationFrame(raf);
 // Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
 
-// === Phase 1: Hero Parallax ===
+// --- Phase 1: Hero Parallax ---
 const heroTl = gsap.timeline({
     scrollTrigger: {
         trigger: "#phase1-hero",
@@ -34,7 +34,7 @@ gsap.to(".rocket-wrapper", { x: "-85vw", y: "-85vh", duration: 20, repeat: -1, y
 gsap.to(".rocket-wrapper svg", { x: "random(-1, 1)", y: "random(-1, 1)", duration: 0.05, repeat: -1, yoyo: true, ease: "none" });
 gsap.to(".debris", { y: "random(-100, 100)", x: "random(-50, 50)", rotation: "random(-180, 180)", duration: "random(10, 20)", repeat: -1, yoyo: true, ease: "sine.inOut" });
 
-// === Phase 2: Education Dossier ===
+// --- Phase 2: Education Dossier ---
 // Phase 1: Entrance scrub (heading fades/scales in as section scrolls into view)
 const eduHeading = document.querySelector(".edu-heading-wrapper");
 if (eduHeading) {
@@ -136,7 +136,7 @@ if (dossierCards.length) {
     });
 }
 
-// === Phase 3: Skills Sequence ===
+// --- Phase 3: Skills Sequence ---
 const slides = gsap.utils.toArray(".skill-slide");
 const hudWrapper = document.querySelector(".skills-hud-wrapper");
 const hudBrackets = document.querySelectorAll(".hud-brackets div");
@@ -242,29 +242,47 @@ slides.forEach((slide, i) => {
     }
 });
 
-// === Phase 4: Projects Showcase ===
+// --- Phase 4: Projects Showcase ---
+// --- Phase 4: Projects Showcase ---
 const projects = gsap.utils.toArray(".project-wrapper");
 projects.forEach((proj, i) => {
-    const constGraphic = proj.querySelector(".constellation-graphic");
+    const bgImage = proj.querySelector(".proj-bg-image");
+    const foregroundCard = proj.querySelector(".holo-card.proj-foreground");
     const initialTitle = proj.querySelector(".proj-initial-title");
     const leftInfo = proj.querySelector(".proj-left");
-    const holoCard = proj.querySelector(".holo-card");
     const diagonalBg = proj.querySelector(".diagonal-bg");
-    const stars = constGraphic.querySelectorAll(".c-star");
 
-    gsap.set(constGraphic, { left: "0%", top: "50%", xPercent: -50, yPercent: -50, scale: 1.8, filter: "blur(15px)", opacity: 0 });
-    gsap.set(initialTitle, { y: 100, opacity: 0, filter: "blur(10px)" });
-    gsap.set(stars, { scale: 0, opacity: 0 });
+    // Initial states
+    // Foreground card is inside .proj-right (which starts at 50vw). 
+    // `left: "0%"` centers it precisely overlaying the middle of the screen.
+    gsap.set(foregroundCard, { left: "0%", top: "50%", xPercent: -50, yPercent: -50, opacity: 0, scale: 1.15, filter: "blur(10px)" });
+    gsap.set(bgImage, { opacity: 0, scale: 1.1 }); // Background starts slightly scaled up
+    // Title is initially hidden below
+    gsap.set(initialTitle, { y: 100, opacity: 0, filter: "blur(10px)", zIndex: 30 }); // Make sure title is above the card
 
-    const projTl = gsap.timeline({ scrollTrigger: { trigger: proj, start: "top top", end: "+=250%", pin: true, scrub: 1 } });
-    projTl.to(constGraphic, { opacity: 1, filter: "blur(0px)", scale: 1.5, duration: 1.5, ease: "power4.out" })
-          .to(stars, { scale: 1, opacity: 1, stagger: 0.1, duration: 1, ease: "back.out(2)" }, "-=1")
-          .to(initialTitle, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1 }, "-=0.5")
-          .to(initialTitle, { opacity: 0, y: -100, scale: 1.2, filter: "blur(15px)", duration: 1, ease: "power2.in" })
-          .to(diagonalBg, { clipPath: "polygon(0% 0%, 75% 0%, 55% 100%, 0% 100%)", duration: 1.5, ease: "expo.inOut" }, "-=0.8")
-          .to(constGraphic, { left: "70%", top: "50%", scale: 0.8, rotation: 12, duration: 2, ease: "power4.inOut" }, "-=1.5")
-          .to(leftInfo, { opacity: 1, x: 0, duration: 1.5, ease: "expo.out" }, "-=1")
-          .to(holoCard, { opacity: 1, x: 0, duration: 1.5, ease: "expo.out" }, "-=1.2")
+    const projTl = gsap.timeline({ scrollTrigger: { trigger: proj, start: "top top", end: "+=300%", pin: true, scrub: 1 } });
+
+    // Phase A: Intro (Background, Card, and Title all fade in simultaneously)
+    projTl.to(bgImage, { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" })
+          .to(foregroundCard, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 1.5, ease: "power2.out" }, "-=1.5")
+          .to(initialTitle, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.5, ease: "power2.out" }, "-=1.2")
+          
+          .to({}, { duration: 1 }) // Hold Intro Phase for a beat
+
+          // Phase B: Title exits
+          .to(initialTitle, { opacity: 0, y: -50, scale: 1.1, filter: "blur(10px)", duration: 1, ease: "power2.in" })
+          
+          // Phase C: Foreground Card shrinks slightly and smoothly docks to the right side
+          // `left: 50%` places it cleanly in the center of the right half container
+          .to(foregroundCard, { left: "50%", scale: 0.9, duration: 2, ease: "power4.inOut" }, "-=0.5")
+          
+          // Phase C (concurrent): Diagonal cuts in to hide left side of background
+          .to(diagonalBg, { clipPath: "polygon(0% 0%, 75% 0%, 55% 100%, 0% 100%)", duration: 1.5, ease: "expo.inOut" }, "-=1.5")
+          
+          // Phase D: Project STAR Info slides in on the left half
+          .to(leftInfo, { opacity: 1, x: 0, duration: 1.5, ease: "expo.out" }, "-=1.2")
+          
+          // Phase E: Hold layout
           .to({}, { duration: 2 });
 });
 
@@ -272,7 +290,7 @@ window.addEventListener('load', () => {
     ScrollTrigger.refresh();
 });
 
-// === Phase 5: Outro ===
+// --- Phase 5: Outro ---
 const outroTl = gsap.timeline({ scrollTrigger: { trigger: "#phase5-outro", start: "top bottom", end: "bottom bottom", scrub: true } });
 outroTl.from(".aurora-bg", { opacity: 0, scale: 1.5, filter: "blur(100px)", duration: 2 })
        .from(".mountains", { y: 200, ease: "power2.out" }, 0.5)
@@ -448,6 +466,7 @@ if (closeAbout) {
         .to(aboutOverlay, { opacity: 0, duration: 0.4 }, "-=0.4");
     });
 }
+
 // --- Neural Cosmos Redesign Logic ---
 
 // 1. Starfield Background
