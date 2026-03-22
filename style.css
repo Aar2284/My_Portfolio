@@ -1619,3 +1619,92 @@ body {
 }
 
 .live-readout { position: absolute; bottom: 10%; right: 0; font-family: monospace; font-size: 0.7rem; color: var(--cyan); opacity: 0.6; }
+
+/* =========================================
+   MOBILE & TABLET RESCUE (STACKING OVERRIDE)
+   ========================================= */
+@media (max-width: 850px) {
+    /* 1. Fix About Me (HUD) Stacking */
+    .hud-main {
+        grid-template-columns: 1fr !important; /* Forces 1 single column */
+        gap: 20px !important;
+        padding-top: 60px; /* Clears the UFO button */
+    }
+    .hud-left {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .vertical-title {
+        writing-mode: horizontal-tb; /* Flips ABOUT ME to normal text */
+        transform: none;
+        border-left: none;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        padding-bottom: 10px;
+    }
+    .hud-center {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        padding-bottom: 20px;
+    }
+
+    /* 2. Fix Education (Dossier) Crushing */
+    .dossier-body {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px !important;
+        gap: 20px;
+    }
+    .dossier-meta {
+        border-left: none;
+        border-top: 2px solid var(--magenta);
+        padding-top: 10px;
+        padding-left: 0;
+    }
+    .dossier-inner {
+        width: 95% !important;
+        height: auto !important;
+    }
+
+    /* 3. Fix Skills Stacking */
+    .skill-slide {
+        flex-direction: column;
+        gap: 5vh !important;
+        text-align: center;
+    }
+    .skill-text {
+        padding-right: 0 !important;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .chip-container {
+        justify-content: center;
+    }
+
+    /* 4. Fix Projects Stacking */
+    .proj-layout {
+        flex-direction: column;
+    }
+    .proj-left {
+        padding: 20px;
+        max-width: 100%;
+        text-align: center;
+    }
+    .star-block, .proj-info h2 {
+        max-width: 100% !important;
+    }
+    .star-item {
+        text-align: left; /* Keeps the text readable */
+    }
+    .holo-card.proj-foreground {
+        width: 90vw !important;
+        height: 30vh !important;
+        position: relative !important; /* Stops it from flying off screen */
+        left: 0 !important;
+        transform: none !important;
+        margin: 0 auto;
+    }
+}
