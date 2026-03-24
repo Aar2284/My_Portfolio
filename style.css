@@ -29,6 +29,73 @@ body {
     overflow: hidden;
 }
 
+/* --- Navbar --- */
+
+/* --- Space Navigation Bar --- */
+.space-nav {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999; /* Keeps it above the neural canvas and stars */
+    background: rgba(10, 0, 26, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    border-radius: 50px;
+    padding: 12px 35px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.space-nav:hover {
+    background: rgba(10, 0, 26, 0.7);
+    border-color: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-sub, monospace); /* Falls back to monospace if variable is missing */
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #00ffff; /* Your Cyan color */
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+/* Mobile Responsiveness: Hide text, maybe replace with a hamburger menu later, or just scale down */
+@media (max-width: 768px) {
+    .space-nav {
+        width: 90%;
+        padding: 10px 15px;
+        top: 15px;
+    }
+    .nav-links {
+        gap: 15px;
+        justify-content: space-around;
+        width: 100%;
+    }
+    .nav-link {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
+}
+
 /* --- Phase 1: Hero Section --- */
 #phase1-hero {
     background: radial-gradient(circle at 50% 50%, #1a0033 0%, var(--bg-dark) 100%);
@@ -1413,8 +1480,484 @@ a.social-icon.linkedin:hover i {
     z-index: 5;
     pointer-events: none;
 }
-/* --- Phase 5: Outro Section --- */
-#phase5-outro {
+
+/* --- Phase 5: Certifications (Nebula Pulse) --- */
+#phase5-certifications {
+    background: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+}
+
+/* Fluid Organic Background - BOOSTED OPACITY */
+.nebula-fluid-bg {
+    position: absolute;
+    top: -20%; left: -20%; width: 140%; height: 140%;
+    /* Increased the opacity from 0.05 to 0.15 so you can see it */
+    background: radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 40%);
+    filter: blur(50px);
+    z-index: 0;
+    animation: nebulaDrift 15s infinite alternate ease-in-out;
+}
+
+@keyframes nebulaDrift {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-3%, 4%) scale(1.05); }
+}
+
+/* The Horizontal Activating Wave */
+.nebula-pulse-wave {
+    position: absolute;
+    top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.08), transparent);
+    transform: skewX(-20deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cert-container {
+    position: relative;
+    z-index: 5;
+    width: 90%;
+    max-width: 1400px;
+    padding: 10vh 0;
+}
+
+/* Heading */
+.cert-heading-wrapper {
+    position: relative;
+    margin-bottom: 60px;
+    text-align: center;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cert-main-title {
+    font-family: var(--font-header);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: rgba(255, 255, 255, 0.05); /* Very dim */
+    letter-spacing: 0.2em;
+    margin: 0;
+}
+
+.cert-heading-sweep {
+    position: absolute;
+    top: 0; left: 0; width: 0%; height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.cert-heading-sweep::before {
+    content: "TRAINING & CERTIFICATIONS";
+    position: absolute;
+    top: 0; left: 0;
+    font-family: var(--font-header);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+/* --- Card Grid & Design (Matching Reference Image) --- */
+.cert-grid {
+    display: grid;
+    /* Allows cards to fit nicely, adjusting size based on screen */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.cert-card {
+    position: relative;
+    height: 450px;
+    border-radius: 25px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* GSAP Starting States */
+    opacity: 0;
+    transform: translateY(60px); 
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.cert-card:hover {
+    transform: translateY(-10px) !important; /* Overrides GSAP after animation */
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* The Background Image */
+.cert-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: grayscale(80%) brightness(0.7); /* Darkens image */
+    transition: filter 0.4s ease, transform 0.6s ease;
+}
+
+.cert-card:hover .cert-img {
+    filter: grayscale(0%) brightness(0.9);
+    transform: scale(1.05);
+}
+
+/* The Dark Gradient Overlay */
+.cert-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(10,0,26,0.8) 0%, rgba(10,0,26,0.3) 40%, rgba(10,0,26,0.95) 100%);
+    z-index: 2;
+}
+
+/* Top Bar (Tag & Arrow) */
+.cert-top-bar {
+    position: absolute;
+    top: 25px; left: 25px; right: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 3;
+}
+
+.cert-tag {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 1px;
+    line-height: 1.4;
+}
+
+.cert-arrow {
+    width: 40px; height: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.cert-card:hover .cert-arrow {
+    background: var(--cyan);
+    color: var(--bg-dark);
+}
+
+/* Bottom Content */
+.cert-content {
+    position: absolute;
+    bottom: 30px; left: 30px; right: 30px;
+    z-index: 3;
+}
+
+.cert-name {
+    font-family: var(--font-sub);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* --- Certifications Section --- */
+#certifications-section {
+    background-color: var(--bg-dark); /* Forces solid background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.nebula-fluid-bg {
+    position: absolute;
+    top: -20%; left: -20%; width: 140%; height: 140%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 40%);
+    filter: blur(50px);
+    z-index: 0;
+    animation: nebulaDrift 15s infinite alternate ease-in-out;
+}
+
+@keyframes nebulaDrift {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-3%, 4%) scale(1.05); }
+}
+
+.cert-container {
+    position: relative;
+    z-index: 5;
+    width: 90%;
+    max-width: 1400px;
+    padding: 10vh 0;
+}
+
+.cert-heading-wrapper {
+    position: relative;
+    margin-bottom: 60px;
+    text-align: center;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cert-main-title {
+    font-family: var(--font-header);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: rgba(255, 255, 255, 0.05);
+    letter-spacing: 0.2em;
+    margin: 0;
+}
+
+.cert-heading-sweep {
+    position: absolute;
+    top: 0; left: 0; width: 0%; height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.cert-heading-sweep::before {
+    content: "TRAINING & CERTIFICATIONS";
+    position: absolute;
+    top: 0; left: 0;
+    font-family: var(--font-header);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--white);
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.cert-card {
+    position: relative;
+    height: 450px;
+    border-radius: 25px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* REMOVED opacity: 0 AND transform! GSAP will handle this now. */
+    transition: border-color 0.4s ease;
+}
+
+.cert-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.cert-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: grayscale(80%) brightness(0.7);
+    transition: filter 0.4s ease, transform 0.6s ease;
+}
+
+.cert-card:hover .cert-img {
+    filter: grayscale(0%) brightness(0.9);
+    transform: scale(1.05);
+}
+
+.cert-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(10,0,26,0.8) 0%, rgba(10,0,26,0.3) 40%, rgba(10,0,26,0.95) 100%);
+    z-index: 2;
+}
+
+.cert-top-bar {
+    position: absolute;
+    top: 25px; left: 25px; right: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 3;
+}
+
+.cert-tag {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 1px;
+    line-height: 1.4;
+}
+
+.cert-arrow {
+    width: 40px; height: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.cert-card:hover .cert-arrow {
+    background: var(--cyan);
+    color: var(--bg-dark);
+}
+
+.cert-content {
+    position: absolute;
+    bottom: 30px; left: 30px; right: 30px;
+    z-index: 3;
+}
+
+.cert-name {
+    font-family: var(--font-sub);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* --- Make cards clickable --- */
+.cert-card {
+    cursor: pointer;
+}
+
+/* --- Certification Modal Styles --- */
+.cert-modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden; 
+    opacity: 0;
+}
+
+.cert-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 0, 15, 0.8); 
+    backdrop-filter: blur(15px); 
+}
+
+.cert-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    background: #0a0512;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    transform: scale(0.95) translateY(20px);
+}
+
+.cert-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.3s, color 0.3s;
+}
+
+.cert-modal-close:hover {
+    background: var(--cyan);
+    color: var(--bg-dark);
+}
+
+/* Layout: Split 50/50 */
+.cert-modal-left {
+    flex: 1;
+    background: #11081f;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cert-modal-left img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.cert-modal-right {
+    flex: 1;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Typography inside Modal */
+.modal-title {
+    font-family: var(--font-sub);
+    font-size: 2.2rem;
+    color: var(--white);
+    margin: 20px 0;
+    line-height: 1.2;
+}
+
+.modal-desc {
+    font-family: sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cert-modal-content {
+        flex-direction: column;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .cert-modal-left {
+        padding: 30px;
+    }
+    .cert-modal-right {
+        padding: 40px 30px;
+    }
+}
+
+/* --- Phase 6: Outro Section --- */
+#phase6-outro {
     display: flex;
     flex-direction: column;
     align-items: center;

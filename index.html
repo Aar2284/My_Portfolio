@@ -98,6 +98,17 @@
         </div>
     </div>
 
+    <!-- Navbar-->
+    <nav class="space-nav">
+        <ul class="nav-links">
+            <li><a href="#phase2-education" class="nav-link">Education</a></li>
+            <li><a href="#phase3-skills" class="nav-link">Skills</a></li>
+            <li><a href="#phase4-projects" class="nav-link">Projects</a></li>
+            <li><a href="#certifications-section" class="nav-link">Certifications</a></li>
+            <li><a href="#phase6-outro" class="nav-link">Socials</a></li>
+        </ul>
+    </nav>
+
     <div id="smooth-wrapper">
         <div id="smooth-content">
 
@@ -550,8 +561,71 @@
                 </div>
             </section>
 
-            <!-- Phase 5: Outro -->
-            <section id="phase5-outro" class="scene">
+            <!-- Phase 5: TRAINING & CERTIFICATIONS -->
+            <section id="phase5-certifications" class="scene">
+                <div class="nebula-fluid-bg"></div>
+                <div class="nebula-pulse-wave"></div>
+
+                <div class="cert-container">
+                    <div class="cert-heading-wrapper">
+                        <h2 class="cert-main-title">TRAINING & CERTIFICATIONS</h2>
+                        <div class="cert-heading-sweep"></div>
+                    </div>
+
+                    <div class="cert-grid">
+                        <div class="cert-card" data-description="Intensive bootcamp covering advanced PL/SQL querying, database management, and foundational data science principles for complex data manipulation and analysis.">
+                            <img src="assets/certification/cert1.png" alt="Certificate 1" class="cert-img">
+                            <div class="cert-overlay"></div>
+                            <div class="cert-top-bar">
+                                <span class="cert-tag">TRAINING |<br>LPU PROFESSIONAL ENHANCEMENT</span>
+                                <div class="cert-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-name">CODE QUERY: THE ULTIMATE PL/SQL & DATA SCIENCE BOOTCAMP</h3>
+                            </div>
+                        </div>
+
+                        <div class="cert-card" data-description="Practical training on leveraging no-code platforms to rapidly prototype, build, and deploy Generative AI applications and intelligent business solutions.">
+                            <img src="assets/certification/cert2.png" alt="Certificate 2" class="cert-img">
+                            <div class="cert-overlay"></div>
+                            <div class="cert-top-bar">
+                                <span class="cert-tag">TRAINING |<br>INFOSYS SPRINGBOARD</span>
+                                <div class="cert-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-name">BUILD GENERATIVE AI APPS AND SOLUTIONS WITH NO-CODE TOOLS</h3>
+                            </div>
+                        </div>
+
+                        <div class="cert-card" data-description="Comprehensive study of digital privacy protocols, security vulnerabilities, and threat mitigation strategies within modern online social media networks.">
+                            <img src="assets/certification/cert3.png" alt="Certificate 3" class="cert-img">
+                            <div class="cert-overlay"></div>
+                            <div class="cert-top-bar">
+                                <span class="cert-tag">CERTIFICATE |<br>NPTEL</span>
+                                <div class="cert-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-name">PRIVACY and SECURITY in ONLINE SOCIAL MEDIA</h3>
+                            </div>
+                        </div>
+
+                        <div class="cert-card" data-description="Hands-on certification focusing on transforming raw data into interactive dashboards, complex visual reports, and actionable business intelligence.">
+                            <img src="assets/certification/cert4.png" alt="Certificate 4" class="cert-img">
+                            <div class="cert-overlay"></div>
+                            <div class="cert-top-bar">
+                                <span class="cert-tag">CERTIFICATE |<br>CODING NINJAS</span>
+                                <div class="cert-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-name">DATA VISUALIZATION with POWER BI</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 6: Outro -->
+            <section id="phase6-outro" class="scene">
                 <div class="aurora-bg"></div>
                 <div class="mountains">
                     <svg viewBox="0 0 1000 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -615,7 +689,24 @@
 
         </div>
     </div>
-
+    <div id="cert-modal" class="cert-modal-wrapper">
+        <div class="cert-modal-backdrop"></div>
+        <div class="cert-modal-content">
+            <button class="cert-modal-close">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+            </button>
+            
+            <div class="cert-modal-left">
+                <img src="" alt="Certificate Full View" id="modal-cert-img">
+            </div>
+            
+            <div class="cert-modal-right">
+                <span id="modal-cert-tag" class="cert-tag"></span>
+                <h2 id="modal-cert-title" class="modal-title"></h2>
+                <p id="modal-cert-desc" class="modal-desc"></p>
+            </div>
+        </div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>

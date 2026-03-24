@@ -14,6 +14,38 @@ requestAnimationFrame(raf);
 // Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
 
+// ==========================================
+// NAVIGATION BAR LOGIC (Lenis Integration)
+// ==========================================
+const initNavigation = () => {
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Stop the instant, jumpy HTML scroll
+            
+            const targetId = link.getAttribute('href');
+            
+            // Tell Lenis to smoothly pilot us to the target ID
+            if (typeof lenis !== 'undefined') {
+                lenis.scrollTo(targetId, {
+                    duration: 1.5, // How long the travel takes
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Buttery smooth easing
+                    offset: 0 // Adjust this if you need it to stop slightly higher or lower
+                });
+            } else {
+                // Emergency fallback just in case Lenis fails
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+};
+
+// Add this to your main load listener alongside your other init functions
+window.addEventListener('load', () => {
+    initNavigation();
+});
+
 // --- Phase 1: Hero Parallax ---
 const heroTl = gsap.timeline({
     scrollTrigger: {
@@ -243,7 +275,6 @@ slides.forEach((slide, i) => {
 });
 
 // --- Phase 4: Projects Showcase ---
-// --- Phase 4: Projects Showcase ---
 const projects = gsap.utils.toArray(".project-wrapper");
 projects.forEach((proj, i) => {
     const bgImage = proj.querySelector(".proj-bg-image");
@@ -290,15 +321,157 @@ window.addEventListener('load', () => {
     ScrollTrigger.refresh();
 });
 
-// --- Phase 5: Outro ---
-const outroTl = gsap.timeline({ scrollTrigger: { trigger: "#phase5-outro", start: "top bottom", end: "bottom bottom", scrub: true } });
-outroTl.from(".aurora-bg", { opacity: 0, scale: 1.5, filter: "blur(100px)", duration: 2 })
-       .from(".mountains", { y: 200, ease: "power2.out" }, 0.5)
-       .from(".outro-content h2", { scale: 0.5, filter: "blur(20px)", opacity: 0, duration: 1.5, ease: "expo.out" }, 1)
-       .from(".outro-links a", { y: 50, opacity: 0, stagger: 0.2, duration: 1, ease: "back.out(1.7)" }, 1.5);
+// --- Phase 5: Certifications Animation (Pinned Impact Version) ---
+const initCertifications = () => {
+    const certSection = document.querySelector("#certifications-section") || document.querySelector("#phase5-certifications");
+    
+    if (!certSection) return;
 
-gsap.to(".final-fade", { scrollTrigger: { trigger: "#phase5-outro", start: "90% top", end: "bottom top", scrub: true }, opacity: 1, ease: "none" });
+    const certCards = gsap.utils.toArray(certSection.querySelectorAll(".cert-card"));
+    const headingSweep = certSection.querySelector(".cert-heading-sweep");
 
+    // Force visibility and initial hidden states for the cards
+    gsap.set(certSection, { autoAlpha: 1 });
+    gsap.set(certCards, { y: 150, opacity: 0, scale: 0.8 }); // Start lower and smaller
+
+    // Create a master timeline that PINS the section
+    const certTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: certSection,
+            start: "top top", // Pin exactly when it hits the top of the screen
+            end: "+=150%",    // Keep it pinned for 1.5x the height of the screen (the "1-2 scrolls" impact)
+            pin: true,        // Locks it in place
+            scrub: 1          // Ties the animation progress to your mouse wheel
+        }
+    });
+
+    // Step 1: Sweep the heading in
+    if (headingSweep) {
+        certTl.fromTo(headingSweep, 
+            { width: "0%" }, 
+            { width: "100%", duration: 1, ease: "none" }
+        );
+    }
+
+    // Step 2: Cards glide up elegantly while pinned
+    if (certCards.length > 0) {
+        certTl.to(certCards, {
+            y: 0, 
+            opacity: 1, 
+            scale: 1, 
+            stagger: 0.2, // Cascades them in one by one
+            duration: 1.5,
+            ease: "power2.out"
+        }, "-=0.5"); // Starts slightly before the heading finishes
+    }
+
+    certTl.to({}, { duration: 0.8 }); 
+};
+
+// Ensure it's called after everything else loads
+window.addEventListener('load', () => {
+    initCertifications();
+    ScrollTrigger.refresh(); // Crucial: recalculates layouts for the newly pinned section
+});
+
+// ==========================================
+// CERTIFICATION MODAL LOGIC
+// ==========================================
+const initCertModal = () => {
+    const cards = document.querySelectorAll('.cert-card');
+    const modalWrapper = document.getElementById('cert-modal');
+    if (!cards.length || !modalWrapper) return;
+
+    const closeBtn = modalWrapper.querySelector('.cert-modal-close');
+    const backdrop = modalWrapper.querySelector('.cert-modal-backdrop');
+    
+    // Elements to populate
+    const modalImg = document.getElementById('modal-cert-img');
+    const modalTag = document.getElementById('modal-cert-tag');
+    const modalTitle = document.getElementById('modal-cert-title');
+    const modalDesc = document.getElementById('modal-cert-desc');
+
+    // Create a reusable GSAP timeline for the modal
+    const modalTl = gsap.timeline({ paused: true, reversed: true })
+        .to(modalWrapper, { autoAlpha: 1, duration: 0.3 })
+        .to('.cert-modal-content', { scale: 1, y: 0, duration: 0.4, ease: "back.out(1.2)" }, "-=0.2");
+
+    // Open Modal Function
+    const openModal = (card) => {
+        // 1. Extract data from the clicked card
+        const imgSrc = card.querySelector('.cert-img').src;
+        const tagHTML = card.querySelector('.cert-tag').innerHTML;
+        const titleText = card.querySelector('.cert-name').innerText;
+        const descText = card.getAttribute('data-description');
+
+        // 2. Populate the modal
+        modalImg.src = imgSrc;
+        modalTag.innerHTML = tagHTML;
+        modalTitle.innerText = titleText;
+        modalDesc.innerText = descText;
+
+        // 3. Pause Lenis smooth scrolling
+        if (typeof lenis !== 'undefined') {
+            lenis.stop();
+        } else {
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        // 4. Play the animation
+        modalTl.play();
+    };
+
+    // Close Modal Function
+    const closeModal = () => {
+        modalTl.reverse().then(() => {
+            // Restart Lenis scrolling
+            if (typeof lenis !== 'undefined') {
+                lenis.start();
+            } else {
+                document.body.style.overflow = ''; 
+            }
+            modalImg.src = ''; 
+        });
+    };
+
+    // Attach Event Listeners
+    cards.forEach(card => {
+        card.addEventListener('click', () => openModal(card));
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal); 
+};
+
+// Initialize the modal interaction
+window.addEventListener('load', () => {
+    initCertModal();
+});
+
+// --- Phase 6: Outro (Cleaned & Bulletproof) ---
+const outroSection = document.querySelector("#phase6-outro") || document.querySelector("#phase5-outro");
+
+if (outroSection) {
+    // 1. Force the section and contact form to be fully visible
+    gsap.set(outroSection, { autoAlpha: 1, opacity: 1 });
+    gsap.set(".contact-container", { autoAlpha: 1, opacity: 1 }); 
+
+    const outroTl = gsap.timeline({ 
+        scrollTrigger: { 
+            trigger: outroSection, 
+            start: "top bottom", 
+            end: "bottom bottom", 
+            scrub: true 
+        } 
+    });
+
+    // 2. Play the entrance animations (aurora, mountains, text)
+    outroTl.from(".aurora-bg", { opacity: 0, scale: 1.5, filter: "blur(100px)", duration: 2 })
+           .from(".mountains", { y: 200, ease: "power2.out" }, 0.5)
+           .from(".outro-content h2", { scale: 0.5, filter: "blur(20px)", opacity: 0, duration: 1.5, ease: "expo.out" }, 1)
+           .from(".outro-links a", { y: 50, opacity: 0, stagger: 0.2, duration: 1, ease: "back.out(1.7)" }, 1.5);
+
+}
 // --- Cinematic About Me HUD Logic (V4) ---
 const aboutBtn = document.querySelector('.hero-cta.secondary');
 const aboutOverlay = document.getElementById('about-overlay');
