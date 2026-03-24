@@ -216,7 +216,7 @@ const nebulaColors = [
 // Hold at center
 skillsTl.to({}, { duration: 6 }) 
         .to(hudWrapper, { 
-            y: "-52vh", 
+            y: "-42vh", 
             scale: 0.5, 
             backgroundColor: "rgba(0, 255, 255, 0.08)",
             backdropFilter: "blur(15px)",
