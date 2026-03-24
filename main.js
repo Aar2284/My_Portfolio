@@ -198,7 +198,7 @@ const skillsTl = gsap.timeline({
     scrollTrigger: { 
         trigger: "#phase3-skills", 
         start: "top top", 
-        end: "+=1200%", 
+        end: "+=1500%", 
         pin: true, 
         scrub: 1 
     }
@@ -210,7 +210,8 @@ const nebulaColors = [
     { c1: "rgba(75, 0, 130, 0.15)", c2: "rgba(0, 255, 255, 0.15)" }, // Indigo + Electric Cyan
     { c1: "rgba(0, 128, 128, 0.15)", c2: "rgba(255, 191, 0, 0.15)" },  // Teal + Gold Amber
     { c1: "rgba(255, 0, 255, 0.15)", c2: "rgba(255, 105, 180, 0.15)" },// Magenta + Warm Pink
-    { c1: "rgba(80, 200, 120, 0.15)", c2: "rgba(57, 255, 20, 0.15)" }  // Emerald + Neon Green
+    { c1: "rgba(80, 200, 120, 0.15)", c2: "rgba(57, 255, 20, 0.15)" }, // Emerald + Neon Green
+    { c1: "rgba(255, 69, 0, 0.15)", c2: "rgba(255, 215, 0, 0.15)" }    // Slide 5: Warm Orange + Gold
 ];
 
 // Hold at center
@@ -1209,3 +1210,95 @@ function initChartMorph() {
 }
 initChartMorph();
 
+// ===== 5. Synergy Matrix (Soft Skills Visualizer - GAP FIXED) =====
+function initSoftSkillsCanvas() {
+    const canvas = document.querySelector('.soft-skills-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    // REDUCED SIZE from 400 to 260 to remove the massive gap!
+    let size = 260; 
+    canvas.width = size;
+    canvas.height = size;
+    
+    let nodes = [];
+    const numNodes = 6;
+    const radius = size * 0.42; // Adjusted ratio to fill the smaller box perfectly
+    const cx = size / 2, cy = size / 2;
+    
+    // Initialize nodes in a hexagonal pattern
+    for(let i=0; i<numNodes; i++) {
+        let angle = (i / numNodes) * Math.PI * 2;
+        nodes.push({
+            baseX: cx + Math.cos(angle) * radius,
+            baseY: cy + Math.sin(angle) * radius,
+            x: cx + Math.cos(angle) * radius,
+            y: cy + Math.sin(angle) * radius,
+            pulse: Math.random() * Math.PI * 2 
+        });
+    }
+
+    function render() {
+        ctx.clearRect(0, 0, size, size);
+        
+        // 1. Draw connecting lines between all outer nodes
+        ctx.strokeStyle = 'rgba(255, 105, 180, 0.15)'; 
+        ctx.lineWidth = 1;
+        for(let i=0; i<numNodes; i++) {
+            for(let j=i+1; j<numNodes; j++) {
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+            }
+        }
+
+        // 2. Draw connections to the center hub
+        ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)'; 
+        ctx.lineWidth = 1.5;
+        nodes.forEach(n => {
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(n.x, n.y);
+            ctx.stroke();
+        });
+
+        // 3. Draw and animate the nodes
+        nodes.forEach(n => {
+            n.pulse += 0.03;
+            n.x = n.baseX + Math.cos(n.pulse) * 8; // Tighter wobble
+            n.y = n.baseY + Math.sin(n.pulse) * 8;
+            
+            let glow = 8 + Math.sin(n.pulse) * 8;
+            
+            ctx.shadowColor = '#ff69b4';
+            ctx.shadowBlur = glow;
+            ctx.fillStyle = '#ff69b4';
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0; 
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // 4. Central Hub
+        ctx.shadowColor = '#00ffff';
+        ctx.shadowBlur = 15 + Math.sin(nodes[0].pulse) * 8;
+        ctx.strokeStyle = 'rgba(0, 255, 255, 0.8)';
+        ctx.fillStyle = 'rgba(0, 200, 255, 0.2)';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 12, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        requestAnimationFrame(render);
+    }
+    render();
+}
+// Initialize it!
+initSoftSkillsCanvas();
