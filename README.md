@@ -109,7 +109,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ---
 
 <div align="center">
-  <p>System Status: <b>Online</b> | Created with 💙 by Aaryan Kalia</p>
+  <p>System Status: <b><a href="https://aaryan-kalia-portfolio.vercel.app/">Online</a></b> | Created with 💙 by Aaryan Kalia</p>
   <a href="https://github.com/Aar2284">
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />
   </a>
