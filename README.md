@@ -1,9 +1,12 @@
 <h1 align="center">🌌 Aaryan Kalia | Immersive Portfolio 🚀</h1>
 
 <p align="center">
+<p><h2>Languages Used</h2></p>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+
+  <p><h2>Libraries Used</h2></p>
   <img src="https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP" />
   <img src="https://img.shields.io/badge/Lenis-000000?style=for-the-badge&logo=probot&logoColor=white" alt="Lenis" />
 </p>
